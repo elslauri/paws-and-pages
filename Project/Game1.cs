@@ -25,12 +25,17 @@ public class Game1 : Game
         // TODO: Add your initialization logic here
         _charTextureRectangle = new Rectangle(moveCharTextureX, 0, 32, 32);
 
+        _graphics.PreferredBackBufferWidth = 1600;
+        _graphics.PreferredBackBufferHeight = 960;
+        _graphics.ApplyChanges();
+
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+    
 
         // TODO: use this.Content to load your game content here
         _charTexture = Content.Load<Texture2D>("char_global");
