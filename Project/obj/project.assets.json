@@ -238,25 +238,27 @@
     ]
   },
   "packageFolders": {
-    "/Users/Els/.nuget/packages/": {}
+    "C:\\Users\\elsla\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Els/Repos/gameDev/Project/Project/Project.csproj",
+      "projectUniqueName": "C:\\Repos\\gamedev\\ba2-gamedev-project\\Project\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "/Users/Els/Repos/gameDev/Project/Project/Project.csproj",
-      "packagesPath": "/Users/Els/.nuget/packages/",
-      "outputPath": "/Users/Els/Repos/gameDev/Project/Project/obj/",
+      "projectPath": "C:\\Repos\\gamedev\\ba2-gamedev-project\\Project\\Project.csproj",
+      "packagesPath": "C:\\Users\\elsla\\.nuget\\packages\\",
+      "outputPath": "C:\\Repos\\gamedev\\ba2-gamedev-project\\Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/Els/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\elsla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -305,7 +307,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
