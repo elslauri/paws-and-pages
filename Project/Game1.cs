@@ -25,6 +25,7 @@ public class Game1 : Game
         // TODO: Add your initialization logic here
         _charTextureRectangle = new Rectangle(moveCharTextureX, 0, 32, 32);
 
+        // Rescale window
         _graphics.PreferredBackBufferWidth = 1600;
         _graphics.PreferredBackBufferHeight = 960;
         _graphics.ApplyChanges();
