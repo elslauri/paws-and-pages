@@ -9,6 +9,10 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
+    private Texture2D _charTexture;
+    private Rectangle _charTextureRectangle;
+    private int moveCharTextureX = 0;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -19,6 +23,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
+        _charTextureRectangle = new Rectangle(moveCharTextureX, 0, 32, 32);
 
         base.Initialize();
     }
@@ -28,6 +33,7 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // TODO: use this.Content to load your game content here
+        _charTexture = Content.Load<Texture2D>("char_global");
     }
 
     protected override void Update(GameTime gameTime)
@@ -46,6 +52,17 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         // TODO: Add your drawing code here
+        _spriteBatch.Begin();
+        _spriteBatch.Draw(_charTexture, new Vector2(0, 0),_charTextureRectangle, Color.White);
+        _spriteBatch.End();
+
+        moveCharTextureX += 32;
+        if (moveCharTextureX > 256)
+        {
+            moveCharTextureX = 0;
+        }
+        _charTextureRectangle.X = moveCharTextureX;
+
 
         base.Draw(gameTime);
     }
