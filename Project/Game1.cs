@@ -11,9 +11,10 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    private Texture2D _charTexture;
+    private Texture2D npc_basicMan_Texture;
     private Character testChar;
-
+    private Texture2D mcTexture;
+    private MainCharacter player;
 
     public Game1()
     {
@@ -33,7 +34,8 @@ public class Game1 : Game
 
         base.Initialize();
 
-        testChar = new Character(_charTexture);
+        testChar = new Character(npc_basicMan_Texture, 3f, new Vector2(0,0));
+        player = new MainCharacter(mcTexture, 4f, new Vector2(0, 0));
     }
 
     protected override void LoadContent()
@@ -42,7 +44,9 @@ public class Game1 : Game
     
         // TODO: use this.Content to load your game content here
 
-        _charTexture = Content.Load<Texture2D>("mc_Idle_Down");
+       npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF");
+       mcTexture = Content.Load<Texture2D>("mc_Idle_Down");
+
     }
 
     protected override void Update(GameTime gameTime)
@@ -53,6 +57,7 @@ public class Game1 : Game
 
         // TODO: Add your update logic here
         testChar.Update(gameTime);
+        player.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -64,6 +69,7 @@ public class Game1 : Game
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
         testChar.Draw(_spriteBatch);
+        player.Draw(_spriteBatch);
         _spriteBatch.End();
 
 

@@ -14,17 +14,18 @@ namespace Project.Classes.GameObjects
         private Texture2D texture;
         Animation animation;
 
-        private Vector2 startPos = new Vector2(0, 0);
-        
+        private Vector2 startPos;
 
         // scale adjusted for testing on my screen
-        private float scale = 4f;
+        private float scale;
 
-        public Character(Texture2D texture)
+        public Character(Texture2D texture, float scale, Vector2 startPos)
         {
             this.texture = texture;
             animation = new Animation();
             animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1);
+            this.scale = scale;
+            this.startPos = startPos;
         }
 
         public void Draw(SpriteBatch spriteBatch)
