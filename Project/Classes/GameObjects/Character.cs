@@ -15,8 +15,7 @@ namespace Project.Classes.GameObjects
         Animation animation;
 
         private Vector2 startPos = new Vector2(0, 0);
-        //private Rectangle rectangle;
-        //private int moveX = 0;
+        
 
         // scale adjusted for testing on my screen
         private float scale = 3f;
@@ -25,15 +24,7 @@ namespace Project.Classes.GameObjects
         {
             this.texture = texture;
             animation = new Animation();
-            animation.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(32, 0, 32, 32)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(64, 0, 32, 32)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(96, 0, 32, 32)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(128, 0, 32, 32)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(160, 0, 32, 32)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(192, 0, 32, 32)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(224, 0, 32, 32)));
-            //rectangle = new Rectangle(moveX, 0, 32, 32);
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1);
         }
 
         public void Draw(SpriteBatch spriteBatch)

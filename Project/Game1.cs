@@ -42,7 +42,7 @@ public class Game1 : Game
     
         // TODO: use this.Content to load your game content here
 
-        _charTexture = Content.Load<Texture2D>("char_global");
+        _charTexture = Content.Load<Texture2D>("npc_basicMan_walkF");
     }
 
     protected override void Update(GameTime gameTime)

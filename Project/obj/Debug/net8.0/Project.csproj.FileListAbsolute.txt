@@ -50,4 +50,4 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\obj\Debug\net8.0\refint\Project.dll
 C:\Repos\gamedev\ba2-gamedev-project\Project\obj\Debug\net8.0\Project.pdb
 C:\Repos\gamedev\ba2-gamedev-project\Project\obj\Debug\net8.0\Project.genruntimeconfig.cache
 C:\Repos\gamedev\ba2-gamedev-project\Project\obj\Debug\net8.0\ref\Project.dll
-C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\char_global.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\npc_basicMan_walkF.xnb

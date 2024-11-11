@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Repos/gamedev/ba2-gamedev-project/Project/Content/char_global.png","C:/Repos/gamedev/ba2-gamedev-project/Project/Content/bin/DesktopGL/Content/char_global.xnb","TextureProcessor","Texture2DContent",5669,393301,0.1382046
+"C:/Repos/gamedev/ba2-gamedev-project/Project/Content/npc_basicMan_walkF.png","C:/Repos/gamedev/ba2-gamedev-project/Project/Content/bin/DesktopGL/Content/npc_basicMan_walkF.xnb","TextureProcessor","Texture2DContent",2823,49237,0.1494336
