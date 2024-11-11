@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project.Classes;
+using Project.Classes.GameObjects;
 
 namespace Project;
 
