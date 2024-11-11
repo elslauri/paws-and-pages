@@ -53,3 +53,4 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\obj\Debug\net8.0\ref\Project.dll
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\npc_basicMan_walkF.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\npc_basicMan_walkF_fluid.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\mc_Idle_Down.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\cat_walk.xnb

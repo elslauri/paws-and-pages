@@ -15,6 +15,8 @@ public class Game1 : Game
     private Character testChar;
     private Texture2D mcTexture;
     private MainCharacter player;
+    private Texture2D catTexture;
+    private Friend cat;
 
     public Game1()
     {
@@ -36,6 +38,7 @@ public class Game1 : Game
 
         testChar = new Character(npc_basicMan_Texture, 3f, new Vector2(0,0));
         player = new MainCharacter(mcTexture, 4f, new Vector2(0, 0));
+        cat = new Friend(catTexture,new Vector2(100, 100), new Vector2(1, 1));
     }
 
     protected override void LoadContent()
@@ -46,7 +49,7 @@ public class Game1 : Game
 
        npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF");
        mcTexture = Content.Load<Texture2D>("mc_Idle_Down");
-
+        catTexture = Content.Load<Texture2D>("cat_walk");
     }
 
     protected override void Update(GameTime gameTime)
@@ -58,6 +61,7 @@ public class Game1 : Game
         // TODO: Add your update logic here
         testChar.Update(gameTime);
         player.Update(gameTime);
+        cat.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -70,6 +74,7 @@ public class Game1 : Game
         _spriteBatch.Begin();
         testChar.Draw(_spriteBatch);
         player.Draw(_spriteBatch);
+        cat.Draw(_spriteBatch);
         _spriteBatch.End();
 
 

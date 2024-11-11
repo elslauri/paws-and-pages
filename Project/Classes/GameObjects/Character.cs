@@ -24,16 +24,13 @@ namespace Project.Classes.GameObjects
         public Character(Texture2D texture, float scale, Vector2 position)
         {
             this.texture = texture;
-            animation = new Animation();
-            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1);
             this.scale = scale;
             this.position = position;
-            speed = new Vector2(1, 1);
-        }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            animation = new Animation();
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1);
+
+            speed = new Vector2(1, 1);
         }
 
         public void Update(GameTime gameTime)
@@ -42,6 +39,12 @@ namespace Project.Classes.GameObjects
             Move();
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+        }
+
+        
 
         private void Move()
         {
