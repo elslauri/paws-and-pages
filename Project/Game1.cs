@@ -42,7 +42,7 @@ public class Game1 : Game
     
         // TODO: use this.Content to load your game content here
 
-        _charTexture = Content.Load<Texture2D>("npc_basicMan_walkF");
+        _charTexture = Content.Load<Texture2D>("mc_Idle_Down");
     }
 
     protected override void Update(GameTime gameTime)
@@ -52,7 +52,7 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        testChar.Update();
+        testChar.Update(gameTime);
 
         base.Update(gameTime);
     }

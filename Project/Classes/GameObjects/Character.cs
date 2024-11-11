@@ -18,7 +18,7 @@ namespace Project.Classes.GameObjects
         
 
         // scale adjusted for testing on my screen
-        private float scale = 3f;
+        private float scale = 4f;
 
         public Character(Texture2D texture)
         {
@@ -32,9 +32,9 @@ namespace Project.Classes.GameObjects
             spriteBatch.Draw(texture, startPos, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            animation.Update();
+            animation.Update(gameTime);
         }
     }
 }

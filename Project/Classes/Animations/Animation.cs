@@ -11,18 +11,26 @@ namespace Project.Classes.Animations
     internal class Animation
     {
         public AnimationFrame CurrentFrame { get; set; }
+       
         private List<AnimationFrame> frames;
         private int counter;
+        private double secondCounter;
 
         public Animation()
         {
             frames = new List<AnimationFrame>();
         }
         
-        public void Update() 
+        public void Update(GameTime gameTime) 
         {
             CurrentFrame = frames[counter];
-            counter++;
+            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            int fps = 8;
+            if (secondCounter >= 1d/fps)
+            {
+                counter++;
+                secondCounter = 0;
+            }
             if (counter >= frames.Count)
             {
                 counter = 0;
