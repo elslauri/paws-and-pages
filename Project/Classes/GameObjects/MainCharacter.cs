@@ -10,9 +10,13 @@ namespace Project.Classes.GameObjects
 {
     internal class MainCharacter : Character
     {
+        
+        
         public MainCharacter(Texture2D texture, float scale, Vector2 startPos) : base(texture, scale, startPos)
         {
-
+            
         }
+        
+        
     }
 }
