@@ -19,6 +19,7 @@ namespace Project.Classes.GameObjects
         private Texture2D texture;
         Animation animation;
 
+        // TODO: refactor
         private Vector2 position;
         private Vector2 speed;
         

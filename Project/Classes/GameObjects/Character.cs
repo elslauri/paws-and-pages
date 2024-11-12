@@ -14,8 +14,8 @@ namespace Project.Classes.GameObjects
         private Texture2D texture;
         Animation animation;
 
-        private Vector2 position;
-        private Vector2 speed;
+        public Vector2 Position { get; set; } 
+        public Vector2 Speed { get; set; }
 
 
         // scale adjusted for testing on my screen
@@ -25,30 +25,30 @@ namespace Project.Classes.GameObjects
         {
             this.texture = texture;
             this.scale = scale;
-            this.position = position;
+            this.Position = position;
 
             animation = new Animation();
-            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1);
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1); // TODO: variable numberOfFrames
 
-            speed = new Vector2(1, 1);
+            Speed = new Vector2(1, 1);
         }
 
         public void Update(GameTime gameTime)
         {
             animation.Update(gameTime);
-            Move();
+            //Move(Position, Speed);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
 
         
 
-        private void Move()
+        private void Move(Vector2 position, Vector2 speed)
         {
-            position += speed;
+            Position += speed;
             // TODO: collision box
             if (position.X > 1600 - texture.Height || position.X < 0) 
             {

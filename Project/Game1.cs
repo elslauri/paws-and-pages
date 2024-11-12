@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project.Classes;
 using Project.Classes.GameObjects;
+using Project.Classes.Input;
 
 namespace Project;
 
@@ -11,6 +12,7 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
+    // TODO: move loading textures
     private Texture2D npc_basicMan_Texture;
     private Character testChar;
     private Texture2D mcTexture;
@@ -36,8 +38,9 @@ public class Game1 : Game
 
         base.Initialize();
 
+        // Initialize characters
         testChar = new Character(npc_basicMan_Texture, 3f, new Vector2(0,0));
-        player = new MainCharacter(mcTexture, 4f, new Vector2(0, 0));
+        player = new MainCharacter(new KeyboardReader(),mcTexture, 4f, new Vector2(0, 0));
         cat = new Friend(catTexture,new Vector2(100, 100), new Vector2(1, 1));
     }
 
