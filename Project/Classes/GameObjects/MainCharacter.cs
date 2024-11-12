@@ -13,7 +13,7 @@ namespace Project.Classes.GameObjects
     {
         private IInputReader inputReader;
         
-        public MainCharacter(IInputReader inputReader,Texture2D texture, Vector2 startPos, float scale) : base(texture, startPos, scale)
+        public MainCharacter(IInputReader inputReader,Texture2D texture, int numberOfSprites, Vector2 startPos, float scale) : base(texture, numberOfSprites,startPos, scale)
         {
             this.inputReader = inputReader;
             base.Speed = new Vector2(2, 2);

@@ -39,9 +39,9 @@ public class Game1 : Game
         base.Initialize();
 
         // Initialize characters
-        testChar = new NPC(npc_basicMan_Texture, new Vector2(0, 0), 3f);
-        player = new MainCharacter(new KeyboardReader(),mcTexture, new Vector2(0, 0), 4f);
-        cat = new Friend(catTexture,new Vector2(100, 100), new Vector2(0.5f, 0.5f));
+        testChar = new NPC(npc_basicMan_Texture, 7, new Vector2(0, 0), 3f);
+        player = new MainCharacter(new KeyboardReader(),mcTexture,8, new Vector2(0, 0), 4f);
+        cat = new Friend(catTexture, 6,new Vector2(100, 100), new Vector2(0.5f, 0.5f));
     }
 
     protected override void LoadContent()
@@ -50,7 +50,7 @@ public class Game1 : Game
     
         // TODO: use this.Content to load your game content here
 
-       npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF");
+       npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
        mcTexture = Content.Load<Texture2D>("mc_Idle_Down");
         catTexture = Content.Load<Texture2D>("cat_walk");
     }

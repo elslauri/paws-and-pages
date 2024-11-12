@@ -22,14 +22,14 @@ namespace Project.Classes.GameObjects
         // scale adjusted for testing on my screen
         private float scale;
 
-        public Character(Texture2D texture, Vector2 position, float scale )
+        public Character(Texture2D texture, int numberOfSprites, Vector2 position, float scale)
         {
             this.texture = texture;
             this.Position = position;
             this.scale = scale;
 
             animation = new Animation();
-            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1); // TODO: variable numberOfFrames
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfSprites, 1); // TODO: variable numberOfFrames
 
             Speed = new Vector2(0.5f, 0.5f);
         }

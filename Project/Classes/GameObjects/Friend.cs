@@ -23,7 +23,7 @@ namespace Project.Classes.GameObjects
         private Vector2 position;
         private Vector2 speed;
         
-        public Friend(Texture2D texture,Vector2 position, Vector2 speed)
+        public Friend(Texture2D texture, int numberOfSprites, Vector2 position, Vector2 speed)
         {
             this.texture = texture;
             this.position = position;
@@ -31,7 +31,7 @@ namespace Project.Classes.GameObjects
 
             // TODO: number of animations
             animation = new Animation();
-            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1);
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfSprites, 1);
         }
 
         public void Update(GameTime gameTime)

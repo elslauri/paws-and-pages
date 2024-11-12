@@ -12,7 +12,7 @@ namespace Project.Classes.GameObjects
     internal class NPC : Character
     {
        
-        public NPC(Texture2D texture, Vector2 position,float scale) : base(texture, position, scale)
+        public NPC(Texture2D texture, int numberOfSprites, Vector2 position,float scale) : base(texture, numberOfSprites, position, scale)
         {
             base.Speed = new Vector2(0.5f, 0.5f);
         }
