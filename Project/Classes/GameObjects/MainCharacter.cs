@@ -13,9 +13,10 @@ namespace Project.Classes.GameObjects
     {
         private IInputReader inputReader;
         
-        public MainCharacter(IInputReader inputReader,Texture2D texture, float scale, Vector2 startPos) : base(texture, scale, startPos)
+        public MainCharacter(IInputReader inputReader,Texture2D texture, Vector2 startPos, float scale) : base(texture, startPos, scale)
         {
-            this.inputReader = inputReader; 
+            this.inputReader = inputReader;
+            base.Speed = new Vector2(2, 2);
         }
         
         public void Update(GameTime gametime)

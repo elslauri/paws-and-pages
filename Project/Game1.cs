@@ -14,7 +14,7 @@ public class Game1 : Game
 
     // TODO: move loading textures
     private Texture2D npc_basicMan_Texture;
-    private Character testChar;
+    private NPC testChar;
     private Texture2D mcTexture;
     private MainCharacter player;
     private Texture2D catTexture;
@@ -39,9 +39,9 @@ public class Game1 : Game
         base.Initialize();
 
         // Initialize characters
-        testChar = new Character(npc_basicMan_Texture, 3f, new Vector2(0,0));
-        player = new MainCharacter(new KeyboardReader(),mcTexture, 4f, new Vector2(0, 0));
-        cat = new Friend(catTexture,new Vector2(100, 100), new Vector2(1, 1));
+        testChar = new NPC(npc_basicMan_Texture, new Vector2(0, 0), 3f);
+        player = new MainCharacter(new KeyboardReader(),mcTexture, new Vector2(0, 0), 4f);
+        cat = new Friend(catTexture,new Vector2(100, 100), new Vector2(0.5f, 0.5f));
     }
 
     protected override void LoadContent()
