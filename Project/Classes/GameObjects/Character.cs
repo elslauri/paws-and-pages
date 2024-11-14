@@ -29,7 +29,7 @@ namespace Project.Classes.GameObjects
             this.scale = scale;
 
             animation = new Animation();
-            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfSprites, 1); // TODO: variable numberOfFrames
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfSprites, 1);
 
             Speed = new Vector2(0.5f, 0.5f);
         }
@@ -42,6 +42,8 @@ namespace Project.Classes.GameObjects
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            // TODO: other things also needs drawing? move draw from character to abstract spriteDrawer class? 
+
         }
     }
 }

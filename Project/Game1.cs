@@ -41,7 +41,7 @@ public class Game1 : Game
         // Initialize characters
         testChar = new NPC(npc_basicMan_Texture, 7, new Vector2(0, 0), 3f);
         player = new MainCharacter(new KeyboardReader(),mcTexture,8, new Vector2(0, 0), 4f);
-        cat = new Friend(catTexture, 6,new Vector2(100, 100), new Vector2(0.5f, 0.5f));
+        cat = new Friend(catTexture, 6,1f,new Vector2(100, 100), new Vector2(0.5f, 0.5f));
     }
 
     protected override void LoadContent()

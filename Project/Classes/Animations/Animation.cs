@@ -37,6 +37,13 @@ namespace Project.Classes.Animations
             }
         }
         
+        /// <summary>
+        /// Gets frames based on texture properties
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="numberOfWidthSprites"></param>
+        /// <param name="numberOfHeightSprites"></param>
         public void GetFramesFromTextureProperties (int width, int height, int numberOfWidthSprites, int numberOfHeightSprites)
         {
             int widthOfFrame = width/numberOfWidthSprites;
