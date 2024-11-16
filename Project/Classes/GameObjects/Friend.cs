@@ -29,6 +29,7 @@ namespace Project.Classes.GameObjects
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            base.Draw(spriteBatch);
         }
         private void MoveWithMouse()
         {

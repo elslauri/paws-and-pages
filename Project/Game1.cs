@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Project.Classes;
 using Project.Classes.GameObjects;
 using Project.Classes.Input;
+using Project.Classes.Background;
 
 namespace Project;
 
@@ -13,12 +14,17 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
 
     // TODO: move loading textures
+    // characters
     private Texture2D npc_basicMan_Texture;
     private NPC testChar;
     private Texture2D mcTexture;
     private MainCharacter player;
     private Texture2D catTexture;
     private Friend cat;
+    // background
+    private Floor tile;
+    private Texture2D tileTexture;
+
 
     public Game1()
     {
@@ -42,6 +48,7 @@ public class Game1 : Game
         testChar = new NPC(npc_basicMan_Texture, 7, new Vector2(0, 0), 3f);
         player = new MainCharacter(new KeyboardReader(),mcTexture,8, new Vector2(0, 0), 4f);
         cat = new Friend(catTexture, 6,1f,new Vector2(100, 100), new Vector2(0.5f, 0.5f));
+        tile = new Floor(tileTexture, new Vector2(50,50),2f);
     }
 
     protected override void LoadContent()
@@ -51,8 +58,9 @@ public class Game1 : Game
         // TODO: use this.Content to load your game content here
 
        npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
-       mcTexture = Content.Load<Texture2D>("mc_Idle_Down");
-        catTexture = Content.Load<Texture2D>("cat_walk");
+       mcTexture = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
+        catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
+        tileTexture = Content.Load<Texture2D>("Background/planks_H");
     }
 
     protected override void Update(GameTime gameTime)
@@ -65,6 +73,7 @@ public class Game1 : Game
         testChar.Update(gameTime);
         player.Update(gameTime);
         cat.Update(gameTime);
+        tile.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -78,6 +87,7 @@ public class Game1 : Game
         testChar.Draw(_spriteBatch);
         player.Draw(_spriteBatch);
         cat.Draw(_spriteBatch);
+        tile.Draw(_spriteBatch);
         _spriteBatch.End();
 
 
