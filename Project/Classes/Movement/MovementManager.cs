@@ -11,8 +11,10 @@ namespace Project.Classes.Movement
 {
     internal class MovementManager
     {
+        // TODO: add borders for collision
         // TODO: acceleration? 
         private Vector2 acceleration = new Vector2(0.1f, 0.1f);
+        
         public void Move(IMovable movable)
         {
             movable.Position += movable.Speed;
@@ -20,31 +22,33 @@ namespace Project.Classes.Movement
             float maxSpeed = 5;
             movable.Speed = Limit(movable.Speed, maxSpeed);
 
-            // TODO: collision box
-            if (movable.Position.X + movable.Speed.X > 1600 - 64 || movable.Position.X + movable.Speed.X < 0)
+            if (IsCharWithinX(movable))
             {
                 movable.Speed = new Vector2(movable.Speed.X < 0 ? 1 : -1, movable.Speed.Y);
                 acceleration.X *= -1;
             }
-            if (movable.Position.Y + movable.Speed.Y > 960 - 96 || movable.Position.Y + movable.Speed.Y < 0)
+            if (IsCharWithinY(movable))
             {
                 movable.Speed = new Vector2(movable.Speed.X, movable.Speed.Y < 0 ? 1 : -1);
                 acceleration.Y *= -1;
-
             }
         }
         
         public void MoveWithKeys(IMovable movable)
         {
             var direction = movable.InputReader.ReadInput();
+            var distance = direction * movable.Speed; 
 
-            var distance = direction * movable.Speed;
-            movable.Position += distance;
+            var nextPos = movable.Position + distance;
+            if (IsMCWithinBounds(nextPos))
+            {
+                movable.Position = nextPos;
+            }
         }
 
         public void MoveWithMC(IMovable movable, IMovable target)
         {
-            Vector2 direction = (target.Position - new Vector2(0,-100f)) - movable.Position;
+            Vector2 direction = (target.Position - new Vector2(0,-148f)) - movable.Position;
             float distance = direction.Length();
 
             if (distance < 10)
@@ -74,8 +78,17 @@ namespace Project.Classes.Movement
             }
             return v;
         }
-
-        // TODO: collisions
-        
+        private bool IsMCWithinBounds(Vector2 p)
+        {
+            return p.X >= -64 && p.X <= (1600 - 128) && p.Y >= -64 && p.Y <= (960 - 192);
+        }
+        private bool IsCharWithinX(IMovable movable)
+        {
+            return movable.Position.X + movable.Speed.X > 1600 - 64 || movable.Position.X + movable.Speed.X < 0;
+        }
+        private bool IsCharWithinY(IMovable movable)
+        {
+            return movable.Position.Y + movable.Speed.Y > 960 - 96 || movable.Position.Y + movable.Speed.Y < 0;
+        }
     }
 }

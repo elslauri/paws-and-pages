@@ -17,7 +17,8 @@ public class Game1 : Game
     // characters
     private Texture2D npc_basicMan_Texture;
     private NPC testChar;
-    private Texture2D mcTexture;
+    private Texture2D mcTextureIdleD;
+    //private Texture2D mcTextureWalkF;
     private MainCharacter player;
     private Texture2D catTexture;
     private Friend cat;
@@ -30,7 +31,7 @@ public class Game1 : Game
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = true;
+        IsMouseVisible = false;
     }
 
     protected override void Initialize()
@@ -46,8 +47,8 @@ public class Game1 : Game
 
         // Initialize characters
         tile = new Floor(tileTexture, 2f, new Vector2(50, 50));
-        testChar = new NPC(npc_basicMan_Texture, 7, 3f, new Vector2(100, 100), new Vector2(2f,2f));
-        player = new MainCharacter(mcTexture, 8, 4f, new Vector2(0, 0), new Vector2(4f,4f));
+        testChar = new NPC(npc_basicMan_Texture, 7, 3f, new Vector2(100, 100), new Vector2(2f, 2f));
+        player = new MainCharacter(mcTextureIdleD, 8, 4f, new Vector2(0, 0), new Vector2(4f, 4f));
         cat = new Friend(catTexture, 6, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player);
 
     }
@@ -61,7 +62,7 @@ public class Game1 : Game
         tileTexture = Content.Load<Texture2D>("Background/planks_H");
         npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
         catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
-        mcTexture = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
+        mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
     }
 
     protected override void Update(GameTime gameTime)
@@ -80,7 +81,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(new Color(52,52,79)); // TODO: change background
+        GraphicsDevice.Clear(new Color(52, 52, 79)); // TODO: change background
 
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
