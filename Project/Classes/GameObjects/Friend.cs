@@ -19,11 +19,14 @@ namespace Project.Classes.GameObjects
     internal class Friend : Character
     {
         private MovementManager movementManager;
+        private Character player;
 
-        public Friend(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed) : base(texture,numberOfSprites, scale, position, speed )
+        public Friend(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed, Character player) : base(texture,numberOfSprites, scale, position, speed)
         {
+            this.player = player;
+            
             movementManager = new MovementManager();
-            InputReader = new MouseReader();
+            
         }
 
         public void Update(GameTime gameTime)
@@ -38,7 +41,7 @@ namespace Project.Classes.GameObjects
 
         private void Move()
         {
-            movementManager.MoveWithMouse(this);
+            movementManager.MoveWithMC(this, player);
         }
     }
 }

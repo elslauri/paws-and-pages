@@ -33,48 +33,35 @@ namespace Project.Classes.Movement
 
             }
         }
-        // hier juiste plek? nope de Imovable moet hem hebben
         
         public void MoveWithKeys(IMovable movable)
         {
-            if (movable.InputReader == null)
-            {
-                throw new Exception("InputReader is not initialized!");
-            }
-
             var direction = movable.InputReader.ReadInput();
 
             var distance = direction * movable.Speed;
             movable.Position += distance;
         }
 
-        public void MoveWithMouse(IMovable movable)
+        public void MoveWithMC(IMovable movable, IMovable target)
         {
-            //    // cut? 
-            //    if (movable == null)
-            //    {
-            //        Debug.WriteLine("Null");
-            //    }
+            Vector2 direction = (target.Position - new Vector2(0,-100f)) - movable.Position;
+            float distance = direction.Length();
 
-            //    var direction = movable.InputReader.ReadInput() - movable.Position;
+            if (distance < 10)
+            {
+                movable.Speed *= 0.9f;
+                if (movable.Speed.Length() < 0.1f)
+                {
+                    movable.Speed = Vector2.Zero;
+                }
+                return;
+            }
+            
+            direction.Normalize();
+            movable.Speed += direction;
+            movable.Speed = Limit(movable.Speed, 2);
 
-            //    float distance = direction.Length();
-
-            //    // stop when close to mouse
-            //    if (distance < 10)
-            //    {
-            //        movable.Speed = Vector2.Zero;
-            //    }
-
-            //    //    direction -= movable.Position;
-
-            //    direction.Normalize();
-
-            //    //var distance = Vector2.Multiply(direction,0.1f);
-            //    movable.Speed += direction;
-            //    movable.Speed = Limit(movable.Speed, 5);
-
-            //    movable.Position += movable.Speed;
+            movable.Position += movable.Speed;
         }
 
         private Vector2 Limit(Vector2 v, float max)
