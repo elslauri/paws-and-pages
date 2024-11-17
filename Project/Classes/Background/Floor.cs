@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +16,15 @@ namespace Project.Classes.Background
 
         private float scale;
 
+
         public void Update(GameTime gameTime)
         {
             //throw new NotImplementedException();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture,position, new Rectangle(0,0,16,16), Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+           
+            spriteBatch.Draw(texture, position, new Rectangle(0, 0, 16, 16), Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
 
         // TODO: refactor everything that needs to be drawn with / without animation

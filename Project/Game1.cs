@@ -45,22 +45,23 @@ public class Game1 : Game
         base.Initialize();
 
         // Initialize characters
-        testChar = new NPC(npc_basicMan_Texture, 7, new Vector2(0, 0), 3f);
-        player = new MainCharacter(new KeyboardReader(),mcTexture,8, new Vector2(0, 0), 4f);
+        tile = new Floor(tileTexture, new Vector2(50, 50), 2f);
+        testChar = new NPC(npc_basicMan_Texture, 7, new Vector2(30, 30), 3f);
         cat = new Friend(catTexture, 6,1f,new Vector2(100, 100), new Vector2(0.5f, 0.5f));
-        tile = new Floor(tileTexture, new Vector2(50,50),2f);
+        player = new MainCharacter(new KeyboardReader(), mcTexture, 8, new Vector2(0, 0), 4f);
+
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-    
+
         // TODO: use this.Content to load your game content here
 
-       npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
-       mcTexture = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
-        catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
         tileTexture = Content.Load<Texture2D>("Background/planks_H");
+        npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
+        catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
+        mcTexture = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
     }
 
     protected override void Update(GameTime gameTime)
@@ -70,11 +71,10 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        testChar.Update(gameTime);
-        player.Update(gameTime);
-        cat.Update(gameTime);
         tile.Update(gameTime);
-
+        testChar.Update(gameTime);
+        cat.Update(gameTime);
+        player.Update(gameTime);
         base.Update(gameTime);
     }
 
@@ -84,10 +84,10 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
-        testChar.Draw(_spriteBatch);
-        player.Draw(_spriteBatch);
-        cat.Draw(_spriteBatch);
         tile.Draw(_spriteBatch);
+        testChar.Draw(_spriteBatch);
+        cat.Draw(_spriteBatch);
+        player.Draw(_spriteBatch);
         _spriteBatch.End();
 
 
