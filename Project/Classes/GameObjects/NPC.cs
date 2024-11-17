@@ -15,7 +15,7 @@ namespace Project.Classes.GameObjects
 
         public NPC(Texture2D texture, int numberOfSprites, Vector2 position,float scale) : base(texture, numberOfSprites, position, scale)
         {
-            base.Speed = new Vector2(0.5f, 0.5f);
+            base.Speed = new Vector2(0.1f, 0.1f);
 
         }
 
@@ -29,7 +29,7 @@ namespace Project.Classes.GameObjects
         {
             base.Position += base.Speed;
             base.Speed += acceleration;
-            float maxSpeed = 10;
+            float maxSpeed = 5;
             base.Speed = Limit(base.Speed, maxSpeed);
 
             // TODO: collision box

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using NVorbis.Contracts;
 using Project.Classes.Animations;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Project.Classes.GameObjects
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
+                base.Draw(spriteBatch);
         }
         private void MoveWithMouse()
         {
@@ -37,14 +38,25 @@ namespace Project.Classes.GameObjects
             Vector2 mouseVector = new Vector2(state.X, state.Y);
 
             var direction = mouseVector - base.Position;
+            
+            float distance = direction.Length();
+
+            // stop when close to mouse
+            if (distance < 5)
+            {
+                base.Speed = Vector2.Zero;
+            }
+
             direction.Normalize();
-            var distance = Vector2.Multiply(direction,0.1f);
+
+            //var distance = Vector2.Multiply(direction,0.1f);
             base.Speed += direction;
-            base.Speed = Limit(base.Speed, 10);
+            base.Speed = Limit(base.Speed, 5);
+
             base.Position += base.Speed;
         }
 
-        // TODO: read the ppt about accelaration
+        // TODO: acceleration?
         private Vector2 Limit(Vector2 v, float max)
         {
             float length = v.Length();
@@ -56,6 +68,5 @@ namespace Project.Classes.GameObjects
             }
             return v;
         }
-
     }
 }

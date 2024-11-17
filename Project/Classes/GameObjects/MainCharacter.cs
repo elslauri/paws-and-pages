@@ -19,13 +19,13 @@ namespace Project.Classes.GameObjects
             base.Speed = new Vector2(2, 2);
         }
         
-        public void Update(GameTime gametime)
+        public void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             var direction = inputReader.ReadInput();
             direction *= base.Speed;
             base.Position += direction;
-
-            base.Update(gametime);
+            
         }
     }
 }

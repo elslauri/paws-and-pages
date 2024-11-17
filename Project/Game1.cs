@@ -46,8 +46,8 @@ public class Game1 : Game
 
         // Initialize characters
         tile = new Floor(tileTexture, new Vector2(50, 50), 2f);
-        testChar = new NPC(npc_basicMan_Texture, 7, new Vector2(30, 30), 3f);
-        cat = new Friend(catTexture, 6,1f,new Vector2(100, 100), new Vector2(0.5f, 0.5f));
+        testChar = new NPC(npc_basicMan_Texture, 7, new Vector2(100, 100), 3f);
+        cat = new Friend(catTexture, 6, 1f, new Vector2(100, 100), new Vector2(0.5f, 0.5f));
         player = new MainCharacter(new KeyboardReader(), mcTexture, 8, new Vector2(0, 0), 4f);
 
     }
