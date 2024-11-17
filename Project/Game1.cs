@@ -45,10 +45,10 @@ public class Game1 : Game
         base.Initialize();
 
         // Initialize characters
-        tile = new Floor(tileTexture, new Vector2(50, 50), 2f);
-        testChar = new NPC(npc_basicMan_Texture, 7, new Vector2(100, 100), 3f);
+        tile = new Floor(tileTexture, 2f, new Vector2(50, 50));
+        testChar = new NPC(npc_basicMan_Texture, 7, 3f, new Vector2(100, 100), new Vector2(2f,2f));
         cat = new Friend(catTexture, 6, 1f, new Vector2(100, 100), new Vector2(0.5f, 0.5f));
-        player = new MainCharacter(new KeyboardReader(), mcTexture, 8, new Vector2(0, 0), 4f);
+        player = new MainCharacter(mcTexture, 8, 4f, new Vector2(0, 0), new Vector2(4f,4f));
 
     }
 

@@ -16,6 +16,13 @@ namespace Project.Classes.Background
 
         private float scale;
 
+        // TODO: refactor everything that needs to be drawn with / without animation
+        public Floor(Texture2D texture, float scale, Vector2 position)
+        {
+            this.texture = texture;
+            this.position = position;
+            this.scale = scale;
+        }
 
         public void Update(GameTime gameTime)
         {
@@ -27,12 +34,6 @@ namespace Project.Classes.Background
             spriteBatch.Draw(texture, position, new Rectangle(0, 0, 16, 16), Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
 
-        // TODO: refactor everything that needs to be drawn with / without animation
-        public Floor(Texture2D texture, Vector2 position, float scale) 
-        {
-            this.texture = texture;
-            this.position = position;
-            this.scale = scale;
-        }
+       
     }
 }

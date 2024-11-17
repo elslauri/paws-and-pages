@@ -6,26 +6,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Project.Classes.Input;
+using Project.Classes.Movement;
 
 namespace Project.Classes.GameObjects
 {
     internal class MainCharacter : Character
     {
-        private IInputReader inputReader;
-        
-        public MainCharacter(IInputReader inputReader,Texture2D texture, int numberOfSprites, Vector2 startPos, float scale) : base(texture, numberOfSprites,startPos, scale)
+        private MovementManager movementManager;
+         // here the right place? 
+
+        public MainCharacter(Texture2D texture, int numberOfSprites, float scale, Vector2 startPos, Vector2 speed) : base(texture, numberOfSprites, scale, startPos, speed)
         {
-            this.inputReader = inputReader;
-            base.Speed = new Vector2(2, 2);
+            movementManager = new MovementManager();
+            InputReader = new KeyboardReader();
         }
         
         public void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            var direction = inputReader.ReadInput();
-            direction *= base.Speed;
-            base.Position += direction;
-            
+            Move();
+        }
+        
+        private void Move()
+        {
+            movementManager.MoveWithKeys(this);
         }
     }
 }

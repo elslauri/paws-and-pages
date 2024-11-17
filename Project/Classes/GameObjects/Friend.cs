@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NVorbis.Contracts;
 using Project.Classes.Animations;
+using Project.Classes.Input;
+using Project.Classes.Movement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,57 +18,27 @@ namespace Project.Classes.GameObjects
 {
     internal class Friend : Character
     {
-        
-        
-        public Friend(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed) : base(texture,numberOfSprites, position, scale)
-        {
+        private MovementManager movementManager;
 
+        public Friend(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed) : base(texture,numberOfSprites, scale, position, speed )
+        {
+            movementManager = new MovementManager();
+            InputReader = new MouseReader();
         }
 
         public void Update(GameTime gameTime)
         {
-            MoveWithMouse();
             base.Update(gameTime);
+            Move();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
                 base.Draw(spriteBatch);
         }
-        private void MoveWithMouse()
+
+        private void Move()
         {
-            MouseState state = Mouse.GetState();
-            Vector2 mouseVector = new Vector2(state.X, state.Y);
-
-            var direction = mouseVector - base.Position;
-            
-            float distance = direction.Length();
-
-            // stop when close to mouse
-            if (distance < 5)
-            {
-                base.Speed = Vector2.Zero;
-            }
-
-            direction.Normalize();
-
-            //var distance = Vector2.Multiply(direction,0.1f);
-            base.Speed += direction;
-            base.Speed = Limit(base.Speed, 5);
-
-            base.Position += base.Speed;
-        }
-
-        // TODO: acceleration?
-        private Vector2 Limit(Vector2 v, float max)
-        {
-            float length = v.Length();
-            if (length > max)
-            {
-                float ratio = max / length;
-                v.X *= ratio;
-                v.Y *= ratio;
-            }
-            return v;
+            movementManager.MoveWithMouse(this);
         }
     }
 }
