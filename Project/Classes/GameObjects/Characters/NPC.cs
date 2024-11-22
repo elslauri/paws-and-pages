@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Classes.GameObjects
+namespace Project.Classes.GameObjects.Characters
 {
     internal class NPC : Character
     {

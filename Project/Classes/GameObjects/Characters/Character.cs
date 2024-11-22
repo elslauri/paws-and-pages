@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Classes.GameObjects
+namespace Project.Classes.GameObjects.Characters
 {
     internal class Character : IGameObject, IMovable
     {
@@ -32,18 +32,18 @@ namespace Project.Classes.GameObjects
             this.texture = texture;
             this.scale = scale;
 
-            this.Position = position;
-            this.Speed = speed;
+            Position = position;
+            Speed = speed;
 
             animation = new Animation();
             animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfSprites, 1);
 
-            
+
         }
 
         public void Update(GameTime gameTime)
         {
-            animation.Update(gameTime); 
+            animation.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)

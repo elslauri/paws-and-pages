@@ -14,19 +14,19 @@ using System.Threading.Tasks;
 using System.Xml.Schema;
 using static System.Formats.Asn1.AsnWriter;
 
-namespace Project.Classes.GameObjects
+namespace Project.Classes.GameObjects.Characters
 {
     internal class Friend : Character
     {
         private MovementManager movementManager;
         private Character player;
 
-        public Friend(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed, Character player) : base(texture,numberOfSprites, scale, position, speed)
+        public Friend(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed, Character player) : base(texture, numberOfSprites, scale, position, speed)
         {
             this.player = player;
-            
+
             movementManager = new MovementManager();
-            
+
         }
 
         public void Update(GameTime gameTime)
@@ -36,7 +36,7 @@ namespace Project.Classes.GameObjects
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-                base.Draw(spriteBatch);
+            base.Draw(spriteBatch);
         }
 
         private void Move()
