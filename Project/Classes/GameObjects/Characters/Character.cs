@@ -27,6 +27,8 @@ namespace Project.Classes.GameObjects.Characters
         // scale adjusted for testing on my screen
         private float scale;
 
+        public CollisionBox BoxCollission { get; set; }
+
         public Character(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed)
         {
             this.texture = texture;
@@ -38,19 +40,21 @@ namespace Project.Classes.GameObjects.Characters
             animation = new Animation();
             animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfSprites, 1);
 
-
+            BoxCollission = new CollisionBox(Position, new Vector2(192,256));
         }
 
         public void Update(GameTime gameTime)
         {
             animation.Update(gameTime);
+            BoxCollission.Update(gameTime, this.Position);
+       
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             // TODO: other things also needs drawing? move draw from character to abstract spriteDrawer class? 
-
+            
         }
     }
 }

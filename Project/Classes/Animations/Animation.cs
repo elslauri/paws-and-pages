@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -44,11 +45,12 @@ namespace Project.Classes.Animations
         /// <param name="height"></param>
         /// <param name="numberOfWidthSprites"></param>
         /// <param name="numberOfHeightSprites"></param>
-        public void GetFramesFromTextureProperties (int width, int height, int numberOfWidthSprites, int numberOfHeightSprites)
+        public Vector2 GetFramesFromTextureProperties (int width, int height, int numberOfWidthSprites, int numberOfHeightSprites)
         {
             int widthOfFrame = width/numberOfWidthSprites;
             int heightOfFrame = height / numberOfHeightSprites;
 
+            Vector2 size = new Vector2(widthOfFrame, heightOfFrame);
 
             for (int y = 0; y <= height-heightOfFrame; y+= heightOfFrame)
             {
@@ -59,6 +61,7 @@ namespace Project.Classes.Animations
             }
 
             CurrentFrame = frames[0];
+            return size;
         }
     }
 }

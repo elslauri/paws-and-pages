@@ -5,8 +5,11 @@ using Project.Classes;
 using Project.Classes.Input;
 using Project.Classes.Background;
 using Project.Classes.GameObjects.Characters;
-using Project.Classes.GameObjects.Items;
 using System.Reflection.Metadata.Ecma335;
+using System.Linq.Expressions;
+using Project.Classes.GameObjects;
+using System;
+using System.Diagnostics;
 
 
 namespace Project;
@@ -30,11 +33,9 @@ public class Game1 : Game
     private Texture2D tileTexture;
 
     //block
-    Texture2D blockTexture;
-    Rectangle rectangle;
-    Vector2 position;
-    
-
+    private Texture2D blockTexture;
+    private Box test1;
+    private Box test2;
 
     public Game1()
     {
@@ -61,8 +62,9 @@ public class Game1 : Game
         cat = new Friend(catTexture, 6, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player);
 
         // block
-        position = new Vector2(460, 460);
-        rectangle = new Rectangle((int)position.X, (int)position.Y, 100,100);
+        test1 = new Box(blockTexture, new Vector2(300, 300), new Vector2(100, 100), new Color(4294633190u));
+        test2 = new Box(blockTexture, new Vector2(500, 300), new Vector2(100, 100), new Color(4283465727u));
+
     }
 
     protected override void LoadContent()
@@ -76,9 +78,9 @@ public class Game1 : Game
         catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
 
-        // block
+        // texture 1px 1px
         blockTexture = new Texture2D(GraphicsDevice, 1, 1);
-        blockTexture.SetData(new[] { Color.Coral });
+        blockTexture.SetData(new[] { Color.LavenderBlush });
         
     }
 
@@ -93,7 +95,17 @@ public class Game1 : Game
         testChar.Update(gameTime);
         cat.Update(gameTime);
         player.Update(gameTime);
+        
+        test1.Update(gameTime);
+        test2.Update(gameTime);
+
         base.Update(gameTime);
+
+        // test collision
+        if (test1.Rectangle.Intersects(player.BoxCollission.Rectangle))
+        {
+            Debug.WriteLine("COLLISION");
+        }
     }
 
     protected override void Draw(GameTime gameTime)
@@ -107,7 +119,8 @@ public class Game1 : Game
         cat.Draw(spriteBatch);
         player.Draw(spriteBatch);
         // block
-        spriteBatch.Draw(blockTexture, rectangle, Color.White);
+        test1.Draw(spriteBatch);
+        test2.Draw(spriteBatch);
         spriteBatch.End();
 
         
