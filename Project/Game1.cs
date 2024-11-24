@@ -102,9 +102,13 @@ public class Game1 : Game
         base.Update(gameTime);
 
         // test collision
-        if (test1.Rectangle.Intersects(player.BoxCollission.Rectangle))
+        if (player.BoxCollission.IsCollidingWith(test1.BoxCollission))
         {
             Debug.WriteLine("COLLISION");
+        }
+        if (player.BoxCollission.IsCollidingWith(testChar.BoxCollission))
+        {
+            Debug.WriteLine("PARDON ME");
         }
     }
 

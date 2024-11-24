@@ -45,7 +45,7 @@ namespace Project.Classes.GameObjects.Characters
 
             this.Size = animation.getFrameSize(texture.Width, texture.Height, spriteColumns, spriteRows);
 
-            BoxCollission = new CollisionBox(Position, scale * Size); // TODO: size * scale!
+            BoxCollission = new CollisionBox(Position, scale * Size); 
         }
 
         public void Update(GameTime gameTime)

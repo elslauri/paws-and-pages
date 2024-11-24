@@ -24,7 +24,7 @@ namespace Project.Classes.GameObjects
             UpdateRectangle();
         }
 
-        public void Update(GameTime gameTime, Vector2 position )
+        public void Update(GameTime gameTime, Vector2 position)
         {
             this.Position = position;
             UpdateRectangle();
@@ -33,6 +33,16 @@ namespace Project.Classes.GameObjects
         public void UpdateRectangle()
         {
             Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+        }
+
+        /// <summary>
+        /// Checks if a collision box is colliding with another collision box.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool IsCollidingWith(CollisionBox other)
+        {
+            return Rectangle.Intersects(other.Rectangle);
         }
     }
 }

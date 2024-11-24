@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Project.Classes.GameObjects
 {
@@ -18,6 +19,7 @@ namespace Project.Classes.GameObjects
         public Vector2 Size { get; set; }
 
         public Color Color { get; set; }
+        public CollisionBox BoxCollission { get; set; }
 
 
         public Box(Texture2D texture, Vector2 position, Vector2 size, Color color)
@@ -28,6 +30,8 @@ namespace Project.Classes.GameObjects
             this.Color = color;
 
             Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+
+            BoxCollission = new CollisionBox(Position, Size);
         }
 
         public void Update(GameTime gameTime)

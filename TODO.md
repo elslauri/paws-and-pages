@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] getSizeFrame used in getFrames for animation and for collision box
 - [ ] powerpoints 1-5
 - [ ] refactor animations so not done by every class themselves
 - [ ] collision
