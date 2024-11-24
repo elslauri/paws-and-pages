@@ -23,13 +23,14 @@ namespace Project.Classes.GameObjects.Characters
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
 
+        public Vector2 Size { get; set; }
 
         // scale adjusted for testing on my screen
         private float scale;
 
         public CollisionBox BoxCollission { get; set; }
 
-        public Character(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed)
+        public Character(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed)
         {
             this.texture = texture;
             this.scale = scale;
@@ -37,10 +38,14 @@ namespace Project.Classes.GameObjects.Characters
             Position = position;
             Speed = speed;
 
-            animation = new Animation();
-            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfSprites, 1);
+            
 
-            BoxCollission = new CollisionBox(Position, new Vector2(192,256));
+            animation = new Animation();
+            animation.LoadFramesFromSpriteSheet(texture.Width, texture.Height, spriteColumns, spriteRows);
+
+            this.Size = animation.getFrameSize(texture.Width, texture.Height, spriteColumns, spriteRows);
+
+            BoxCollission = new CollisionBox(Position, scale * Size); // TODO: size * scale!
         }
 
         public void Update(GameTime gameTime)

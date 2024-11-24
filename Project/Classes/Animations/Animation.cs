@@ -12,24 +12,31 @@ namespace Project.Classes.Animations
     internal class Animation
     {
         public AnimationFrame CurrentFrame { get; set; }
+
        
         private List<AnimationFrame> frames;
         private int counter;
         private double secondCounter;
+        private int fps;
 
-        public Animation()
+        private FrameExtractor extractor;
+
+        public Animation(int fps = 8)
         {
             frames = new List<AnimationFrame>();
+            this.fps = fps;
+            extractor = new FrameExtractor();
         }
         
         public void Update(GameTime gameTime) 
         {
             CurrentFrame = frames[counter];
             secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
-            int fps = 8;
+            
             if (secondCounter >= 1d/fps)
             {
                 counter++;
+                CurrentFrame = frames[0];
                 secondCounter = 0;
             }
             if (counter >= frames.Count)
@@ -37,31 +44,27 @@ namespace Project.Classes.Animations
                 counter = 0;
             }
         }
+
+        public void LoadFramesFromSpriteSheet(int textureWidth, int textureHeight, int columns, int rows)
+        {
+            frames.AddRange(extractor.GetFrames(textureWidth, textureHeight, columns, rows));
+        }
         
+
         /// <summary>
-        /// Gets frames based on texture properties
+        /// Get the size of one frame
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="numberOfWidthSprites"></param>
         /// <param name="numberOfHeightSprites"></param>
-        public Vector2 GetFramesFromTextureProperties (int width, int height, int numberOfWidthSprites, int numberOfHeightSprites)
+        /// <returns></returns>
+        public Vector2 getFrameSize(int width, int height, int numberOfWidthSprites, int numberOfHeightSprites)
         {
-            int widthOfFrame = width/numberOfWidthSprites;
+            int widthOfFrame = width / numberOfWidthSprites;
             int heightOfFrame = height / numberOfHeightSprites;
 
-            Vector2 size = new Vector2(widthOfFrame, heightOfFrame);
-
-            for (int y = 0; y <= height-heightOfFrame; y+= heightOfFrame)
-            {
-                for (int x = 0; x <= width-widthOfFrame; x+= widthOfFrame)
-                {
-                    frames.Add(new AnimationFrame(new Rectangle(x,y,widthOfFrame,heightOfFrame)));
-                }
-            }
-
-            CurrentFrame = frames[0];
-            return size;
+            return new Vector2(widthOfFrame, heightOfFrame);
         }
     }
 }

@@ -73,6 +73,18 @@
 /processorParam:TextureFormat=Color
 /build:Characters/friend_Walk.png
 
+#begin Characters/MC/MC_Idle_Down (2).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Characters/MC/MC_Idle_Down (2).png
+
 #begin Characters/MC/MC_Idle_Down.png
 /importer:TextureImporter
 /processor:TextureProcessor

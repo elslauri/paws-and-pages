@@ -21,7 +21,7 @@ namespace Project.Classes.GameObjects.Characters
         private MovementManager movementManager;
         private Character player;
 
-        public Friend(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed, Character player) : base(texture, numberOfSprites, scale, position, speed)
+        public Friend(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, Character player) : base(texture, spriteColumns, spriteRows, scale, position, speed)
         {
             this.player = player;
 

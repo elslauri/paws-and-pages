@@ -15,7 +15,7 @@ namespace Project.Classes.GameObjects.Characters
         private MovementManager movementManager;
         // here the right place? 
 
-        public MainCharacter(Texture2D texture, int numberOfSprites, float scale, Vector2 startPos, Vector2 speed) : base(texture, numberOfSprites, scale, startPos, speed)
+        public MainCharacter(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 startPos, Vector2 speed) : base(texture, spriteColumns, spriteRows, scale, startPos, speed)
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();

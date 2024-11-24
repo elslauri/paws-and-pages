@@ -15,7 +15,7 @@ namespace Project.Classes.GameObjects.Characters
     {
         private MovementManager movementManager;
 
-        public NPC(Texture2D texture, int numberOfSprites, float scale, Vector2 position, Vector2 speed) : base(texture, numberOfSprites, scale, position, speed)
+        public NPC(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed) : base(texture, spriteColumns, spriteRows, scale, position, speed)
         {
             movementManager = new MovementManager();
         }

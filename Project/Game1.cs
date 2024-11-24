@@ -57,9 +57,9 @@ public class Game1 : Game
 
         // Initialize characters
         tile = new Floor(tileTexture, 2f, new Vector2(50, 50));
-        testChar = new NPC(npc_basicMan_Texture, 7, 3f, new Vector2(100, 100), new Vector2(2f, 2f));
-        player = new MainCharacter(mcTextureIdleD, 8, 4f, new Vector2(0, 0), new Vector2(4f, 4f));
-        cat = new Friend(catTexture, 6, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player);
+        testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f));
+        player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f));
+        cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player);
 
         // block
         test1 = new Box(blockTexture, new Vector2(300, 300), new Vector2(100, 100), new Color(4294633190u));
@@ -76,7 +76,7 @@ public class Game1 : Game
         tileTexture = Content.Load<Texture2D>("Background/planks_H");
         npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
         catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
-        mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
+        mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down (2)");
 
         // texture 1px 1px
         blockTexture = new Texture2D(GraphicsDevice, 1, 1);
@@ -120,7 +120,7 @@ public class Game1 : Game
         player.Draw(spriteBatch);
         // block
         test1.Draw(spriteBatch);
-        test2.Draw(spriteBatch);
+       // test2.Draw(spriteBatch);
         spriteBatch.End();
 
         
