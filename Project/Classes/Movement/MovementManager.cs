@@ -43,10 +43,10 @@ namespace Project.Classes.Movement
             var distance = direction * character.Speed; 
 
             var nextPos = character.Position + distance;
-            character.Position = TryMoveWithKeys(nextPos, character, obstacles);
+
             if (IsMCWithinBounds(nextPos))
             {
-                character.Position = nextPos;
+                character.Position = TryMoveWithKeys(nextPos, character, obstacles);
             }
         }
         private Vector2 TryMoveWithKeys(Vector2 targetPos, Character character, IEnumerable<ICollidable> obstacles)
@@ -59,7 +59,7 @@ namespace Project.Classes.Movement
                     return character.Position;
                 }
             }
-            return character.Position;
+            return targetPos;
         }
 
 
