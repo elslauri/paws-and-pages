@@ -14,7 +14,6 @@ namespace Project.Classes.GameObjects.Items
     {
         private Texture2D texture;
 
-
         public Rectangle Rectangle { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }

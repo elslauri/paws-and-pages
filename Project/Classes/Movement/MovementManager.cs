@@ -14,12 +14,14 @@ namespace Project.Classes.Movement
 {
     internal class MovementManager
     {
-        // TODO: add borders for collision
         // TODO: acceleration? 
         private Vector2 acceleration = new Vector2(0.1f, 0.1f);
         
         public void Move(IMovable movable)
         {
+            var nextPos = movable.Position + movable.Speed;
+            // TODO: checkCollisions and reverse speed
+
             movable.Position += movable.Speed;
             movable.Speed += acceleration;
             float maxSpeed = 5;

@@ -12,6 +12,7 @@ using System.Diagnostics;
 using Project.Classes.GameObjects.Items;
 using Project.Classes.Collision;
 using System.Collections.Generic;
+using static System.Reflection.Metadata.BlobBuilder;
 
 
 namespace Project;
@@ -33,12 +34,26 @@ public class Game1 : Game
     // background
     private Floor tile;
     private Texture2D tileTexture;
+    int[,] gameboard = new int[,]
+{
+    { 1,1,1,1,1,1,1,1 },
+    { 0,0,1,1,0,1,1,1 },
+    { 1,0,0,0,0,0,0,1 },
+    { 1,1,1,1,1,1,0,1 },
+    { 1,0,0,0,0,0,0,2 },
+    { 1,0,1,1,1,1,1,2 },
+    { 1,0,0,0,0,0,0,0 },
+    { 1,1,1,1,1,1,1,1 }
+};
+    private List<Box> blocks;
 
     //block
     private Texture2D blockTexture;
     private Box test1;
     private Box test2;
     private List<ICollidable> obstaclesMC;
+
+
 
     public Game1()
     {
@@ -64,8 +79,10 @@ public class Game1 : Game
         test1 = new Box(blockTexture, new Vector2(300, 300), new Vector2(100, 100), new Color(4294633190u));
         test2 = new Box(blockTexture, new Vector2(500, 300), new Vector2(100, 100), new Color(4283465727u));
 
-        obstaclesMC = new List<ICollidable> { test1, test2};
+        obstaclesMC = new List<ICollidable> { test1, test2 };
 
+        // background
+        blocks = new List<Box>();
 
         // Initialize characters
         tile = new Floor(tileTexture, 2f, new Vector2(50, 50));
@@ -89,7 +106,7 @@ public class Game1 : Game
         // texture 1px 1px
         blockTexture = new Texture2D(GraphicsDevice, 1, 1);
         blockTexture.SetData(new[] { Color.LavenderBlush });
-        
+
     }
 
     protected override void Update(GameTime gameTime)
@@ -103,7 +120,7 @@ public class Game1 : Game
         testChar.Update(gameTime);
         cat.Update(gameTime);
         player.Update(gameTime);
-        
+
         test1.Update(gameTime);
         test2.Update(gameTime);
 
@@ -122,6 +139,8 @@ public class Game1 : Game
         {
             Debug.WriteLine("PARDON ME");
         }
+        // background
+        CreateBlocks();
     }
 
     protected override void Draw(GameTime gameTime)
@@ -130,6 +149,11 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
         spriteBatch.Begin();
+        // background
+        foreach(var block in blocks)
+        {
+            block.Draw(spriteBatch);
+        }
         tile.Draw(spriteBatch);
         testChar.Draw(spriteBatch);
         cat.Draw(spriteBatch);
@@ -137,10 +161,35 @@ public class Game1 : Game
         // block
         test1.Draw(spriteBatch);
         test2.Draw(spriteBatch);
+        
         spriteBatch.End();
 
-        
+
 
         base.Draw(gameTime);
+    }
+
+
+    private void CreateBlocks()
+    {
+        blocks = new List<Box>();
+        for (int l = 0; l < gameboard.GetLength(0); l++)
+        {
+            for (int c = 0; c < gameboard.GetLength(1); c++)
+            {
+                if (gameboard[l, c] == 1)
+                {
+                    blocks.Add(new Box(blockTexture, new Vector2((c * 100), (l * 100)), new Vector2(100,100),Color.LightGoldenrodYellow ));
+
+                }
+                else if (gameboard[l, c] == 2)
+                {
+                    blocks.Add(new Box(blockTexture, new Vector2((c * 100), (l * 100)), new Vector2(100,100),Color.MediumOrchid ));
+                   
+                }
+
+            }
+        }
+
     }
 }
