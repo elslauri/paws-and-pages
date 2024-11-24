@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Classes.GameObjects
+namespace Project.Classes.Collision
 {
     internal class CollisionBox
     {
@@ -18,15 +18,15 @@ namespace Project.Classes.GameObjects
 
         public CollisionBox(Vector2 position, Vector2 size)
         {
-            this.Position = position;
-            this.Size = size;
+            Position = position;
+            Size = size;
 
             UpdateRectangle();
         }
 
         public void Update(GameTime gameTime, Vector2 position)
         {
-            this.Position = position;
+            Position = position;
             UpdateRectangle();
         }
 

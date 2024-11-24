@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Intrinsics;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Project.Classes.Collision;
+using Project.Classes.GameObjects.Characters;
 using Project.Classes.Input;
 
 namespace Project.Classes.Movement
@@ -34,17 +37,31 @@ namespace Project.Classes.Movement
             }
         }
         
-        public void MoveWithKeys(IMovable movable)
+        public void MoveWithKeys(Character character, IEnumerable<ICollidable> obstacles)
         {
-            var direction = movable.InputReader.ReadInput();
-            var distance = direction * movable.Speed; 
+            var direction = character.InputReader.ReadInput();
+            var distance = direction * character.Speed; 
 
-            var nextPos = movable.Position + distance;
+            var nextPos = character.Position + distance;
+            character.Position = TryMoveWithKeys(nextPos, character, obstacles);
             if (IsMCWithinBounds(nextPos))
             {
-                movable.Position = nextPos;
+                character.Position = nextPos;
             }
         }
+        private Vector2 TryMoveWithKeys(Vector2 targetPos, Character character, IEnumerable<ICollidable> obstacles)
+        {
+            var tempCollisionBox = new CollisionBox(targetPos, character.BoxCollision.Size);
+            foreach(var obstacle in obstacles)
+            {
+                if (tempCollisionBox.IsCollidingWith(obstacle.BoxCollision))
+                {
+                    return character.Position;
+                }
+            }
+            return character.Position;
+        }
+
 
         public void MoveWithMC(IMovable movable, IMovable target)
         {

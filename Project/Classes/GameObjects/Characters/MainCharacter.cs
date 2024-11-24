@@ -7,18 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Project.Classes.Input;
 using Project.Classes.Movement;
+using Project.Classes.Collision;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Project.Classes.GameObjects.Characters
 {
     internal class MainCharacter : Character
     {
         private MovementManager movementManager;
-        // here the right place? 
 
-        public MainCharacter(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 startPos, Vector2 speed) : base(texture, spriteColumns, spriteRows, scale, startPos, speed)
+        private List<ICollidable> obstacles;
+
+        public MainCharacter(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles) : base(texture, spriteColumns, spriteRows, scale, startPos, speed)
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();
+            this.obstacles = obstacles;
         }
 
         public void Update(GameTime gameTime)
@@ -29,7 +33,9 @@ namespace Project.Classes.GameObjects.Characters
 
         private void Move()
         {
-            movementManager.MoveWithKeys(this);
+            movementManager.MoveWithKeys(this, obstacles);
         }
+
+
     }
 }

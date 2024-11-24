@@ -7,9 +7,11 @@ using Project.Classes.Background;
 using Project.Classes.GameObjects.Characters;
 using System.Reflection.Metadata.Ecma335;
 using System.Linq.Expressions;
-using Project.Classes.GameObjects;
 using System;
 using System.Diagnostics;
+using Project.Classes.GameObjects.Items;
+using Project.Classes.Collision;
+using System.Collections.Generic;
 
 
 namespace Project;
@@ -36,6 +38,7 @@ public class Game1 : Game
     private Texture2D blockTexture;
     private Box test1;
     private Box test2;
+    private List<ICollidable> obstaclesMC;
 
     public Game1()
     {
@@ -55,15 +58,20 @@ public class Game1 : Game
 
         base.Initialize();
 
+
+        // block
+
+        test1 = new Box(blockTexture, new Vector2(300, 300), new Vector2(100, 100), new Color(4294633190u));
+        test2 = new Box(blockTexture, new Vector2(500, 300), new Vector2(100, 100), new Color(4283465727u));
+
+        obstaclesMC = new List<ICollidable> { test1, test2};
+
+
         // Initialize characters
         tile = new Floor(tileTexture, 2f, new Vector2(50, 50));
         testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f));
-        player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f));
+        player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstaclesMC);
         cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player);
-
-        // block
-        test1 = new Box(blockTexture, new Vector2(300, 300), new Vector2(100, 100), new Color(4294633190u));
-        test2 = new Box(blockTexture, new Vector2(500, 300), new Vector2(100, 100), new Color(4283465727u));
 
     }
 
@@ -102,11 +110,15 @@ public class Game1 : Game
         base.Update(gameTime);
 
         // test collision
-        if (player.BoxCollission.IsCollidingWith(test1.BoxCollission))
+        if (player.BoxCollision.IsCollidingWith(test1.BoxCollision))
         {
-            Debug.WriteLine("COLLISION");
+            Debug.WriteLine("COLLISION 1");
         }
-        if (player.BoxCollission.IsCollidingWith(testChar.BoxCollission))
+        if (player.BoxCollision.IsCollidingWith(test2.BoxCollision))
+        {
+            Debug.WriteLine("COLLISION 2");
+        }
+        if (player.BoxCollision.IsCollidingWith(testChar.BoxCollision))
         {
             Debug.WriteLine("PARDON ME");
         }
@@ -124,7 +136,7 @@ public class Game1 : Game
         player.Draw(spriteBatch);
         // block
         test1.Draw(spriteBatch);
-       // test2.Draw(spriteBatch);
+        test2.Draw(spriteBatch);
         spriteBatch.End();
 
         

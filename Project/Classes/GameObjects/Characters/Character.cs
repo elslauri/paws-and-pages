@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Animations;
+using Project.Classes.Collision;
 using Project.Classes.Input;
 using Project.Classes.Movement;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Project.Classes.GameObjects.Characters
 {
-    internal class Character : IGameObject, IMovable
+    internal class Character : IGameObject, IMovable, ICollidable
     {
         protected Texture2D texture;
         protected Animation animation;
@@ -28,7 +29,7 @@ namespace Project.Classes.GameObjects.Characters
         // scale adjusted for testing on my screen
         private float scale;
 
-        public CollisionBox BoxCollission { get; set; }
+        public CollisionBox BoxCollision { get; set; }
 
         public Character(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed)
         {
@@ -45,13 +46,13 @@ namespace Project.Classes.GameObjects.Characters
 
             this.Size = animation.getFrameSize(texture.Width, texture.Height, spriteColumns, spriteRows);
 
-            BoxCollission = new CollisionBox(Position, scale * Size); 
+            BoxCollision = new CollisionBox(Position, scale * Size); 
         }
 
         public void Update(GameTime gameTime)
         {
             animation.Update(gameTime);
-            BoxCollission.Update(gameTime, this.Position);
+            BoxCollision.Update(gameTime, this.Position);
        
         }
 
