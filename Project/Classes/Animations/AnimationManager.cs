@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Project.Classes.Animations
 {
-    internal class Animation
+    internal class AnimationManager
     {
         public AnimationFrame CurrentFrame { get; set; }
 
@@ -21,7 +24,7 @@ namespace Project.Classes.Animations
 
         private FrameExtractor extractor;
 
-        public Animation(int fps = 8)
+        public AnimationManager(int fps = 8)
         {
             frames = new List<AnimationFrame>();
             this.fps = fps;
@@ -30,27 +33,48 @@ namespace Project.Classes.Animations
         
         public void Update(GameTime gameTime) 
         {
-            CurrentFrame = frames[counter];
-            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            if (frames.Count == 0)
+            {
+                Debug.WriteLine("NO FRAMES LOADED"); // TODO: remove after debug
+            }
             
+            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            CurrentFrame = frames[counter];
+
             if (secondCounter >= 1d/fps)
             {
                 counter++;
-                CurrentFrame = frames[0];
+                if(counter >= frames.Count)
+                {
+                    counter = 0;
+                }
+                CurrentFrame = frames[counter];
                 secondCounter = 0;
             }
-            if (counter >= frames.Count)
-            {
-                counter = 0;
-            }
         }
 
+
+        /// <summary>
+        /// Load frames from spritesheet and adds it to a the frames list. Uses the extractor class to get the frames
+        /// </summary>
+        /// <param name="textureWidth"></param>
+        /// <param name="textureHeight"></param>
+        /// <param name="columns"></param>
+        /// <param name="rows"></param>
         public void LoadFramesFromSpriteSheet(int textureWidth, int textureHeight, int columns, int rows)
         {
+            Debug.WriteLine($"DEBUG Loading frames with texture size: {textureWidth}x{textureHeight}, columns: {columns}, rows: {rows}");
             frames.AddRange(extractor.GetFrames(textureWidth, textureHeight, columns, rows));
+            Debug.WriteLine($"DEBUG  Total frames loaded: {frames.Count}");
+            CurrentFrame = frames[0]; // ok to be here?
         }
-        
 
+        public Rectangle GetCurrentFrameSourceRectangle()
+        {
+            return CurrentFrame.SourceRectangle;
+        }
+
+        // TODO: move this logic to somewhere else
         /// <summary>
         /// Get the size of one frame
         /// </summary>

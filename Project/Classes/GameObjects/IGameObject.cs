@@ -11,6 +11,7 @@ namespace Project.Classes.GameObjects
     internal interface IGameObject
     {
         void Update(GameTime gameTime);
-        void Draw(SpriteBatch spriteBatch);
+       // moved to IDrawable
+       //void Draw(SpriteBatch spriteBatch);
     }
 }

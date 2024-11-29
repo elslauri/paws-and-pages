@@ -13,6 +13,7 @@ using Project.Classes.GameObjects.Items;
 using Project.Classes.Collision;
 using System.Collections.Generic;
 using static System.Reflection.Metadata.BlobBuilder;
+using Project.Classes.Animations;
 
 
 namespace Project;
@@ -21,6 +22,9 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch spriteBatch;
+    private DrawingManager drawingManager;
+
+    private List<Classes.Animations.IDrawable> drawables;
 
     // TODO: move loading textures
     // characters
@@ -73,6 +77,8 @@ public class Game1 : Game
 
         base.Initialize();
 
+        
+       
 
         // block
 
@@ -90,6 +96,18 @@ public class Game1 : Game
         player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstaclesMC, blockTexture);
         cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, blockTexture);
 
+        drawables = new List<Classes.Animations.IDrawable>();
+        drawingManager = new DrawingManager(spriteBatch);
+
+        drawables.Add(player);
+        drawables.Add(testChar);
+        drawables.Add(cat);
+        // TODO: debug 
+        foreach (var drawable in drawables)
+        {
+            Debug.WriteLine($"DEBUG Drawable Object: {drawable}, Position: {drawable.Position}");
+        }
+        // add background and blocks
     }
 
     protected override void LoadContent()
@@ -141,6 +159,7 @@ public class Game1 : Game
         }
         // background
         CreateBlocks();
+        
     }
 
     protected override void Draw(GameTime gameTime)
@@ -148,21 +167,24 @@ public class Game1 : Game
         GraphicsDevice.Clear(new Color(52, 52, 79)); // TODO: change background
 
         // TODO: Add your drawing code here
-        spriteBatch.Begin();
-        // background
-        foreach(var block in blocks)
-        {
-            block.Draw(spriteBatch);
-        }
-        tile.Draw(spriteBatch);
-        testChar.Draw(spriteBatch);
-        cat.Draw(spriteBatch);
-        player.Draw(spriteBatch);
-        // block
-        test1.Draw(spriteBatch);
-        test2.Draw(spriteBatch);
-        
-        spriteBatch.End();
+
+        drawingManager.Draw(drawables, test1);
+
+        //spriteBatch.Begin();
+        //// background
+        //foreach (var block in blocks)
+        //{
+        //    block.Draw(spriteBatch);
+        //}
+        //tile.Draw(spriteBatch);
+        //testChar.Draw(spriteBatch);
+        //cat.Draw(spriteBatch);
+        //player.Draw(spriteBatch);
+        //// block
+        //test1.Draw(spriteBatch);
+        //test2.Draw(spriteBatch);
+
+        //spriteBatch.End();
 
 
 
