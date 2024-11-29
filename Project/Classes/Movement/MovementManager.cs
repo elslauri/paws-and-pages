@@ -53,7 +53,7 @@ namespace Project.Classes.Movement
         }
         private Vector2 TryMoveWithKeys(Vector2 targetPos, Character character, IEnumerable<ICollidable> obstacles)
         {
-            var tempCollisionBox = new CollisionBox(targetPos, character.BoxCollision.Size);
+            var tempCollisionBox = new CollisionBox(targetPos, character.BoxCollision.Size, character.BoxCollision.texture);
             foreach(var obstacle in obstacles)
             {
                 if (tempCollisionBox.IsCollidingWith(obstacle.BoxCollision))

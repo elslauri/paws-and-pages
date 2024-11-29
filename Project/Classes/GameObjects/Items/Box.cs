@@ -31,7 +31,7 @@ namespace Project.Classes.GameObjects.Items
 
             Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
 
-            BoxCollision = new CollisionBox(Position, Size);
+            BoxCollision = new CollisionBox(Position, Size, texture);
         }
 
         public void Update(GameTime gameTime)

@@ -16,10 +16,14 @@ namespace Project.Classes.Collision
 
         // scale
 
-        public CollisionBox(Vector2 position, Vector2 size)
+        public Texture2D texture; // Placeholder texture for drawing
+
+        public CollisionBox(Vector2 position, Vector2 size, Texture2D blockTexture)
         {
             Position = position;
             Size = size;
+
+            this.texture = blockTexture;
 
             UpdateRectangle();
         }
@@ -33,6 +37,15 @@ namespace Project.Classes.Collision
         public void UpdateRectangle()
         {
             Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+        }
+
+        /// <summary>
+        /// Draw collision box for testing purposes
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, Rectangle, Color.Red);
         }
 
         /// <summary>
