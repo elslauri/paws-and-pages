@@ -65,9 +65,10 @@ namespace Project.Classes.Movement
         }
 
 
-        public void MoveWithMC(IMovable movable, IMovable target)
+        public void MoveWithMC(IMovable movable, IMovable target, Vector2 offset)
         {
-            Vector2 direction = (target.Position - new Vector2(0, -48f)) - movable.Position;
+            ;
+            Vector2 direction = (target.Position - offset) - movable.Position;
             float distance = direction.Length();
 
             if (distance < 10)
@@ -99,7 +100,8 @@ namespace Project.Classes.Movement
         }
         private bool IsMCWithinBounds(Vector2 p)
         {
-            return p.X >= -48 && p.X <= (1600 - 144) && p.Y >= 0 && p.Y <= (960 - 96);
+           // return p.X >= -48 && p.X <= (1600 - 144) && p.Y >= 0 && p.Y <= (960 - 96); // from screen? 
+            return p.X >= -48 && p.X <= (1920 - 144) && p.Y >= 0 && p.Y <= (1200 - 96); // from map? 
         }
         private bool IsCharWithinX(IMovable movable)
         {

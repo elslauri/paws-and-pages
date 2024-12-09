@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Project.Classes.GameObjects
 {
-    internal interface IGameObject
+    internal interface IGameObject 
     {
         void Update(GameTime gameTime);
-       // moved to IDrawable
+
        //void Draw(SpriteBatch spriteBatch);
     }
 }

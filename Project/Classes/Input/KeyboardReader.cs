@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Project.Classes.Input
 {
@@ -22,6 +23,10 @@ namespace Project.Classes.Input
                 direction.Y -= 1;
             if (state.IsKeyDown(Keys.Down) || state.IsKeyDown(Keys.S))
                 direction.Y += 1;
+            if (direction != null)
+            {
+                direction.Normalize();
+            }
             return direction;
         }
     }

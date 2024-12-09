@@ -33,12 +33,7 @@ namespace Project.Classes.Animations
         
         public void Update(GameTime gameTime) 
         {
-            if (frames.Count == 0)
-            {
-                Debug.WriteLine("NO FRAMES LOADED"); // TODO: remove after debug
-            }
-            
-            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+           secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
             CurrentFrame = frames[counter];
 
             if (secondCounter >= 1d/fps)
@@ -63,9 +58,7 @@ namespace Project.Classes.Animations
         /// <param name="rows"></param>
         public void LoadFramesFromSpriteSheet(int textureWidth, int textureHeight, int columns, int rows)
         {
-            Debug.WriteLine($"DEBUG Loading frames with texture size: {textureWidth}x{textureHeight}, columns: {columns}, rows: {rows}");
-            frames.AddRange(extractor.GetFrames(textureWidth, textureHeight, columns, rows));
-            Debug.WriteLine($"DEBUG  Total frames loaded: {frames.Count}");
+           frames.AddRange(extractor.GetFrames(textureWidth, textureHeight, columns, rows));
             CurrentFrame = frames[0]; // ok to be here?
         }
 

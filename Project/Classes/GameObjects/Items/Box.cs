@@ -10,38 +10,44 @@ using Project.Classes.Collision;
 
 namespace Project.Classes.GameObjects.Items
 {
-    internal class Box : ICollidable
+    internal class Box : ICollidable, IDrawable
     {
-        private Texture2D texture;
+        public Texture2D Texture { get; set; }
 
-        public Rectangle Rectangle { get; set; }
+        public Rectangle SourceRectangle { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }
 
         public Color Color { get; set; }
         public CollisionBox BoxCollision { get; set; }
 
+        
+        public float Rotation { get; set; }
+
+        public Vector2 Origin { get; set; }
+
+        public float Scale { get; set; }
 
         public Box(Texture2D texture, Vector2 position, Vector2 size, Color color)
         {
-            this.texture = texture;
+            this.Texture = texture;
             Position = position;
             Size = size;
             Color = color;
 
-            Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+            SourceRectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
 
             BoxCollision = new CollisionBox(Position, Size, texture);
         }
 
         public void Update(GameTime gameTime)
         {
-            Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+            SourceRectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Rectangle, Color);
+            spriteBatch.Draw(Texture, SourceRectangle, Color);
         }
     }
 }

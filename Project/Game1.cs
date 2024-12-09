@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Project.Classes;
 using Project.Classes.Input;
 using Project.Classes.Background;
 using Project.Classes.GameObjects.Characters;
@@ -14,17 +13,20 @@ using Project.Classes.Collision;
 using System.Collections.Generic;
 using static System.Reflection.Metadata.BlobBuilder;
 using Project.Classes.Animations;
+using System.Runtime.InteropServices.ObjectiveC;
 
 
 namespace Project;
 
 public class Game1 : Game
 {
+    // TODO: make a game manager with draw and update instead of here
+
     private GraphicsDeviceManager _graphics;
     private SpriteBatch spriteBatch;
     private DrawingManager drawingManager;
 
-    private List<Classes.Animations.IDrawable> drawables;
+    private List<Classes.GameObjects.IDrawable> drawables;
 
     // TODO: move loading textures
     // characters
@@ -51,6 +53,12 @@ public class Game1 : Game
 };
     private List<Box> blocks;
 
+    private Map map;
+    private Matrix translation;
+
+    private int windowSizeX = 1600;
+    private int windowSizeY = 960;
+
     //block
     private Texture2D blockTexture;
     private Box test1;
@@ -70,9 +78,9 @@ public class Game1 : Game
     {
         // TODO: Add your initialization logic here
 
-        // Rescale window
-        _graphics.PreferredBackBufferWidth = 1600;
-        _graphics.PreferredBackBufferHeight = 960;
+        // Rescale window -> TODO: move to a globals class?
+        _graphics.PreferredBackBufferWidth = windowSizeX;
+        _graphics.PreferredBackBufferHeight = windowSizeY;
         _graphics.ApplyChanges();
 
         base.Initialize();
@@ -96,18 +104,20 @@ public class Game1 : Game
         player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstaclesMC, blockTexture);
         cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, blockTexture);
 
-        drawables = new List<Classes.Animations.IDrawable>();
+        drawables = new List<Classes.GameObjects.IDrawable>();
         drawingManager = new DrawingManager(spriteBatch);
+
+        // add background and blocks
+        map = new Map([tileTexture]);
+        drawables.Add(map);
 
         drawables.Add(player);
         drawables.Add(testChar);
         drawables.Add(cat);
-        // TODO: debug 
-        foreach (var drawable in drawables)
-        {
-            Debug.WriteLine($"DEBUG Drawable Object: {drawable}, Position: {drawable.Position}");
-        }
-        // add background and blocks
+        drawables.Add(test1);
+    
+
+
     }
 
     protected override void LoadContent()
@@ -116,14 +126,14 @@ public class Game1 : Game
 
         // TODO: use this.Content to load your game content here
 
-        tileTexture = Content.Load<Texture2D>("Background/planks_H");
+        tileTexture = Content.Load<Texture2D>("Background/planks_H_3");
         npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
         catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down (2)");
 
         // texture 1px 1px
         blockTexture = new Texture2D(GraphicsDevice, 1, 1);
-        blockTexture.SetData(new[] { Color.LavenderBlush });
+        blockTexture.SetData([Color.LavenderBlush]);
 
     }
 
@@ -142,9 +152,11 @@ public class Game1 : Game
         test1.Update(gameTime);
         test2.Update(gameTime);
 
+        // blocks
+
         base.Update(gameTime);
 
-        // test collision
+        // test collision TODO: move to other file
         if (player.BoxCollision.IsCollidingWith(test1.BoxCollision))
         {
             Debug.WriteLine("COLLISION 1");
@@ -157,9 +169,8 @@ public class Game1 : Game
         {
             Debug.WriteLine("PARDON ME");
         }
-        // background
-        CreateBlocks();
-        
+
+        CalculateTranslation(); // moves camera        
     }
 
     protected override void Draw(GameTime gameTime)
@@ -168,7 +179,7 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
 
-        drawingManager.Draw(drawables, test1);
+        drawingManager.Draw(drawables, translation);
 
         //spriteBatch.Begin();
         //// background
@@ -191,6 +202,12 @@ public class Game1 : Game
         base.Draw(gameTime);
     }
 
+    private void CalculateTranslation()
+    {
+        var dx = (windowSizeX / 2) - player.Position.X;
+        var dy = (windowSizeY / 2) - player.Position.Y;
+        translation = Matrix.CreateTranslation(dx, dy, 0);
+    }
 
     private void CreateBlocks()
     {
@@ -201,17 +218,18 @@ public class Game1 : Game
             {
                 if (gameboard[l, c] == 1)
                 {
-                    blocks.Add(new Box(blockTexture, new Vector2((c * 100), (l * 100)), new Vector2(100,100),Color.LightGoldenrodYellow ));
+                    blocks.Add(new Box(blockTexture, new Vector2((c * 100), (l * 100)), new Vector2(100, 100), Color.LightGoldenrodYellow));
 
                 }
                 else if (gameboard[l, c] == 2)
                 {
-                    blocks.Add(new Box(blockTexture, new Vector2((c * 100), (l * 100)), new Vector2(100,100),Color.MediumOrchid ));
-                   
+                    blocks.Add(new Box(blockTexture, new Vector2((c * 100), (l * 100)), new Vector2(100, 100), Color.MediumOrchid));
+
                 }
 
             }
         }
 
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Animations;
+using Project.Classes.Background;
 using Project.Classes.Collision;
 using Project.Classes.Input;
 using Project.Classes.Movement;
@@ -14,9 +15,12 @@ using System.Threading.Tasks;
 
 namespace Project.Classes.GameObjects.Characters
 {
-    internal class Character : IGameObject, IMovable, ICollidable, Animations.IDrawable
+    internal class Character : IGameObject, IMovable, ICollidable, IDrawable
     {
-        public Texture2D Texture { get; }
+        #region members
+
+        public Sprite Sprite { get; set; } // TODO: use this instead of all the below? 
+        public Texture2D Texture { get; }  
 
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
@@ -33,13 +37,15 @@ namespace Project.Classes.GameObjects.Characters
         public float Scale { get; }
 
 
+
         protected AnimationManager animation;
 
         public IInputReader InputReader { get; set; }
 
         public CollisionBox BoxCollision { get; set; }
 
-        
+        #endregion
+
 
         public Character(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, Texture2D blockTexture)
         {
@@ -48,6 +54,8 @@ namespace Project.Classes.GameObjects.Characters
 
             Position = position;
             Speed = speed;
+
+            Origin = new Vector2(texture.Width / 2, texture.Height /2);
 
             
             animation = new AnimationManager();
@@ -71,7 +79,7 @@ namespace Project.Classes.GameObjects.Characters
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
-            BoxCollision.Draw(spriteBatch);
+            BoxCollision.Draw(spriteBatch); // TODO: remove after testing
             // TODO: other things also needs drawing? move draw from character to abstract spriteDrawer class? 
             
         }
