@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Project.Classes.GameObjects.Characters
 {
-    internal class Character : IGameObject, IMovable, ICollidable, IDrawable
+    internal class Character : IGameObject, IMovable, ICollidable, IDraw
     {
         #region members
 

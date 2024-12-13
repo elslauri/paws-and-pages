@@ -1,18 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Threading.Tasks;
-using Project.Classes.GameObjects;
-using IDrawable = Project.Classes.GameObjects.IDrawable;
+using IDraw = Project.Classes.GameObjects.IDraw;
 
 namespace Project.Classes.Background
 {
-    public class Map : IDrawable
+    public class Map : IDraw
     {
         private Vector2 mapTileSize = new(40, 25); //times 48x48
         private Sprite[,] tiles;

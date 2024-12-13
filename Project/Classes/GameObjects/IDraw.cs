@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project.Classes.GameObjects
 {
-    public interface IDrawable
+    public interface IDraw
     {
         Texture2D Texture { get; }
         Vector2 Position { get; set; }

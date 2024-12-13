@@ -18,7 +18,8 @@ namespace Project.Classes.GameObjects.Characters
 
         private List<ICollidable> obstacles;
 
-        public MainCharacter(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) : base(texture, spriteColumns, spriteRows, scale, startPos, speed, blockTexture)
+        public MainCharacter(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) :
+            base(texture, spriteColumns, spriteRows, scale, startPos, speed, blockTexture)
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();
