@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Project.Classes.GameObjects;
-using System.Diagnostics;
 
 namespace Project.Classes.Background
 {

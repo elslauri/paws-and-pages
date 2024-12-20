@@ -1,14 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Formats.Asn1.AsnWriter;
 using Project.Classes.Collision;
-using System.Diagnostics;
-using Project.Classes.Animations;
 
 namespace Project.Classes.GameObjects.Items
 {
@@ -49,9 +41,8 @@ namespace Project.Classes.GameObjects.Items
         public void Draw(SpriteBatch spriteBatch)
         {
            spriteBatch.Draw(Texture, Position , SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
-           //spriteBatch.Draw(Texture, Position + new Vector2(Texture.Width / 2, Texture.Height / 2), SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
-
-            BoxCollision.Draw(spriteBatch);
+           
+           BoxCollision.Draw(spriteBatch);
         }
     }
 }

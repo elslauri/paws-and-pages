@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Background;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 
 namespace Project.Classes
