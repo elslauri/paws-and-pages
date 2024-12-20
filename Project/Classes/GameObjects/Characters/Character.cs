@@ -5,13 +5,6 @@ using Project.Classes.Background;
 using Project.Classes.Collision;
 using Project.Classes.Input;
 using Project.Classes.Movement;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -55,9 +48,10 @@ namespace Project.Classes.GameObjects.Characters
             Position = position;
             Speed = speed;
 
-            Origin = new Vector2(texture.Width / 2, texture.Height /2);
+            //Origin = new Vector2(texture.Width / 2, texture.Height /2);
+            Origin = new Vector2(0, 0);
 
-            
+
             animation = new AnimationManager();
             animation.LoadFramesFromSpriteSheet(texture.Width, texture.Height, spriteColumns, spriteRows);
 
@@ -78,9 +72,8 @@ namespace Project.Classes.GameObjects.Characters
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
-            BoxCollision.Draw(spriteBatch); // TODO: remove after testing
-            // TODO: other things also needs drawing? move draw from character to abstract spriteDrawer class? 
+            spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+            //BoxCollision.Draw(spriteBatch); // TODO: remove after testing
             
         }
     }

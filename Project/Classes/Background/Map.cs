@@ -7,7 +7,7 @@ namespace Project.Classes.Background
 {
     public class Map : IDraw
     {
-        private Vector2 mapTileSize = new(40, 25); //times 48x48
+        private Vector2 mapTileSize = new(50, 35); //times 48x48
         private Sprite[,] tiles;
 
         public Vector2 TileSize { get; set; }
@@ -16,8 +16,8 @@ namespace Project.Classes.Background
         //aah
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
-        public Microsoft.Xna.Framework.Rectangle SourceRectangle { get; set; }
-        public Microsoft.Xna.Framework.Color Color { get; set; }
+        public Rectangle SourceRectangle { get; set; }
+        public Color Color { get; set; }
         public float Rotation { get; set; }
         public Vector2 Origin { get; set; }
         public float Scale { get; set; }

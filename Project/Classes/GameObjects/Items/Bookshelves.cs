@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 using Project.Classes.Collision;
+using System.Diagnostics;
+using Project.Classes.Animations;
 
 namespace Project.Classes.GameObjects.Items
 {
-    // FOR TESTING - TODO: REMOVE
-    internal class Box : ICollidable, IDraw
+    internal class Bookshelve : ICollidable, IDraw
     {
         public Texture2D Texture { get; set; }
 
@@ -22,33 +23,34 @@ namespace Project.Classes.GameObjects.Items
         public Color Color { get; set; }
         public CollisionBox BoxCollision { get; set; }
 
-        
         public float Rotation { get; set; }
 
         public Vector2 Origin { get; set; }
 
         public float Scale { get; set; }
 
-        public Box(Texture2D texture, Vector2 position, Vector2 size, Color color)
+        public Bookshelve(Texture2D texture, Vector2 position)
         {
             this.Texture = texture;
-            Position = position;
-            Size = size;
-            Color = color;
+            Position = position + new Vector2(Texture.Width / 2, Texture.Height / 2);
+            Color = Color.White;
+            Scale = 3f;
 
-            SourceRectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+            Size = new Vector2( Texture.Width, Texture.Height);
 
-            BoxCollision = new CollisionBox(Position, Size, texture);
+            Origin = new Vector2(0, 0); 
+
+            SourceRectangle = new Rectangle(0,0, 64, 48);
+
+
+            //BoxCollision = new CollisionBox(Position, Size, texture);
         }
 
-        public void Update(GameTime gameTime)
-        {
-            SourceRectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
-        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, SourceRectangle, Color);
+           spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+          
         }
     }
 }

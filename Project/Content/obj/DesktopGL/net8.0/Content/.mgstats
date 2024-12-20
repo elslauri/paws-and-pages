@@ -1,5 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Repos/gamedev/ba2-gamedev-project/Project/Content/Background/filledbookshelves.png","C:/Repos/gamedev/ba2-gamedev-project/Project/Content/bin/DesktopGL/Content/Background/filledbookshelves.xnb","TextureProcessor","Texture2DContent",11715,98389,0.1225095
+"C:/Repos/gamedev/ba2-gamedev-project/Project/Content/Background/filledbookshelves.png","C:/Repos/gamedev/ba2-gamedev-project/Project/Content/bin/DesktopGL/Content/Background/filledbookshelves.xnb","TextureProcessor","Texture2DContent",11715,98389,0.157252
 "C:/Repos/gamedev/ba2-gamedev-project/Project/Content/Background/planks_H_3.png","C:/Repos/gamedev/ba2-gamedev-project/Project/Content/bin/DesktopGL/Content/Background/planks_H_3.xnb","TextureProcessor","Texture2DContent",1060,9301,0.1313083
 "C:/Repos/gamedev/ba2-gamedev-project/Project/Content/Background/planks_H.png","C:/Repos/gamedev/ba2-gamedev-project/Project/Content/bin/DesktopGL/Content/Background/planks_H.xnb","TextureProcessor","Texture2DContent",404,1109,0.1265279
 "C:/Repos/gamedev/ba2-gamedev-project/Project/Content/Background/planks_V.png","C:/Repos/gamedev/ba2-gamedev-project/Project/Content/bin/DesktopGL/Content/Background/planks_V.xnb","TextureProcessor","Texture2DContent",409,1109,0.0075445

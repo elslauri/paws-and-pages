@@ -1,19 +1,23 @@
 # TODO
 
-- [ ] powerpoints 1-5
+- [x] powerpoints 1-5
 - [ ] refactor animations so not done by every class themselves
-- [ ] collision
+- [ ] collision ? ICollide interface 
 - [ ] add object (book?)
 - [ ] interaction book and character
 - [ ] background(s)
 - [ ] day / night mechanism
-- [ ] UI speech
+- [ ] UI speech on collision
 - [ ] UI level design
 - [ ] pause / play
 - [ ] start screen
 - [ ] levels
 - [ ] game over scherm?
 - [ ] balk met voortgang (voltooide taken in tijd uitgedrukt?)
+- [ ] factory om npcs aan te maken 
+- [ ] observer voor posities? 
+- [ ] score 
+- [ ] use sprite class in char and items
 
 ## Requirements
 

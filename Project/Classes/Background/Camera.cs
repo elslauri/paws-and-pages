@@ -31,7 +31,6 @@ namespace Project.Classes.Background
         public void Update(GameTime gameTime)
         {
             CalculateTranslation();
-            Debug.WriteLine(translation);
         }
 
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project.Classes.GameObjects
 {
-    internal interface IGameObject 
+    public interface IGameObject 
     {
         void Update(GameTime gameTime);
 

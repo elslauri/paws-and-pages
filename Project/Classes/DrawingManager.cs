@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 
-namespace Project.Classes.Animations
+namespace Project.Classes
 {
     internal class DrawingManager
     {
@@ -17,14 +17,13 @@ namespace Project.Classes.Animations
 
         public void Draw(IEnumerable<GameObjects.IDraw> drawables)
         {
-            spriteBatch.Begin(transformMatrix: Camera.GetTheCamera().translation);
+            spriteBatch.Begin(transformMatrix: Camera.GetTheCamera().translation, samplerState: SamplerState.PointClamp);
 
-            
             foreach (var d in drawables)
             {
-                
+
                 d.Draw(spriteBatch);
-                
+
             }
             spriteBatch.End();
         }
