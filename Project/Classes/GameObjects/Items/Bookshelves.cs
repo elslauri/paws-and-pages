@@ -42,7 +42,7 @@ namespace Project.Classes.GameObjects.Items
             SourceRectangle = new Rectangle(0,0, 64, 48); 
 
 
-            BoxCollision = new CollisionBox(Position, Scale * Size , texture);
+            BoxCollision = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y /3) , texture);
         }
 
 

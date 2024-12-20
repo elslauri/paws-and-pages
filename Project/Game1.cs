@@ -71,21 +71,29 @@ public class Game1 : Game
         test1 = new Box(blockTexture, new Vector2(300, 300), new Vector2(100, 100), new Color(4294633190u));
         test2 = new Box(blockTexture, new Vector2(500, 300), new Vector2(100, 100), new Color(4283465727u));
 
-        obstaclesMC = new List<ICollidable> { test1, test2 };
 
 
-        // Initialize characters
-        testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), blockTexture);
-        player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstaclesMC, blockTexture);
-        cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, blockTexture);
-
+        
         
         drawingManager = new DrawingManager(spriteBatch);
 
         // add background and blocks
         map = new Map([tileTexture]);
 
-        bookshelve = new Bookshelve(bookshelveTexture, new Vector2(0,0) );
+        bookshelve = new Bookshelve(bookshelveTexture, new Vector2(1600,600));
+        
+
+        
+
+        // Initialize characters
+        testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), blockTexture);
+
+        obstaclesMC = [test1, test2, bookshelve];
+
+
+        player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstaclesMC, blockTexture);
+        cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, blockTexture);
+
 
         drawables = [map, test1, test2, bookshelve, testChar, cat, player];
 
@@ -131,18 +139,11 @@ public class Game1 : Game
         base.Update(gameTime);
 
         // test collision TODO: move to other file
-        if (player.BoxCollision.IsCollidingWith(test1.BoxCollision))
-        {
-            Debug.WriteLine("COLLISION 1");
-        }
-        if (player.BoxCollision.IsCollidingWith(test2.BoxCollision))
-        {
-            Debug.WriteLine("COLLISION 2");
-        }
         if (player.BoxCollision.IsCollidingWith(testChar.BoxCollision))
         {
             Debug.WriteLine("PARDON ME");
-        }      
+        }
+        
     }
 
     protected override void Draw(GameTime gameTime)
