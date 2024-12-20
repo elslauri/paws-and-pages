@@ -36,21 +36,22 @@ namespace Project.Classes.GameObjects.Items
             Color = Color.White;
             Scale = 3f;
 
-            Size = new Vector2( Texture.Width, Texture.Height);
+            Origin = new Vector2(0, 0);
 
-            Origin = new Vector2(0, 0); 
+            Size = new Vector2(64, 48); //TODO: FOR THIS SHELVE ONLY SO MAKE A FACTORY?!
+            SourceRectangle = new Rectangle(0,0, 64, 48); 
 
-            SourceRectangle = new Rectangle(0,0, 64, 48);
 
-
-            //BoxCollision = new CollisionBox(Position, Size, texture);
+            BoxCollision = new CollisionBox(Position, Scale * Size , texture);
         }
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
-           spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
-          
+           spriteBatch.Draw(Texture, Position , SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+           //spriteBatch.Draw(Texture, Position + new Vector2(Texture.Width / 2, Texture.Height / 2), SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+
+            BoxCollision.Draw(spriteBatch);
         }
     }
 }
