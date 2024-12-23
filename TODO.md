@@ -18,6 +18,7 @@
 - [ ] observer voor posities? 
 - [ ] score 
 - [ ] use sprite class in char and items
+- [ ] make character class abstract
 
 ## Requirements
 

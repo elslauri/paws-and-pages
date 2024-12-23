@@ -30,11 +30,11 @@ namespace Project.Classes.GameObjects.Items
 
             Origin = new Vector2(0, 0);
 
-            Size = new Vector2(64, 48); //TODO: FOR THIS SHELVE ONLY SO MAKE A FACTORY?!
-            SourceRectangle = new Rectangle(0,0, 64, 48); 
+            Size = new Vector2(0, 0); //TODO: FOR THIS SHELVE ONLY SO MAKE A FACTORY?!
+            SourceRectangle = new Rectangle(0,0, 128, 192); 
 
 
-            BoxCollision = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y /3) , texture);
+            BoxCollision = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y) , texture);
         }
 
 

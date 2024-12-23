@@ -35,7 +35,7 @@ public class Game1 : Game
     // background
     private Map map;
     private Texture2D tileTexture;
-    private Bookshelve bookshelve;
+    private List<Bookshelve> bookshelves;
     private Texture2D bookshelveTexture;
 
     //block FOR TESTING
@@ -80,22 +80,31 @@ public class Game1 : Game
         // add background and blocks
         map = new Map([tileTexture]);
 
-        bookshelve = new Bookshelve(bookshelveTexture, new Vector2(1600,600));
-        
+        bookshelves = new List<Bookshelve>();
+        for (int j = 200; j <= 800; j+=200)
+        {
+            for (int i = 0; i < 5 * 192; i += 192)
+            {
+                bookshelves.Add(new LongFullBookShelve(bookshelveTexture, new Vector2(0 + i, j)));
+
+
+            }
+        }
 
         
+
 
         // Initialize characters
         testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), blockTexture);
 
-        obstaclesMC = [test1, test2, bookshelve];
+        obstaclesMC = [.. bookshelves];
 
 
         player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstaclesMC, blockTexture);
         cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, blockTexture);
 
 
-        drawables = [map, test1, test2, bookshelve, testChar, cat, player];
+        drawables = [map, .. bookshelves, testChar, cat, player];
 
         // camera 
         Camera.GetTheCamera().Initialize(map, player);

@@ -4,12 +4,12 @@ using Project.Classes.Collision;
 
 namespace Project.Classes.GameObjects.Items
 {
-    internal class LongFullBookShelve : Bookshelve
+    internal class ShortFullBookshelve : Bookshelve
     {
-        public LongFullBookShelve(Texture2D texture, Vector2 position) : base(texture, position)
+        public ShortFullBookshelve(Texture2D texture, Vector2 position) : base(texture, position)
         {
-            Size = new Vector2(64, 48); //TODO: FOR THIS SHELVE ONLY SO MAKE A FACTORY?
-            SourceRectangle = new Rectangle(0, 0, 64, 48);
+            Size = new Vector2(64, 48); 
+            SourceRectangle = new Rectangle(0, 48, 64, 48);
 
 
             BoxCollision = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y / 3), texture);
