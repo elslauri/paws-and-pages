@@ -38,11 +38,8 @@ public class Game1 : Game
     private List<Bookshelve> bookshelves;
     private Texture2D bookshelveTexture;
 
-    //block FOR TESTING
+    //texture for box collision
     private Texture2D blockTexture;
-    private Box test1;
-    private Box test2;
-
     
 
 
@@ -65,22 +62,18 @@ public class Game1 : Game
 
         base.Initialize();
 
-        
 
-        // obstacles
-        test1 = new Box(blockTexture, new Vector2(300, 300), new Vector2(100, 100), new Color(4294633190u));
-        test2 = new Box(blockTexture, new Vector2(500, 300), new Vector2(100, 100), new Color(4283465727u));
-
-
-
-        
-        
         drawingManager = new DrawingManager(spriteBatch);
 
         // add background and blocks
         map = new Map([tileTexture]);
 
+
         bookshelves = new List<Bookshelve>();
+        //FACTORY
+        // makeBookshelves(amountX, amountY)
+        // public List<Bookshelve> makeBookShelves(int amountX, int amountY)
+        // List<Bookshelve> bookshelves = new List<Bookshelves>();
         for (int j = 200; j <= 800; j+=200)
         {
             for (int i = 0; i < 5 * 192; i += 192)
@@ -90,9 +83,9 @@ public class Game1 : Game
 
             }
         }
+        // return bookshelves;
 
         
-
 
         // Initialize characters
         testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), blockTexture);
@@ -123,10 +116,6 @@ public class Game1 : Game
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down (2)");
         bookshelveTexture = Content.Load<Texture2D>("Background/filledbookshelves");
 
-        // TESTING REMOVE texture 1px 1px
-        blockTexture = new Texture2D(GraphicsDevice, 1, 1);
-        blockTexture.SetData([Color.LavenderBlush]);
-
     }
 
     protected override void Update(GameTime gameTime)
@@ -139,9 +128,6 @@ public class Game1 : Game
         testChar.Update(gameTime);
         cat.Update(gameTime);
         player.Update(gameTime);
-
-        //test1.Update(gameTime);
-        //test2.Update(gameTime);
 
         Camera.GetTheCamera().Update(gameTime);
 
@@ -172,11 +158,6 @@ public class Game1 : Game
         //testChar.Draw(spriteBatch);
         //cat.Draw(spriteBatch);
         //player.Draw(spriteBatch);
-        //// block
-        //test1.Draw(spriteBatch);
-        //test2.Draw(spriteBatch);
-
-       // bookshelve.Draw(spriteBatch);
         //spriteBatch.End();
 
 
