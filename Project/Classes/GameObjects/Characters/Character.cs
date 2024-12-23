@@ -5,6 +5,7 @@ using Project.Classes.Background;
 using Project.Classes.Collision;
 using Project.Classes.Input;
 using Project.Classes.Movement;
+using System.Collections.Generic;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -36,11 +37,12 @@ namespace Project.Classes.GameObjects.Characters
         public IInputReader InputReader { get; set; }
 
         public CollisionBox BoxCollision { get; set; }
+        public List<ICollidable> obstacles;
 
         #endregion
 
 
-        public Character(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, Texture2D blockTexture)
+        public Character(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture)
         {
             this.Texture = texture;
             this.Scale = scale;
@@ -59,8 +61,8 @@ namespace Project.Classes.GameObjects.Characters
 
             this.Size = animation.getFrameSize(texture.Width, texture.Height, spriteColumns, spriteRows);
 
-            BoxCollision = new CollisionBox(Position, scale * Size, blockTexture); 
-
+            BoxCollision = new CollisionBox(Position, scale * Size, blockTexture);
+            this.obstacles = obstacles;
         }
 
         public void Update(GameTime gameTime)

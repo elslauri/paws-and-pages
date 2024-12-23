@@ -11,14 +11,14 @@ namespace Project.Classes.GameObjects.Characters
     {
         private MovementManager movementManager;
 
-        private List<ICollidable> obstacles;
+        
 
         public MainCharacter(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) :
-            base(texture, spriteColumns, spriteRows, scale, startPos, speed, blockTexture)
+            base(texture, spriteColumns, spriteRows, scale, startPos, speed, obstacles, blockTexture)
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();
-            this.obstacles = obstacles;
+            
         }
 
         public void Update(GameTime gameTime)
