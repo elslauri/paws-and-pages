@@ -29,7 +29,7 @@ namespace Project.Classes.GameObjects.Characters
 
         private void Move()
         {
-            movementManager.MoveWithKeys(this, obstacles);
+            movementManager.MoveWithKeys(this);
         }
 
 

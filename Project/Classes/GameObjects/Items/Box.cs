@@ -20,7 +20,7 @@ namespace Project.Classes.GameObjects.Items
         public Vector2 Size { get; set; }
 
         public Color Color { get; set; }
-        public CollisionBox BoxCollision { get; set; }
+        public CollisionBox ColBox { get; set; }
 
         
         public float Rotation { get; set; }
@@ -38,7 +38,7 @@ namespace Project.Classes.GameObjects.Items
 
             SourceRectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
 
-            BoxCollision = new CollisionBox(Position, Size, texture);
+            ColBox = new CollisionBox(Position, Size, texture);
         }
 
         public void Update(GameTime gameTime)

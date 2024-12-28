@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Project.Classes.Collision;
 using Project.Classes.GameObjects.Characters;
+using System.Collections.Generic;
 
 
 namespace Project.Classes.Movement
@@ -11,6 +11,7 @@ namespace Project.Classes.Movement
         // TODO: acceleration? 
         private Vector2 acceleration = new Vector2(2f, 2f);
         
+
         public void Move(IMovable movable)
         {
             var nextPos = movable.Position + movable.Speed;
@@ -33,7 +34,7 @@ namespace Project.Classes.Movement
             }
         }
         
-        public void MoveWithKeys(Character character, IEnumerable<ICollidable> obstacles)
+        public void MoveWithKeys(Character character)
         {
             var direction = character.InputReader.ReadInput();
             var distance = direction * character.Speed; 
@@ -42,28 +43,10 @@ namespace Project.Classes.Movement
 
             if (IsMCWithinBounds(nextPos))
             {
-                character.Position = TryMoveWithKeys(nextPos, character, obstacles);
+                character.Position = TryMove(nextPos, character);
             }
         }
-        /// <summary>
-        /// Checks if movement is possible with obstacles
-        /// </summary>
-        /// <param name="targetPos"></param>
-        /// <param name="character"></param>
-        /// <param name="obstacles"></param>
-        /// <returns>New position if movement possible, else current position</returns>
-        private Vector2 TryMoveWithKeys(Vector2 targetPos, Character character, IEnumerable<ICollidable> obstacles)
-        {
-            var tempCollisionBox = new CollisionBox(targetPos, character.BoxCollision.Size, character.BoxCollision.texture);
-            foreach(var obstacle in obstacles)
-            {
-                if (tempCollisionBox.IsCollidingWith(obstacle.BoxCollision))
-                {
-                    return character.Position;
-                }
-            }
-            return targetPos;
-        }
+    
 
         /// <summary>
         /// Follows a movable target with an offset
@@ -71,27 +54,27 @@ namespace Project.Classes.Movement
         /// <param name="movable"></param>
         /// <param name="target"></param>
         /// <param name="offset"></param>
-        public void MoveWithMC(IMovable movable, IMovable target, Vector2 offset)
+        public void MoveWithTarget(Character character, IMovable target, Vector2 offset)
         {
-            ;
-            Vector2 direction = (target.Position - offset) - movable.Position;
+            
+            Vector2 direction = (target.Position - offset) - character.Position;
             float distance = direction.Length();
 
             if (distance < 10)
             {
-                movable.Speed *= 0.9f;
-                if (movable.Speed.Length() < 0.1f)
+                character.Speed *= 0.9f;
+                if (character.Speed.Length() < 0.1f)
                 {
-                    movable.Speed = Vector2.Zero;
+                    character.Speed = Vector2.Zero;
                 }
                 return;
             }
             
             direction.Normalize();
-            movable.Speed += direction;
-            movable.Speed = Limit(movable.Speed, 2);
+            character.Speed += direction;
+            character.Speed = Limit(character.Speed, 2);
 
-            movable.Position += movable.Speed;
+            character.Position = character.Position + character.Speed;
         }
 
         /// <summary>
@@ -110,6 +93,30 @@ namespace Project.Classes.Movement
             }
             return v;
         }
+
+        /// <summary>
+        /// Checks if movement is possible with obstacles
+        /// </summary>
+        /// <param name="targetPos"></param>
+        /// <param name="character"></param>
+        /// <param name="obstacles"></param>
+        /// <returns>New position if movement possible, else current position</returns>
+        private Vector2 TryMove(Vector2 targetPos, Character character)
+        {
+            var tempCollisionBox = new CollisionBox(targetPos, character.ColBox.Size, character.ColBox.texture);
+            foreach (var obstacle in character.obstacles)
+            {
+                if (tempCollisionBox.IsCollidingWith(obstacle.ColBox))
+                {
+                    return character.Position;
+                }
+            }
+            return targetPos;
+        }
+
+
+        // TODO: this is a fix because sprite MC is weird (so fix sprite instead of this code)
+
         private bool IsMCWithinBounds(Vector2 p)
         {
            // return p.X >= -48 && p.X <= (1600 - 144) && p.Y >= 0 && p.Y <= (960 - 96); // from screen

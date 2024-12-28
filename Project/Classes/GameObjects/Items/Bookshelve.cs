@@ -13,7 +13,7 @@ namespace Project.Classes.GameObjects.Items
         public Vector2 Size { get; set; }
 
         public Color Color { get; set; }
-        public CollisionBox BoxCollision { get; set; }
+        public CollisionBox ColBox { get; set; }
 
         public float Rotation { get; set; }
 
@@ -34,7 +34,7 @@ namespace Project.Classes.GameObjects.Items
             SourceRectangle = new Rectangle(0,0, 128, 192); 
 
 
-            BoxCollision = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y) , texture);
+            ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y) , texture);
         }
 
 
@@ -42,7 +42,7 @@ namespace Project.Classes.GameObjects.Items
         {
            spriteBatch.Draw(Texture, Position , SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
            
-           BoxCollision.Draw(spriteBatch);
+           ColBox.Draw(spriteBatch);
         }
     }
 }

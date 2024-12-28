@@ -36,7 +36,7 @@ namespace Project.Classes.GameObjects.Characters
 
         public IInputReader InputReader { get; set; }
 
-        public CollisionBox BoxCollision { get; set; }
+        public CollisionBox ColBox { get; set; }
         public List<ICollidable> obstacles;
 
         #endregion
@@ -61,14 +61,14 @@ namespace Project.Classes.GameObjects.Characters
 
             this.Size = animation.getFrameSize(texture.Width, texture.Height, spriteColumns, spriteRows);
 
-            BoxCollision = new CollisionBox(Position, scale * Size, blockTexture);
+            ColBox = new CollisionBox(Position, scale * Size, blockTexture);
             this.obstacles = obstacles;
         }
 
         public void Update(GameTime gameTime)
         {
             animation.Update(gameTime);
-            BoxCollision.Update(gameTime, this.Position);
+            ColBox.Update(gameTime, this.Position);
        
         }
 
@@ -76,7 +76,7 @@ namespace Project.Classes.GameObjects.Characters
         {
             spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
             // BoxCollision.Draw(spriteBatch); // TODO: remove after testing
-            BoxCollision.Draw(spriteBatch); // TODO: remove after testing
+            ColBox.Draw(spriteBatch); // TODO: remove after testing
         }
     }
 }

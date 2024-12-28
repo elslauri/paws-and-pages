@@ -9,6 +9,6 @@ namespace Project.Classes.Collision
 {
     internal interface ICollidable
     {
-        CollisionBox BoxCollision { get; set; }
+        CollisionBox ColBox { get; set; }
     }
 }

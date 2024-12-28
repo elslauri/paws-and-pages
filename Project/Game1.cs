@@ -135,7 +135,7 @@ public class Game1 : Game
         base.Update(gameTime);
 
         // test collision TODO: move to other file
-        if (player.BoxCollision.IsCollidingWith(testChar.BoxCollision))
+        if (player.ColBox.IsCollidingWith(testChar.ColBox))
         {
             Debug.WriteLine("PARDON ME");
         }
