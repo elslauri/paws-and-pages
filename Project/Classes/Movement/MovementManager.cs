@@ -9,7 +9,7 @@ namespace Project.Classes.Movement
     internal class MovementManager
     {
         // TODO: acceleration? 
-        private Vector2 acceleration = new Vector2(0.1f, 0.1f);
+        private Vector2 acceleration = new Vector2(2f, 2f);
         
         public void Move(IMovable movable)
         {
@@ -45,6 +45,13 @@ namespace Project.Classes.Movement
                 character.Position = TryMoveWithKeys(nextPos, character, obstacles);
             }
         }
+        /// <summary>
+        /// Checks if movement is possible with obstacles
+        /// </summary>
+        /// <param name="targetPos"></param>
+        /// <param name="character"></param>
+        /// <param name="obstacles"></param>
+        /// <returns>New position if movement possible, else current position</returns>
         private Vector2 TryMoveWithKeys(Vector2 targetPos, Character character, IEnumerable<ICollidable> obstacles)
         {
             var tempCollisionBox = new CollisionBox(targetPos, character.BoxCollision.Size, character.BoxCollision.texture);
@@ -58,7 +65,12 @@ namespace Project.Classes.Movement
             return targetPos;
         }
 
-
+        /// <summary>
+        /// Follows a movable target with an offset
+        /// </summary>
+        /// <param name="movable"></param>
+        /// <param name="target"></param>
+        /// <param name="offset"></param>
         public void MoveWithMC(IMovable movable, IMovable target, Vector2 offset)
         {
             ;
@@ -82,6 +94,12 @@ namespace Project.Classes.Movement
             movable.Position += movable.Speed;
         }
 
+        /// <summary>
+        /// Limits speed to a maximum
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         private Vector2 Limit(Vector2 v, float max)
         {
             if (v.Length() > max)
@@ -94,16 +112,17 @@ namespace Project.Classes.Movement
         }
         private bool IsMCWithinBounds(Vector2 p)
         {
-           // return p.X >= -48 && p.X <= (1600 - 144) && p.Y >= 0 && p.Y <= (960 - 96); // from screen? 
-            return p.X >= -48 && p.X <= (1920 - 144) && p.Y >= 0 && p.Y <= (1200 - 96); // from map? 
+           // return p.X >= -48 && p.X <= (1600 - 144) && p.Y >= 0 && p.Y <= (960 - 96); // from screen
+            return p.X >= -48 && p.X <= (Globals.mapSizeX-144) && p.Y >= 0 && p.Y <= (Globals.mapSizeY-120); // from map? 
+
         }
         private bool IsCharWithinX(IMovable movable)
         {
-            return movable.Position.X + movable.Speed.X > 1600 - 64 || movable.Position.X + movable.Speed.X < 0;
+            return movable.Position.X + movable.Speed.X > Globals.mapSizeX - 64 || movable.Position.X + movable.Speed.X < 0;
         }
         private bool IsCharWithinY(IMovable movable)
         {
-            return movable.Position.Y + movable.Speed.Y > 960 - 96 || movable.Position.Y + movable.Speed.Y < 0;
+            return movable.Position.Y + movable.Speed.Y > Globals.mapSizeY - 96 || movable.Position.Y + movable.Speed.Y < 0;
         }
     }
 }

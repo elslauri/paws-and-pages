@@ -8,6 +8,7 @@ using Project.Classes.GameObjects.Items;
 using Project.Classes.Collision;
 using System.Collections.Generic;
 using Project.Classes;
+using System.Dynamic;
 
 
 namespace Project;
@@ -21,7 +22,7 @@ public class Game1 : Game
     private DrawingManager drawingManager;
 
     private List<Classes.GameObjects.IDraw> drawables;
-    private List<ICollidable> obstaclesMC;
+    private List<ICollidable> obstacles;
 
     // TODO: move loading textures
     // characters
@@ -88,13 +89,13 @@ public class Game1 : Game
         
 
         // Initialize characters
-        testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), blockTexture);
+        testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), obstacles, blockTexture);
 
-        obstaclesMC = [.. bookshelves];
+        obstacles = [.. bookshelves];
 
 
-        player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstaclesMC, blockTexture);
-        cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, blockTexture);
+        player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstacles, blockTexture);
+        cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
 
         drawables = [map, .. bookshelves, testChar, cat, player];

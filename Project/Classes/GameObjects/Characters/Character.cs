@@ -76,7 +76,7 @@ namespace Project.Classes.GameObjects.Characters
         {
             spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
             // BoxCollision.Draw(spriteBatch); // TODO: remove after testing
-            BoxCollision.Draw(spriteBatch);
+            BoxCollision.Draw(spriteBatch); // TODO: remove after testing
         }
     }
 }

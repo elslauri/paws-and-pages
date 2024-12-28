@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NVorbis.Contracts;
 using Project.Classes.Animations;
+using Project.Classes.Collision;
 using Project.Classes.Input;
 using Project.Classes.Movement;
 using System;
@@ -21,7 +22,8 @@ namespace Project.Classes.GameObjects.Characters
         private MovementManager movementManager;
         private Character player;
 
-        public Friend(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, Character player, Texture2D blockTexture) : base(texture, spriteColumns, spriteRows, scale, position, speed, blockTexture)
+        public Friend(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, Character player, List<ICollidable> obstacles,Texture2D blockTexture) : 
+            base(texture, spriteColumns, spriteRows, scale, position, speed, obstacles, blockTexture)
         {
             this.player = player;
 
