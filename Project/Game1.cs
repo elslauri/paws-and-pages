@@ -7,7 +7,6 @@ using Project.Classes.GameObjects.Items;
 using Project.Classes.Collision;
 using System.Collections.Generic;
 using Project.Classes;
-using System.Dynamic;
 using Project.Classes.Animations;
 using Project.Classes.GameObjects.Background;
 
@@ -39,6 +38,9 @@ public class Game1 : Game
     private Texture2D tileTexture;
     private List<Bookshelve> bookshelves;
     private Texture2D bookshelveTexture;
+
+    private Book book1;
+    private Texture2D bookTexture;
 
     //texture for box collision
     private Texture2D blockTexture;
@@ -82,24 +84,23 @@ public class Game1 : Game
             {
                 bookshelves.Add(new LongFullBookShelve(bookshelveTexture, new Vector2(0 + i, j)));
 
-
             }
         }
         // return bookshelves;
 
-        
-
-        // Initialize characters
-        testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), obstacles, blockTexture);
 
         obstacles = [.. bookshelves];
 
+        book1 = new Book(bookTexture,new Vector2(700,600));
 
+
+        // Initialize characters
+        testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), obstacles, blockTexture);
         player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstacles, blockTexture);
         cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
 
-        drawables = [map, .. bookshelves, testChar, cat, player];
+        drawables = [map, .. bookshelves, book1, testChar, cat, player];
 
         // camera 
         Camera.GetTheCamera().Initialize(map, player);
@@ -117,6 +118,7 @@ public class Game1 : Game
         catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down (2)");
         bookshelveTexture = Content.Load<Texture2D>("Background/filledbookshelves");
+        bookTexture = Content.Load<Texture2D>("Items/bookClosed");
 
     }
 

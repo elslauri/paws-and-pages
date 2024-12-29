@@ -26,10 +26,10 @@ namespace Project.Classes.Animations
         
         public void Update(GameTime gameTime) 
         {
-            Debug.WriteLine($"secondCounter: {secondCounter}, elapsed: {gameTime.ElapsedGameTime.TotalSeconds}");
+            
 
             secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
-            Debug.WriteLine($"Updated secondCounter: {secondCounter}");
+
             CurrentFrame = frames[counter];
 
             if (secondCounter >= 1d/fps)

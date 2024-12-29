@@ -25,7 +25,6 @@ namespace Project.Classes.GameObjects.Characters
         public float Rotation { get; }
         public Vector2 Origin { get; }
 
-        public Rectangle SourceRectangle { get; }
         public Vector2 Size { get; set; }
 
 
@@ -59,7 +58,6 @@ namespace Project.Classes.GameObjects.Characters
             animation = new AnimationManager();
             animation.LoadFramesFromSpriteSheet(texture.Width, texture.Height, spriteColumns, spriteRows);
 
-            SourceRectangle = animation.CurrentFrame.SourceRectangle;
 
             this.Size = animation.getFrameSize(texture.Width, texture.Height, spriteColumns, spriteRows);
 
