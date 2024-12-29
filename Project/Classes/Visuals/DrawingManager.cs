@@ -8,7 +8,7 @@ namespace Project.Classes.Animations
     internal class DrawingManager
     {
         private SpriteBatch spriteBatch;
-        // statisch tekenen en geanimeerd tekenen
+        // TODO: onderscheid statisch en geanimeerd tekenen? 
         public DrawingManager(SpriteBatch spriteBatch)
         {
             this.spriteBatch = spriteBatch;
