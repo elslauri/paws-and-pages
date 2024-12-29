@@ -126,7 +126,6 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
         testChar.Update(gameTime);
         cat.Update(gameTime);
         player.Update(gameTime);
@@ -140,7 +139,7 @@ public class Game1 : Game
         {
             Debug.WriteLine("PARDON ME");
         }
-        
+
     }
 
     protected override void Draw(GameTime gameTime)
@@ -161,7 +160,6 @@ public class Game1 : Game
         //cat.Draw(spriteBatch);
         //player.Draw(spriteBatch);
         //spriteBatch.End();
-
 
 
         base.Draw(gameTime);

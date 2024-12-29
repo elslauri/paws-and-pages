@@ -14,7 +14,7 @@ namespace Project.Classes.GameObjects.Background
         public Vector2 TileSize { get; set; }
         public Vector2 MapSize { get; set; }
 
-        //aah
+        // aah
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Rectangle SourceRectangle { get; set; }

@@ -6,6 +6,8 @@ using Project.Classes.Input;
 using Project.Classes.Movement;
 using Project.Classes.Visuals;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -75,6 +77,7 @@ namespace Project.Classes.GameObjects.Characters
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+
             // BoxCollision.Draw(spriteBatch); // TODO: remove after testing
             ColBox.Draw(spriteBatch); // TODO: remove after testing
         }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
 namespace Project.Classes.Animations
@@ -24,7 +26,10 @@ namespace Project.Classes.Animations
         
         public void Update(GameTime gameTime) 
         {
-           secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            Debug.WriteLine($"secondCounter: {secondCounter}, elapsed: {gameTime.ElapsedGameTime.TotalSeconds}");
+
+            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            Debug.WriteLine($"Updated secondCounter: {secondCounter}");
             CurrentFrame = frames[counter];
 
             if (secondCounter >= 1d/fps)
@@ -36,6 +41,7 @@ namespace Project.Classes.Animations
                 }
                 CurrentFrame = frames[counter];
                 secondCounter = 0;
+
             }
         }
 
