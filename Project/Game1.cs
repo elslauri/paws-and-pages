@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Project.Classes.Background;
 using Project.Classes.GameObjects.Characters;
 using System.Diagnostics;
 using Project.Classes.GameObjects.Items;
@@ -9,6 +8,8 @@ using Project.Classes.Collision;
 using System.Collections.Generic;
 using Project.Classes;
 using System.Dynamic;
+using Project.Classes.Animations;
+using Project.Classes.GameObjects.Background;
 
 
 namespace Project;

@@ -49,7 +49,7 @@ namespace Project.Classes.Movement
     
 
         /// <summary>
-        /// Follows a movable target with an offset
+        /// Follows a movable target with an offset. No obstacles untill pathfinding is added
         /// </summary>
         /// <param name="movable"></param>
         /// <param name="target"></param>

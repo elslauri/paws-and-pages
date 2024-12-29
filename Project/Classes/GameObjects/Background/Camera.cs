@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Project.Classes.GameObjects;
 
-namespace Project.Classes.Background
+namespace Project.Classes.GameObjects.Background
 {
     public class Camera : IGameObject
     {
@@ -11,7 +11,7 @@ namespace Project.Classes.Background
         private IDraw anchor;
 
         private static Camera theCamera;
-        private Camera(){}
+        private Camera() { }
         public static Camera GetTheCamera() // check if no problem
         {
             if (theCamera == null)
@@ -20,11 +20,11 @@ namespace Project.Classes.Background
             }
             return theCamera;
         }
-        
+
         public void Initialize(Map map, IDraw anchor)
         {
             this.map = map;
-            this.anchor = anchor; 
+            this.anchor = anchor;
         }
 
         public void Update(GameTime gameTime)
@@ -38,10 +38,10 @@ namespace Project.Classes.Background
         /// </summary>
         private void CalculateTranslation()
         {
-            var dx = (Globals.windowSizeX / 2) - anchor.Position.X;
-            dx = MathHelper.Clamp(dx, -map.MapSize.X + Globals.windowSizeX + (map.TileSize.X / 2), map.TileSize.X / 2);
-            var dy = (Globals.windowSizeY / 2) - anchor.Position.Y;
-            dy = MathHelper.Clamp(dy, -map.MapSize.Y + Globals.windowSizeY + (map.TileSize.Y / 2), map.TileSize.Y / 2);
+            var dx = Globals.windowSizeX / 2 - anchor.Position.X;
+            dx = MathHelper.Clamp(dx, -map.MapSize.X + Globals.windowSizeX + map.TileSize.X / 2, map.TileSize.X / 2);
+            var dy = Globals.windowSizeY / 2 - anchor.Position.Y;
+            dy = MathHelper.Clamp(dy, -map.MapSize.Y + Globals.windowSizeY + map.TileSize.Y / 2, map.TileSize.Y / 2);
             translation = Matrix.CreateTranslation(dx, dy, 0);
         }
     }

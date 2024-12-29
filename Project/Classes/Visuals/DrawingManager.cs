@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Project.Classes.Background;
+using Project.Classes.GameObjects.Background;
 using System.Collections.Generic;
 
 
-namespace Project.Classes
+namespace Project.Classes.Animations
 {
     internal class DrawingManager
     {

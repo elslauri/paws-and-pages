@@ -2,8 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Project.Classes.GameObjects;
+using Project.Classes.Visuals;
 
-namespace Project.Classes.Background
+namespace Project.Classes.GameObjects.Background
 {
     public class Map : IDraw
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Project.Classes.Background
+namespace Project.Classes.Visuals
 {
     public class Sprite
     {
