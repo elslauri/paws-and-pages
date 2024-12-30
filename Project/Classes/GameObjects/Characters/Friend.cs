@@ -22,8 +22,8 @@ namespace Project.Classes.GameObjects.Characters
         private MovementManager movementManager;
         private Character player;
 
-        public Friend(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, Character player, List<ICollidable> obstacles,Texture2D blockTexture) : 
-            base(texture, spriteColumns, spriteRows, scale, position, speed, obstacles, blockTexture)
+        public Friend(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, Character player, List<ICollidable> obstacles,Texture2D blockTexture) : 
+            base(animationManager, scale, position, speed, obstacles, blockTexture)
         {
             this.player = player;
 

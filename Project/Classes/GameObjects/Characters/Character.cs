@@ -15,7 +15,8 @@ namespace Project.Classes.GameObjects.Characters
     {
         #region members
 
-        public Sprite Sprite { get; set; } // TODO: use this instead of all the below? 
+         
+        // TODO: remove Texture from IDraw
         public Texture2D Texture { get; }  
 
         public Vector2 Position { get; set; }
@@ -25,15 +26,14 @@ namespace Project.Classes.GameObjects.Characters
         public float Rotation { get; }
         public Vector2 Origin { get; }
 
-        public Vector2 Size { get; set; }
 
-
-        // scale adjusted for testing on my screen
         public float Scale { get; }
 
 
 
-        protected AnimationManager animation;
+        protected AnimationManager animationManager;
+        // TODO: make enum STATE
+        private string currentState;
 
         public IInputReader InputReader { get; set; }
 
@@ -43,10 +43,9 @@ namespace Project.Classes.GameObjects.Characters
         #endregion
 
 
-        public Character(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture)
+        public Character(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture)
         {
-            this.Texture = texture;
-            this.Scale = scale;
+            Scale = scale;
 
             Position = position;
             Speed = speed;
@@ -55,26 +54,43 @@ namespace Project.Classes.GameObjects.Characters
             Origin = new Vector2(0, 0);
 
 
-            animation = new AnimationManager();
-            animation.LoadFramesFromSpriteSheet(texture.Width, texture.Height, spriteColumns, spriteRows);
+            this.animationManager = animationManager; 
+            currentState = "Idle";
+            animationManager.SetAnimation(currentState);
 
-
-            this.Size = animation.getFrameSize(texture.Width, texture.Height, spriteColumns, spriteRows);
-
-            ColBox = new CollisionBox(Position, scale * Size, blockTexture);
+            var size = animationManager.getCurrentFrameSize();
+            ColBox = new CollisionBox(Position, scale * size, blockTexture);
             this.obstacles = obstacles;
+
+
         }
 
         public void Update(GameTime gameTime)
         {
-            animation.Update(gameTime);
+            UpdateState();
+            animationManager.SetAnimation(currentState);
+
+            animationManager.Update(gameTime);
             ColBox.Update(gameTime, this.Position);
-       
+
+        }
+
+
+
+        public void UpdateState()
+        {
+            currentState = IsMoving() ? "Run" : "Idle";
+        }
+         private bool IsMoving()
+        {
+            // TODO: ah yes faith programming
+            return Speed.X > 0 && Speed.Y > 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, animation.GetCurrentFrameSourceRectangle(), Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+            //spriteBatch.Draw(Texture, Position, animationManager.GetCurrentFrameSourceRectangle(), Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+            animationManager.Draw(spriteBatch, Position, Scale);
 
             // BoxCollision.Draw(spriteBatch); // TODO: remove after testing
             ColBox.Draw(spriteBatch); // TODO: remove after testing

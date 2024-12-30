@@ -1,70 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Project.Classes.Visuals;
 
 namespace Project.Classes.Animations
 {
     internal class AnimationManager
     {
-        public AnimationFrame CurrentFrame { get; set; }
+        private Dictionary<string, Animation> animations;
+        private Animation currentAnimation;
 
-       
-        private List<AnimationFrame> frames;
-        private int counter;
-        private double secondCounter;
-        private int fps;
-
-        private FrameExtractor extractor;
-
-        public AnimationManager(int fps = 8)
+        public AnimationManager()
         {
-            frames = new List<AnimationFrame>();
-            this.fps = fps;
-            extractor = new FrameExtractor();
+            animations = new Dictionary<string, Animation>();
+        }
+
+        public void AddAnimation(string key, Animation animation)
+        {
+            animations[key] = animation;
+            if (currentAnimation == null)
+                currentAnimation = animation;
         }
         
-        public void Update(GameTime gameTime) 
+        public void SetAnimation(string animationKey)
         {
-            
-
-            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
-
-            CurrentFrame = frames[counter];
-
-            if (secondCounter >= 1d/fps)
+            if(animations.TryGetValue(animationKey, out var animation))
             {
-                counter++;
-                if(counter >= frames.Count)
-                {
-                    counter = 0;
-                }
-                CurrentFrame = frames[counter];
-                secondCounter = 0;
-
+                currentAnimation = animation;
             }
         }
-
-
-        /// <summary>
-        /// Load frames from spritesheet and adds it to a the frames list. Uses the extractor class to get the frames
-        /// </summary>
-        /// <param name="textureWidth"></param>
-        /// <param name="textureHeight"></param>
-        /// <param name="columns"></param>
-        /// <param name="rows"></param>
-        public void LoadFramesFromSpriteSheet(int textureWidth, int textureHeight, int columns, int rows)
+      
+        public void Update(GameTime gameTime)
         {
-           frames.AddRange(extractor.GetFrames(textureWidth, textureHeight, columns, rows));
-            CurrentFrame = frames[0]; // ok to be here?
+            currentAnimation.Update(gameTime);
         }
 
-        public Rectangle GetCurrentFrameSourceRectangle()
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, float scale)
         {
-            return CurrentFrame.SourceRectangle;
+            spriteBatch.Draw(currentAnimation.Texture, position, currentAnimation.GetCurrentFrameSourceRectangle(), Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
 
-        // TODO: move this logic to somewhere else
         /// <summary>
         /// Get the size of one frame
         /// </summary>
@@ -73,12 +49,15 @@ namespace Project.Classes.Animations
         /// <param name="numberOfWidthSprites"></param>
         /// <param name="numberOfHeightSprites"></param>
         /// <returns></returns>
-        public Vector2 getFrameSize(int width, int height, int numberOfWidthSprites, int numberOfHeightSprites)
+        public Vector2 getCurrentFrameSize()
         {
-            int widthOfFrame = width / numberOfWidthSprites;
-            int heightOfFrame = height / numberOfHeightSprites;
+            //int widthOfFrame = width / numberOfWidthSprites;
+            //int heightOfFrame = height / numberOfHeightSprites;
 
-            return new Vector2(widthOfFrame, heightOfFrame);
+            //return new Vector2(widthOfFrame, heightOfFrame);
+
+            Rectangle frame = currentAnimation.Frames[0].SourceRectangle;
+            return new Vector2(frame.Width, frame.Height);
         }
     }
 }

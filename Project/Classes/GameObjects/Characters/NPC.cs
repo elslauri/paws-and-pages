@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Project.Classes.Animations;
 using Project.Classes.Collision;
 using Project.Classes.Movement;
 using System;
@@ -16,8 +17,8 @@ namespace Project.Classes.GameObjects.Characters
     {
         private MovementManager movementManager;
 
-        public NPC(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) : 
-            base(texture, spriteColumns, spriteRows, scale, position, speed, obstacles, blockTexture)
+        public NPC(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) : 
+            base(animationManager, scale, position, speed, obstacles, blockTexture)
         {
             movementManager = new MovementManager();
         }

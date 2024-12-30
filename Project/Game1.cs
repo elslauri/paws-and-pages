@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using Project.Classes;
 using Project.Classes.Animations;
 using Project.Classes.GameObjects.Background;
+using Microsoft.VisualBasic;
+using Project.Classes.Visuals;
 
 
 namespace Project;
@@ -29,7 +31,7 @@ public class Game1 : Game
     private Texture2D npc_basicMan_Texture;
     private NPC testChar;
     private Texture2D mcTextureIdleD;
-    //private Texture2D mcTextureWalkF;
+    private Texture2D mcTextureWalkF;
     private MainCharacter player;
     private Texture2D catTexture;
     private Friend cat;
@@ -45,7 +47,8 @@ public class Game1 : Game
     //texture for box collision
     private Texture2D blockTexture;
     
-
+    private AnimationFactory animationFactory;
+    private AnimationManager animationMainCharManager;
 
 
     public Game1()
@@ -68,6 +71,16 @@ public class Game1 : Game
 
 
         drawingManager = new DrawingManager(spriteBatch);
+
+        // for animations
+        animationFactory = new AnimationFactory();
+        animationMainCharManager = new AnimationManager();
+        var idleMC = animationFactory.CreateAnimationFromSpriteSheet(mcTextureIdleD, 8, 1);
+        var runMC = animationFactory.CreateAnimationFromSpriteSheet(mcTextureWalkF, 8, 1);
+        animationMainCharManager.AddAnimation("Idle", idleMC);
+        animationMainCharManager.AddAnimation("Run", runMC);
+
+
 
         // add background and blocks
         map = new Map([tileTexture]);
@@ -95,9 +108,13 @@ public class Game1 : Game
 
 
         // Initialize characters
-        testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), obstacles, blockTexture);
-        player = new MainCharacter(mcTextureIdleD, 8, 1, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstacles, blockTexture);
-        cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
+        //testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), obstacles, blockTexture);
+        testChar = new NPC(animationMainCharManager, 3f, new Vector2(100, 100), new Vector2(2f, 2f), obstacles, blockTexture);
+        
+        player = new MainCharacter(animationMainCharManager, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstacles, blockTexture);
+        cat = new Friend(animationMainCharManager, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
+
+        //cat = new Friend(catTexture, 6, 1, 1f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
 
         drawables = [map, .. bookshelves, book1, testChar, cat, player];
@@ -117,6 +134,7 @@ public class Game1 : Game
         npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
         catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down (2)");
+        mcTextureWalkF = Content.Load<Texture2D>("Characters/MC/MC_walk_Down");
         bookshelveTexture = Content.Load<Texture2D>("Background/filledbookshelves");
         bookTexture = Content.Load<Texture2D>("Items/bookClosed");
 

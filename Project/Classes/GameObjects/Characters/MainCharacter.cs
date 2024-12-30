@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Project.Classes.Input;
 using Project.Classes.Movement;
 using Project.Classes.Collision;
+using Project.Classes.Animations;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -13,8 +14,8 @@ namespace Project.Classes.GameObjects.Characters
 
         
 
-        public MainCharacter(Texture2D texture, int spriteColumns, int spriteRows, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) :
-            base(texture, spriteColumns, spriteRows, scale, startPos, speed, obstacles, blockTexture)
+        public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) :
+            base(animationManager, scale, startPos, speed, obstacles, blockTexture)
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();

@@ -1,11 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Collision;
+using System;
 
 namespace Project.Classes.GameObjects.Items
 {
     internal class Book : IDraw, ICollidable
     {
+        public Boolean IsOpen;
+
         public Texture2D Texture { get; set; }
 
         public Rectangle SourceRectangle { get; set; }
