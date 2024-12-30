@@ -79,6 +79,7 @@ public class Game1 : Game
         var runMC = animationFactory.CreateAnimationFromSpriteSheet(mcTextureWalkF, 8, 1);
         animationMainCharManager.AddAnimation("Idle", idleMC);
         animationMainCharManager.AddAnimation("Run", runMC);
+        //var runningCat = animationFactory.CreateAnimationFromSpriteSheet(catTexture, 6, 1);
 
 
 
@@ -133,7 +134,7 @@ public class Game1 : Game
         tileTexture = Content.Load<Texture2D>("Background/planks_H_3");
         npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
         catTexture = Content.Load<Texture2D>("Characters/friend_Walk");
-        mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down (2)");
+        mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
         mcTextureWalkF = Content.Load<Texture2D>("Characters/MC/MC_walk_Down");
         bookshelveTexture = Content.Load<Texture2D>("Background/filledbookshelves");
         bookTexture = Content.Load<Texture2D>("Items/bookClosed");

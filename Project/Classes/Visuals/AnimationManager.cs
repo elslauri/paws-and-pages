@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Visuals;
@@ -38,7 +38,11 @@ namespace Project.Classes.Animations
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position, float scale)
         {
-            spriteBatch.Draw(currentAnimation.Texture, position, currentAnimation.GetCurrentFrameSourceRectangle(), Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            var frame = currentAnimation.GetCurrentFrameSourceRectangle();
+            //var origin = new Vector2(frame.Width / 2f, frame.Height / 2f);
+            var origin = Vector2.Zero;
+           // Debug.WriteLine("MANAGER -- frame: "+ frame + " origin: " + origin); 
+            spriteBatch.Draw(currentAnimation.Texture, position, frame, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
         }
 
         /// <summary>
@@ -49,7 +53,7 @@ namespace Project.Classes.Animations
         /// <param name="numberOfWidthSprites"></param>
         /// <param name="numberOfHeightSprites"></param>
         /// <returns></returns>
-        public Vector2 getCurrentFrameSize()
+        public Vector2 GetCurrentFrameSize()
         {
             //int widthOfFrame = width / numberOfWidthSprites;
             //int heightOfFrame = height / numberOfHeightSprites;
