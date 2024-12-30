@@ -88,23 +88,13 @@ namespace Project.Classes.GameObjects.Characters
         }
          private bool IsMoving()
         {
-            // TODO: ah yes faith programming
-            return false; 
-                //Speed.X > 0 && Speed.Y > 0;
+            return Speed.X > 0 || Speed.Y > 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(Texture, Position, animationManager.GetCurrentFrameSourceRectangle(), Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
-            //var frameSize = animationManager.GetCurrentFrameSize();
-            //var origin = new Vector2(frameSize.X, frameSize.Y);
-            //var adjustedPosition = Position + origin;
-
             animationManager.Draw(spriteBatch, Position, Scale);
-            //Debug.WriteLine("CHARACTER -- Position: " + Position + " adjustedPostitioin: " + adjustedPosition+ " origin: " +Origin);
-            Debug.WriteLine("CHARACTER -- Position: " + Position + " adjustedPostition: "+ " origin: " +Origin);
-            Debug.WriteLine("COLLISION BOX -- Position: " + ColBox.Position + " Size: " + ColBox.Size);
-
+            
             ColBox.Draw(spriteBatch); // TODO: remove after testing
         }
     }

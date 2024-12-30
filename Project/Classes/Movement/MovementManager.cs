@@ -37,8 +37,9 @@ namespace Project.Classes.Movement
         public void MoveWithKeys(Character character)
         {
             var direction = character.InputReader.ReadInput();
-            var distance = direction * character.Speed; 
+            character.Speed = direction;
 
+            var distance = direction * character.Speed; 
             var nextPos = character.Position + distance;
 
             if (IsMCWithinBounds(nextPos))
