@@ -2,6 +2,7 @@
 using Project.Classes.Collision;
 using Project.Classes.GameObjects.Characters;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Project.Classes.Movement
@@ -37,15 +38,22 @@ namespace Project.Classes.Movement
         public void MoveWithKeys(Character character)
         {
             var direction = character.InputReader.ReadInput();
-            character.Speed = direction;
 
-            var distance = direction * character.Speed; 
-            var nextPos = character.Position + distance;
+            float acceleration = 0.2f;
+
+            character.Speed += direction * acceleration;
+
+            float maxSpeed = 5;
+            character.Speed = Limit(character.Speed, maxSpeed);
+
+            var nextPos = character.Position + character.Speed;
 
             if (IsMCWithinBounds(nextPos))
             {
                 character.Position = TryMove(nextPos, character);
             }
+            else
+                character.Speed = Vector2.Zero;
         }
     
 
@@ -72,10 +80,14 @@ namespace Project.Classes.Movement
             }
             
             direction.Normalize();
-            character.Speed += direction;
-            character.Speed = Limit(character.Speed, 2);
+            float acceleration = 3f;
 
-            character.Position = character.Position + character.Speed;
+            character.Speed += direction * acceleration;
+
+            float maxSpeed = 2f;
+            character.Speed = Limit(character.Speed, maxSpeed);
+
+            character.Position += character.Speed;
         }
 
         /// <summary>
