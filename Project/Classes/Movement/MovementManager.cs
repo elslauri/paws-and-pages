@@ -3,38 +3,55 @@ using Project.Classes.Collision;
 using Project.Classes.GameObjects.Characters;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 
 namespace Project.Classes.Movement
 {
     internal class MovementManager
     {
-        // TODO: acceleration? 
-        private Vector2 acceleration = new Vector2(2f, 2f);
-        
-
-        public void Move(IMovable movable)
+        public void Move(Character character)
         {
-            var nextPos = movable.Position + movable.Speed;
-            // TODO: checkCollisions and reverse speed
-
-            movable.Position += movable.Speed;
-            movable.Speed += acceleration;
+            float acceleration = 0.3f;
+            character.Speed += character.Speed * acceleration;
             float maxSpeed = 5;
-            movable.Speed = Limit(movable.Speed, maxSpeed);
+            character.Speed = Limit(character.Speed, maxSpeed);
 
-            if (IsCharWithinX(movable))
+            Vector2 nextPos = character.Position + character.Speed;
+
+
+            if (IsCharWithinX(character) && IsCharWithinY(character))
             {
-                movable.Speed = new Vector2(movable.Speed.X < 0 ? 1 : -1, movable.Speed.Y);
-                acceleration.X *= -1;
+                if (!TryMove(nextPos, character))
+                {
+                    character.Position -= character.Speed * 0.1f;
+                    character.Speed = -character.Speed * 0.5f;
+                    //character.Position += character.Speed * 0.1f;
+                    Debug.WriteLine("Collision detected");
+                }
+                else
+                {
+                    character.Position = nextPos;
+                }
             }
-            if (IsCharWithinY(movable))
+            else if(!IsCharWithinX(character)) // does not work 
             {
-                movable.Speed = new Vector2(movable.Speed.X, movable.Speed.Y < 0 ? 1 : -1);
-                acceleration.Y *= -1;
+                character.Speed = new Vector2(character.Speed.X < 0 ? 1 : -1, character.Speed.Y);
+                acceleration *= -1;
+                Debug.WriteLine("Boundary x");
             }
+            else if(!IsCharWithinY(character))
+            {
+                character.Speed = new Vector2(character.Speed.X, character.Speed.Y < 0 ? 1 : -1);
+                acceleration *= -1;
+                Debug.WriteLine("Boundary y");
+            }
+
+            Debug.WriteLine($"Position: {character.Position}, Speed: {character.Speed}");
+
+
         }
-        
+
         public void MoveWithKeys(Character character)
         {
             var direction = character.InputReader.ReadInput();
@@ -46,16 +63,19 @@ namespace Project.Classes.Movement
             float maxSpeed = 5;
             character.Speed = Limit(character.Speed, maxSpeed);
 
-            var nextPos = character.Position + character.Speed;
+            Vector2 nextPos = character.Position + character.Speed;
 
             if (IsMCWithinBounds(nextPos))
             {
-                character.Position = TryMove(nextPos, character);
+                if (TryMove(nextPos, character))
+                {
+                    character.Position = nextPos;
+                }
             }
             else
                 character.Speed = Vector2.Zero;
         }
-    
+
 
         /// <summary>
         /// Follows a movable target with an offset. No obstacles untill pathfinding is added
@@ -65,7 +85,7 @@ namespace Project.Classes.Movement
         /// <param name="offset"></param>
         public void MoveWithTarget(Character character, IMovable target, Vector2 offset)
         {
-            
+
             Vector2 direction = (target.Position - offset) - character.Position;
             float distance = direction.Length();
 
@@ -78,7 +98,7 @@ namespace Project.Classes.Movement
                 }
                 return;
             }
-            
+
             direction.Normalize();
             float acceleration = 3f;
 
@@ -108,23 +128,22 @@ namespace Project.Classes.Movement
         }
 
         /// <summary>
-        /// Checks if movement is possible with obstacles
+        /// Checks if a next position will collide with any obstacles of the character
         /// </summary>
         /// <param name="targetPos"></param>
         /// <param name="character"></param>
-        /// <param name="obstacles"></param>
-        /// <returns>New position if movement possible, else current position</returns>
-        private Vector2 TryMove(Vector2 targetPos, Character character)
+        /// <returns>True if possible, return false if collision</returns>
+        private bool TryMove(Vector2 targetPos, Character character)
         {
             var tempCollisionBox = new CollisionBox(targetPos, character.ColBox.Size, character.ColBox.texture);
             foreach (var obstacle in character.obstacles)
             {
                 if (tempCollisionBox.IsCollidingWith(obstacle.ColBox))
                 {
-                    return character.Position;
+                    return false;
                 }
             }
-            return targetPos;
+            return true;
         }
 
 
@@ -132,17 +151,17 @@ namespace Project.Classes.Movement
 
         private bool IsMCWithinBounds(Vector2 p)
         {
-           // return p.X >= -48 && p.X <= (1600 - 144) && p.Y >= 0 && p.Y <= (960 - 96); // from screen
-            return p.X >= -48 && p.X <= (Globals.mapSizeX-144) && p.Y >= 0 && p.Y <= (Globals.mapSizeY-120); // from map? 
+            // return p.X >= -48 && p.X <= (1600 - 144) && p.Y >= 0 && p.Y <= (960 - 96); // from screen
+            return p.X >= -48 && p.X <= (Globals.mapSizeX - 144) && p.Y >= 0 && p.Y <= (Globals.mapSizeY - 120); // from map? 
 
         }
-        private bool IsCharWithinX(IMovable movable)
+        private bool IsCharWithinX(Character character)
         {
-            return movable.Position.X + movable.Speed.X > Globals.mapSizeX - 64 || movable.Position.X + movable.Speed.X < 0;
+            return character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X || character.Position.X + character.Speed.X >= 0;
         }
-        private bool IsCharWithinY(IMovable movable)
+        private bool IsCharWithinY(Character character)
         {
-            return movable.Position.Y + movable.Speed.Y > Globals.mapSizeY - 96 || movable.Position.Y + movable.Speed.Y < 0;
+            return character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y || character.Position.Y + character.Speed.Y >= 0;
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Project.Classes.GameObjects.Characters
             currentState = "Idle";
             this.animationManager.SetAnimation(currentState);
 
-            // Origin is here not used
+            // TODO: Origin is here not used
             //Origin = new Vector2(this.animationManager.GetCurrentFrameSize().X / 2, this.animationManager.GetCurrentFrameSize().Y / 2);
             //Origin = new Vector2(0, 0); 
 
