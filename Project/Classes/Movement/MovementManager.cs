@@ -24,32 +24,36 @@ namespace Project.Classes.Movement
             {
                 if (!TryMove(nextPos, character))
                 {
+                    Vector2 nextPosX = new Vector2(character.Position.X + character.Speed.X, character.Position.Y);
+                    if (!TryMove(nextPosX, character))
+                    {
+                        character.Speed = new Vector2(-character.Speed.X * 0.5f, character.Speed.Y);
+                     }
+                    Vector2 nextPosY = new Vector2(character.Position.X, character.Position.Y + character.Speed.Y);
+                    if (!TryMove(nextPosY, character))
+                    {
+                        character.Speed = new Vector2(character.Speed.X, -character.Speed.Y * 0.5f);
+                    }
                     character.Position -= character.Speed * 0.1f;
-                    character.Speed = -character.Speed * 0.5f;
-                    //character.Position += character.Speed * 0.1f;
-                    Debug.WriteLine("Collision detected");
                 }
                 else
                 {
                     character.Position = nextPos;
                 }
             }
-            else if(!IsCharWithinX(character)) // does not work 
+            else if(!IsCharWithinX(character))
             {
-                character.Speed = new Vector2(character.Speed.X < 0 ? 1 : -1, character.Speed.Y);
-                acceleration *= -1;
+                character.Speed = new Vector2(-character.Speed.X * 0.5f, character.Speed.Y);
+
                 Debug.WriteLine("Boundary x");
             }
             else if(!IsCharWithinY(character))
             {
-                character.Speed = new Vector2(character.Speed.X, character.Speed.Y < 0 ? 1 : -1);
-                acceleration *= -1;
+                character.Speed = new Vector2(character.Speed.X, -character.Speed.Y * 0.5f);
+
                 Debug.WriteLine("Boundary y");
             }
-
             Debug.WriteLine($"Position: {character.Position}, Speed: {character.Speed}");
-
-
         }
 
         public void MoveWithKeys(Character character)
@@ -157,11 +161,15 @@ namespace Project.Classes.Movement
         }
         private bool IsCharWithinX(Character character)
         {
-            return character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X || character.Position.X + character.Speed.X >= 0;
+            return character.Position.X + character.Speed.X >= 0 && character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X;
+
+            // return character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X || character.Position.X + character.Speed.X >= 0;
         }
         private bool IsCharWithinY(Character character)
         {
-            return character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y || character.Position.Y + character.Speed.Y >= 0;
+            return character.Position.Y + character.Speed.Y >= 0 && character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y;
+
+            //  return character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y || character.Position.Y + character.Speed.Y >= 0;
         }
     }
 }
