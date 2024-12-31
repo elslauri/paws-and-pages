@@ -73,18 +73,6 @@
 /processorParam:TextureFormat=Color
 /build:Background/sidebookshelvest.png
 
-#begin Characters/friend_Walk.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Characters/friend_Walk.png
-
 #begin Characters/friend/friend_angry.png
 /importer:TextureImporter
 /processor:TextureProcessor

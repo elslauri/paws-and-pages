@@ -33,7 +33,7 @@ public class Game1 : Game
     private Texture2D mcTextureWalkF;
     private MainCharacter player;
     private Texture2D catTextureIdle;
-    private Texture2D catTextureAngry;
+    //private Texture2D catTextureAngry;
     private Texture2D catTextureRun;
 private Friend cat;
     // background
@@ -51,6 +51,7 @@ private Friend cat;
     private AnimationFactory animationFactory;
     private AnimationManager animationMainCharManager;
     private AnimationManager animationCatManager;
+    private AnimationManager animationNPCManager;
 
     public Game1()
     {
@@ -83,11 +84,15 @@ private Friend cat;
         animationCatManager = new AnimationManager();
         var idleCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureIdle, 8, 1);
         var runCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureRun, 6, 1);
-        var angryCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureAngry, 2, 1);
+        //var angryCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureAngry, 2, 1);
         animationCatManager.AddAnimation("Idle", idleCat);
         animationCatManager.AddAnimation("Run", runCat);
-        animationCatManager.AddAnimation("Angry", angryCat);
+        //  animationCatManager.AddAnimation("Angry", angryCat);
+        animationNPCManager = new AnimationManager();
+        var idleNpc = animationFactory.CreateAnimationFromSpriteSheet(npc_basicMan_Texture, 7,1);
+        animationNPCManager.AddAnimation("Idle", idleNpc);
 
+        
 
         // add background and blocks
         map = new Map([tileTexture]);
@@ -115,8 +120,7 @@ private Friend cat;
 
 
         // Initialize characters
-        //testChar = new NPC(npc_basicMan_Texture, 7, 1, 3f, new Vector2(100, 100), new Vector2(2f, 2f), obstacles, blockTexture);
-        testChar = new NPC(animationMainCharManager, 3f, new Vector2(150, 100), new Vector2(2f, 2f), obstacles, blockTexture);
+        testChar = new NPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(2f, 2f), obstacles, blockTexture);
         
         player = new MainCharacter(animationMainCharManager, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstacles, blockTexture);
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
@@ -139,7 +143,7 @@ private Friend cat;
         npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
         catTextureIdle = Content.Load<Texture2D>("Characters/friend/friend_idle");
         catTextureRun = Content.Load<Texture2D>("Characters/friend/friend_run");
-        catTextureAngry = Content.Load<Texture2D>("Characters/friend/friend_angry");
+       // catTextureAngry = Content.Load<Texture2D>("Characters/friend/friend_angry");
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
         mcTextureWalkF = Content.Load<Texture2D>("Characters/MC/MC_walk_Down");
         bookshelveTexture = Content.Load<Texture2D>("Background/filledbookshelves");
