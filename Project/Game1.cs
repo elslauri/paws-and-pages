@@ -33,17 +33,15 @@ public class Game1 : Game
     private Texture2D mcTextureWalkF;
     private MainCharacter player;
     private Texture2D catTextureIdle;
-    //private Texture2D catTextureAngry;
-    private Texture2D catTextureRun;
-private Friend cat;
+    private Texture2D catTextureRunLeft;
+    private Texture2D catTextureRunRight;
+    private Friend cat;
     // background
     private Map map;
     private Texture2D tileTexture;
     private List<Bookshelve> bookshelves;
     private Texture2D bookshelveTexture;
 
-    private Book book1;
-    private Texture2D bookTexture;
 
     //texture for box collision
     private Texture2D blockTexture;
@@ -52,6 +50,8 @@ private Friend cat;
     private AnimationManager animationMainCharManager;
     private AnimationManager animationCatManager;
     private AnimationManager animationNPCManager;
+
+    private Texture2D bookTexture;
 
     private List<Book> books;
     private List<Book> booksToBeDeleted;
@@ -87,11 +87,11 @@ private Friend cat;
         animationMainCharManager.AddAnimation("Run", runMC);
         animationCatManager = new AnimationManager();
         var idleCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureIdle, 8, 1);
-        var runCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureRun, 6, 1);
-        //var angryCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureAngry, 2, 1);
+        var runCat_left = animationFactory.CreateAnimationFromSpriteSheet(catTextureRunLeft, 6, 1);
+        var runCat_right = animationFactory.CreateAnimationFromSpriteSheet(catTextureRunRight, 6, 1);
         animationCatManager.AddAnimation("Idle", idleCat);
-        animationCatManager.AddAnimation("Run", runCat);
-        //  animationCatManager.AddAnimation("Angry", angryCat);
+        animationCatManager.AddAnimation("Run_left", runCat_left);
+        animationCatManager.AddAnimation("Run_right", runCat_right);
         animationNPCManager = new AnimationManager();
         var idleNpc = animationFactory.CreateAnimationFromSpriteSheet(npc_basicMan_Texture, 7,1);
         animationNPCManager.AddAnimation("Idle", idleNpc);
@@ -120,7 +120,6 @@ private Friend cat;
 
         obstacles = [.. bookshelves];
 
-        book1 = new Book(bookTexture,new Vector2(700,600));
         booksToBeDeleted = new List<Book>();
         books = new List<Book>();
         for (int j = 400; j <500; j+=100)
@@ -138,7 +137,7 @@ private Friend cat;
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
 
-        drawables = [map, .. bookshelves, book1, .. books, testChar, cat, player];
+        drawables = [map, .. bookshelves, .. books, testChar, cat, player];
 
         // camera 
         Camera.GetTheCamera().Initialize(map, player);
@@ -154,8 +153,10 @@ private Friend cat;
         tileTexture = Content.Load<Texture2D>("Background/planks_H_3");
         npc_basicMan_Texture = Content.Load<Texture2D>("npc_basicMan_walkF_fluid");
         catTextureIdle = Content.Load<Texture2D>("Characters/friend/friend_idle");
-        catTextureRun = Content.Load<Texture2D>("Characters/friend/friend_run");
-       // catTextureAngry = Content.Load<Texture2D>("Characters/friend/friend_angry");
+        catTextureRunLeft = Content.Load<Texture2D>("Characters/friend/friend_run_left");
+        catTextureRunRight = Content.Load<Texture2D>("Characters/friend/friend_run_right");
+
+        // catTextureAngry = Content.Load<Texture2D>("Characters/friend/friend_angry");
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
         mcTextureWalkF = Content.Load<Texture2D>("Characters/MC/MC_walk_Down");
         bookshelveTexture = Content.Load<Texture2D>("Background/filledbookshelves");
@@ -184,7 +185,7 @@ private Friend cat;
         }
 
         CheckBookPickUp();
-        drawables = [map, .. bookshelves, book1, .. books, testChar, cat, player];
+        drawables = [map, .. bookshelves, .. books, testChar, cat, player];
 
     }
 

@@ -69,3 +69,5 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Items\book
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\friend\friend_angry.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\friend\friend_idle.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\friend\friend_run.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\friend\friend_run_left.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\friend\friend_run_right.xnb

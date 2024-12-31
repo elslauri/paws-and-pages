@@ -4,9 +4,8 @@ using Project.Classes.Animations;
 using Project.Classes.Collision;
 using Project.Classes.Input;
 using Project.Classes.Movement;
+using Project.Classes.Visuals;
 using System.Collections.Generic;
-using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -35,6 +34,7 @@ namespace Project.Classes.GameObjects.Characters
         protected AnimationManager animationManager;
         // TODO: make enum STATE
         private string currentState;
+        protected IAnimationStrategy animationStrategy; 
 
         public IInputReader InputReader { get; set; }
 
@@ -44,36 +44,31 @@ namespace Project.Classes.GameObjects.Characters
         #endregion
 
 
-        public Character(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture)
+        public Character(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture, IAnimationStrategy animationStrategy = null)
         {
             Scale = scale;
 
             Position = position;
             Speed = speed;
 
-            
-
-
-            this.animationManager = animationManager;
+           
+            this.animationManager = animationManager; 
+            this.animationStrategy = animationStrategy ?? new DefaultAnimationStrategy();
             currentState = "Idle";
             this.animationManager.SetAnimation(currentState);
 
-            // TODO: Origin is here not used
-            //Origin = new Vector2(this.animationManager.GetCurrentFrameSize().X / 2, this.animationManager.GetCurrentFrameSize().Y / 2);
-            //Origin = new Vector2(0, 0); 
 
             var size = this.animationManager.GetCurrentFrameSize();
 
             ColBox = new CollisionBox(Position, Scale * size, blockTexture);
             this.obstacles = obstacles;
 
-
         }
 
         public void Update(GameTime gameTime)
         {
             UpdateState();
-            animationManager.SetAnimation(currentState);
+            animationStrategy.SetAnimation(animationManager, currentState, Speed);
 
             animationManager.Update(gameTime);
             ColBox.Update(gameTime, Position );

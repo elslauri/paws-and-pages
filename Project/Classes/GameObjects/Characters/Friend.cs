@@ -6,6 +6,7 @@ using Project.Classes.Animations;
 using Project.Classes.Collision;
 using Project.Classes.Input;
 using Project.Classes.Movement;
+using Project.Classes.Visuals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Project.Classes.GameObjects.Characters
         private Character player;
 
         public Friend(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, Character player, List<ICollidable> obstacles,Texture2D blockTexture) : 
-            base(animationManager, scale, position, speed, obstacles, blockTexture)
+            base(animationManager, scale, position, speed, obstacles, blockTexture, new TwoDirectionalAnimationStrategy())
         {
             this.player = player;
 
