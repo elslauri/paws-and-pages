@@ -10,7 +10,6 @@ using Project.Classes;
 using Project.Classes.Animations;
 using Project.Classes.GameObjects.Background;
 using Project.Classes.Visuals;
-using System.Runtime.ExceptionServices;
 
 
 namespace Project;
@@ -55,6 +54,7 @@ private Friend cat;
     private AnimationManager animationNPCManager;
 
     private List<Book> books;
+    private List<Book> booksToBeDeleted;
 
 
     public Game1()
@@ -121,6 +121,7 @@ private Friend cat;
         obstacles = [.. bookshelves];
 
         book1 = new Book(bookTexture,new Vector2(700,600));
+        booksToBeDeleted = new List<Book>();
         books = new List<Book>();
         for (int j = 400; j <500; j+=100)
         {
@@ -182,6 +183,9 @@ private Friend cat;
             Debug.WriteLine("PARDON ME");
         }
 
+        CheckBookPickUp();
+        drawables = [map, .. bookshelves, book1, .. books, testChar, cat, player];
+
     }
 
     protected override void Draw(GameTime gameTime)
@@ -205,6 +209,23 @@ private Friend cat;
 
 
         base.Draw(gameTime);
+    }
+
+    private void CheckBookPickUp()
+    {
+        foreach(Book book in books)
+        {
+            if (player.ColBox.IsCollidingWith(book.ColBox))
+            {
+                booksToBeDeleted.Add(book);
+                player.PickUpBook();
+            }
+        }
+        foreach(Book book in booksToBeDeleted)
+        {
+            books.Remove(book);
+        }
+        booksToBeDeleted.Clear();
     }
 
 }
