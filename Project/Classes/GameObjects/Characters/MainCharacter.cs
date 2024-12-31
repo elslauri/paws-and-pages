@@ -12,7 +12,7 @@ namespace Project.Classes.GameObjects.Characters
     {
         private MovementManager movementManager;
 
-        
+        public int Books { get; set; }
 
         public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) :
             base(animationManager, scale, startPos, speed, obstacles, blockTexture)
@@ -33,6 +33,14 @@ namespace Project.Classes.GameObjects.Characters
             movementManager.MoveWithKeys(this);
         }
 
+        public void PickUpBook()
+        {
+            Books++;
+        }
+        public void GiveAwayBook()
+        {
+            Books--;
+        }
 
     }
 }

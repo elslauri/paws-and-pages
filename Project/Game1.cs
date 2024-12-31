@@ -10,6 +10,7 @@ using Project.Classes;
 using Project.Classes.Animations;
 using Project.Classes.GameObjects.Background;
 using Project.Classes.Visuals;
+using System.Runtime.ExceptionServices;
 
 
 namespace Project;
@@ -52,6 +53,9 @@ private Friend cat;
     private AnimationManager animationMainCharManager;
     private AnimationManager animationCatManager;
     private AnimationManager animationNPCManager;
+
+    private List<Book> books;
+
 
     public Game1()
     {
@@ -117,7 +121,14 @@ private Friend cat;
         obstacles = [.. bookshelves];
 
         book1 = new Book(bookTexture,new Vector2(700,600));
-
+        books = new List<Book>();
+        for (int j = 400; j <500; j+=100)
+        {
+            for (int i = 100; i <= 1000; i+=200)
+            {
+                books.Add(new Book(bookTexture, new Vector2(0+i,j)));
+            }
+        }
 
         // Initialize characters
         testChar = new NPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(2f, 2f), obstacles, blockTexture);
@@ -126,7 +137,7 @@ private Friend cat;
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
 
-        drawables = [map, .. bookshelves, book1, testChar, cat, player];
+        drawables = [map, .. bookshelves, book1, .. books, testChar, cat, player];
 
         // camera 
         Camera.GetTheCamera().Initialize(map, player);
