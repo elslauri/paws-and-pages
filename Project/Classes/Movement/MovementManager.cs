@@ -69,7 +69,7 @@ namespace Project.Classes.Movement
 
             Vector2 nextPos = character.Position + character.Speed;
 
-            if (IsMCWithinBounds(nextPos))
+            if (IsCharWithinX(character) && IsCharWithinY(character))
             {
                 if (TryMove(nextPos, character))
                 {
@@ -93,7 +93,7 @@ namespace Project.Classes.Movement
             Vector2 direction = (target.Position - offset) - character.Position;
             float distance = direction.Length();
 
-            if (distance < 10)
+            if (distance < 20)
             {
                 character.Speed *= 0.9f;
                 if (character.Speed.Length() < 0.1f)
@@ -151,14 +151,6 @@ namespace Project.Classes.Movement
         }
 
 
-        // TODO: this is a fix because sprite MC is weird (so fix sprite instead of this code)
-
-        private bool IsMCWithinBounds(Vector2 p)
-        {
-            // return p.X >= -48 && p.X <= (1600 - 144) && p.Y >= 0 && p.Y <= (960 - 96); // from screen
-            return p.X >= -48 && p.X <= (Globals.mapSizeX - 144) && p.Y >= 0 && p.Y <= (Globals.mapSizeY - 120); // from map? 
-
-        }
         private bool IsCharWithinX(Character character)
         {
             return character.Position.X + character.Speed.X >= 0 && character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X;

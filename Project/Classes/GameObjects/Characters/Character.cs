@@ -88,7 +88,7 @@ namespace Project.Classes.GameObjects.Characters
         }
          private bool IsMoving()
         {
-            return Speed.X > 0 || Speed.Y > 0;
+            return Speed.X != 0 || Speed.Y != 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)

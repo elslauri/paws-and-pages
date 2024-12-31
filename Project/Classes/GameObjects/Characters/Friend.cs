@@ -43,7 +43,7 @@ namespace Project.Classes.GameObjects.Characters
 
         private void Move()
         {
-            movementManager.MoveWithTarget(this, player, new Vector2(0, -20f));
+            movementManager.MoveWithTarget(this, player, new Vector2(50f, -20f));
         }
     }
 }
