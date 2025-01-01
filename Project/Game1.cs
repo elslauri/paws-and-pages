@@ -108,7 +108,7 @@ public class Game1 : Game
 
 
         bookshelveFactory = new BookshelveFactory(bookshelveTexture);
-        bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50,300),5,6,192,200);
+        bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50,300),7,11,192,200);
 
         obstacles = [.. bookshelves];
 
