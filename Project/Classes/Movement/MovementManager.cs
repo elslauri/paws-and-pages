@@ -10,7 +10,7 @@ namespace Project.Classes.Movement
 {
     internal class MovementManager
     {
-        public void Move(Character character)
+        public void Move(Character character) // todo: add MaxSpeed here
         {
             float acceleration = 0.3f;
             character.Speed += character.Speed * acceleration;

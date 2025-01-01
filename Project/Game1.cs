@@ -57,6 +57,8 @@ public class Game1 : Game
     private AnimationManager animationNPCManager;
 
     private CalmNPCFactory calmNPCFactory;
+    private WalkingNPCFactory walkingNPCFactory;
+    private PanicNPCFactory panicNPCFactory; // TODO: do these need to be different classes or just different objects of the same class!!!
 
     private BookshelveFactory bookshelveFactory;
     private Texture2D bookTexture;
@@ -138,8 +140,13 @@ public class Game1 : Game
         }
 
         // Initialize characters
-        calmNPCFactory = new CalmNPCFactory();
-        npcStill = calmNPCFactory.CreateNPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(1, 1), obstacles, blockTexture);
+        calmNPCFactory = new CalmNPCFactory(3f, new Vector2(0, 0), obstacles, blockTexture);
+        npcStill = calmNPCFactory.CreateNPC(animationNPCManager, new Vector2(150, 100));
+        walkingNPCFactory = new WalkingNPCFactory(3f, new Vector2(1, 1), obstacles, blockTexture);
+        npcWalk = walkingNPCFactory.CreateNPC(animationNPCManager, new Vector2(200, 100));
+        panicNPCFactory = new PanicNPCFactory(3f, new Vector2(3, 3), obstacles, blockTexture);
+        npcRun = panicNPCFactory.CreateNPC(animationNPCManager, new Vector2(250, 100));
+
        
         player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles, blockTexture);
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
@@ -148,7 +155,7 @@ public class Game1 : Game
         ui = new UI(font, new Vector2(10, 10), player);
 
 
-        drawables = [map, .. bookshelves, .. books, npcStill, cat, player, ui];
+        drawables = [map, .. bookshelves, .. books, npcStill, npcWalk,npcRun, cat, player, ui];
 
         // camera 
         Camera.GetTheCamera().Initialize(map, player);
@@ -185,6 +192,8 @@ public class Game1 : Game
             Exit();
 
         npcStill.Update(gameTime);
+        npcWalk.Update(gameTime);
+        npcRun.Update(gameTime);
         cat.Update(gameTime);
         player.Update(gameTime);
 
@@ -199,7 +208,7 @@ public class Game1 : Game
         }
 
         CheckBookPickUp();
-        drawables = [map, .. bookshelves, .. books, npcStill, cat, player, ui];
+        drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, cat, player, ui];
 
     }
 

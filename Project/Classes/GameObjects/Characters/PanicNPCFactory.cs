@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace Project.Classes.GameObjects.Characters
 {
-    internal class CalmNPCFactory : INPCFactory
+    internal class PanicNPCFactory : INPCFactory
     {
         private readonly float scale;
         private readonly Vector2 speed;
         private readonly List<ICollidable> obstacles;
         private readonly Texture2D blockTexture;
 
-        public CalmNPCFactory(float scale, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture)
+        public PanicNPCFactory(float scale, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture)
         {
             this.scale = scale;
             this.speed = speed;
