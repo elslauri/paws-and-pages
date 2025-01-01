@@ -141,7 +141,7 @@ public class Game1 : Game
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
         // UI
-        ui = new UI(font, new Vector2(50,50), player);
+        ui = new UI(font, new Vector2(10,10), player);
 
 
         drawables = [map, .. bookshelves, .. books, testChar, cat, player, ui];
@@ -198,7 +198,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(new Color(52, 52, 79)); // TODO: change background
+        GraphicsDevice.Clear(new Color(52, 52, 79)); 
 
         // TODO: Add your drawing code here
 

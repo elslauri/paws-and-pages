@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.GameObjects;
 using Project.Classes.GameObjects.Characters;
-using System.Diagnostics;
-using System.Linq;
 
 namespace Project.Classes.UI
 {
@@ -12,25 +10,36 @@ namespace Project.Classes.UI
         private SpriteFont font;
         private int books;
         private string message;
+        private Color pearl;
         public Vector2 Position { get; set; }
 
         public UI(SpriteFont font, Vector2 position, MainCharacter player)
         {
             this.font = font;
-            this.Position = position;
+            Position = position;
+            pearl = new Color(234,224,204);
             player.OnPickUp += ObserveBooks;
-            message = "test";
+            UpdateMessage();
         }
         private void ObserveBooks(int bookCount)
         {
             books = bookCount;
-            Debug.WriteLine("UI says: " + books);
-            message = $"{books} + books";
+            UpdateMessage();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            Debug.WriteLine("Drawing");
-            spriteBatch.DrawString(font, message, Position, Color.White);
+            spriteBatch.DrawString(font, message, Position, pearl);
+        }
+        private string UpdateMessage()
+        {
+            if (books > 0)
+            {
+                return message = $"Books: {books}";
+            }
+            else
+            {
+                return message = "No books";
+            }
         }
     }
 }

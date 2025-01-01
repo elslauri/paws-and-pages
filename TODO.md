@@ -50,3 +50,12 @@
 - [ ] geluid, muziek, particle effects
 - tot 2 extra extra's
 - verdere uitwerking SOLID
+
+
+# Colors
+
+purple: 52, 52, 79
+pearl: 234, 224, 204
+rose: 201, 173, 161
+sage: 160, 160, 131
+grey: 121, 132, 120

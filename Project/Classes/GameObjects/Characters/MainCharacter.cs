@@ -5,7 +5,6 @@ using Project.Classes.Input;
 using Project.Classes.Movement;
 using Project.Classes.Collision;
 using Project.Classes.Animations;
-using System.Diagnostics;
 
 namespace Project.Classes.GameObjects.Characters
 {
