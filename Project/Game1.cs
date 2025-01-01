@@ -56,9 +56,9 @@ public class Game1 : Game
     private AnimationManager animationCatManager;
     private AnimationManager animationNPCManager;
 
-    private CalmNPCFactory calmNPCFactory;
-    private WalkingNPCFactory walkingNPCFactory;
-    private PanicNPCFactory panicNPCFactory; // TODO: do these need to be different classes or just different objects of the same class!!!
+    private NPCFactory calmNPCFactory;
+    private NPCFactory walkingNPCFactory;
+    private NPCFactory panicNPCFactory;
 
     private BookshelveFactory bookshelveFactory;
     private Texture2D bookTexture;
@@ -140,11 +140,11 @@ public class Game1 : Game
         }
 
         // Initialize characters
-        calmNPCFactory = new CalmNPCFactory(3f, new Vector2(0, 0), obstacles, blockTexture);
+        calmNPCFactory = new NPCFactory(3f, new Vector2(0, 0), obstacles, blockTexture);
         npcStill = calmNPCFactory.CreateNPC(animationNPCManager, new Vector2(150, 100));
-        walkingNPCFactory = new WalkingNPCFactory(3f, new Vector2(1, 1), obstacles, blockTexture);
+        walkingNPCFactory = new NPCFactory(3f, new Vector2(1, 1), obstacles, blockTexture);
         npcWalk = walkingNPCFactory.CreateNPC(animationNPCManager, new Vector2(200, 100));
-        panicNPCFactory = new PanicNPCFactory(3f, new Vector2(3, 3), obstacles, blockTexture);
+        panicNPCFactory = new NPCFactory(3f, new Vector2(3, 3), obstacles, blockTexture);
         npcRun = panicNPCFactory.CreateNPC(animationNPCManager, new Vector2(250, 100));
 
        

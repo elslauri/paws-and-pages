@@ -1,12 +1,10 @@
 # TODO
 
 - [x] powerpoints 1-5
-- [ ] refactor animations so not done by every class themselves
 - [ ] collision ? ICollide interface 
-- [ ] add object (book?)
+- [x] add object (book?)
 - [ ] interaction book and character
 - [ ] background(s)
-- [ ] day / night mechanism
 - [ ] UI speech on collision
 - [ ] UI level design
 - [ ] pause / play
@@ -14,8 +12,7 @@
 - [ ] levels
 - [ ] game over scherm?
 - [ ] balk met voortgang (voltooide taken in tijd uitgedrukt?)
-- [ ] factory om npcs aan te maken 
-- [ ] observer voor posities? 
+- [ ] factory om npcs aan te maken
 - [ ] score 
 - [ ] make character class abstract? and/or an interface
 
@@ -39,7 +36,7 @@
 - [ ] fog of war (volledig scherm is niet direct zichtbaar)
 - [x] Vriendelijke helper die je volgt en meehelpt
 - vijand kan schieten, held moet ontwijken
-- Held kan geld verzamelen als score: bepaalde score: victory
+- [ ] Held kan geld verzamelen als score: bepaalde score: victory
 - held kan monsters enkel doden door er langs boven op te springen
 - bossfight met een HP balk
 - je hebt 3(of meer) levens (visueel voorgesteld), wanneer je geraakt wordt ben je even onschendbaar en flikkert je figuurtje
