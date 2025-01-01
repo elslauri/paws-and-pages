@@ -49,7 +49,6 @@ namespace Project.Classes.GameObjects.Characters
         public void PickUpBook()
         {
             Books++;
-            Debug.WriteLine("PICKUP");
         }
         public void GiveAwayBook()
         {

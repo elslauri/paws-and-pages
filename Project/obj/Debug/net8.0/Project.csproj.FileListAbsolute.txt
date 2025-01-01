@@ -71,3 +71,6 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\friend\friend_run.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\friend\friend_run_left.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\friend\friend_run_right.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\DotGothic16.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\DotGothic.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\MenuFont.xnb

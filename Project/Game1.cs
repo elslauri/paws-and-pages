@@ -59,6 +59,7 @@ public class Game1 : Game
 
     //UI
     private UI ui;
+    private SpriteFont font;
 
     public Game1()
     {
@@ -140,10 +141,10 @@ public class Game1 : Game
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
         // UI
-        ui = new UI(null, new Vector2(50,50), player);
+        ui = new UI(font, new Vector2(50,50), player);
 
 
-        drawables = [map, .. bookshelves, .. books, testChar, cat, player];
+        drawables = [map, .. bookshelves, .. books, testChar, cat, player, ui];
 
         // camera 
         Camera.GetTheCamera().Initialize(map, player);
@@ -162,12 +163,12 @@ public class Game1 : Game
         catTextureRunLeft = Content.Load<Texture2D>("Characters/friend/friend_run_left");
         catTextureRunRight = Content.Load<Texture2D>("Characters/friend/friend_run_right");
 
-        // catTextureAngry = Content.Load<Texture2D>("Characters/friend/friend_angry");
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
         mcTextureWalkF = Content.Load<Texture2D>("Characters/MC/MC_walk_Down");
         bookshelveTexture = Content.Load<Texture2D>("Background/filledbookshelves");
         bookTexture = Content.Load<Texture2D>("Items/bookClosed");
 
+        font = Content.Load<SpriteFont>("MenuFont");
     }
 
     protected override void Update(GameTime gameTime)
@@ -191,7 +192,7 @@ public class Game1 : Game
         }
 
         CheckBookPickUp();
-        drawables = [map, .. bookshelves, .. books, testChar, cat, player];
+        drawables = [map, .. bookshelves, .. books, testChar, cat, player, ui];
 
     }
 

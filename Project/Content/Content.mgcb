@@ -181,3 +181,10 @@
 /processorParam:TextureFormat=Color
 /build:Items/bookOpen.png
 
+#begin MenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:MenuFont.spritefont
+
