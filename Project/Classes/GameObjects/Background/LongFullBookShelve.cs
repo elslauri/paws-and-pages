@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Collision;
 
-namespace Project.Classes.GameObjects.Items
+namespace Project.Classes.GameObjects.Background
 {
     internal class LongFullBookShelve : Bookshelve
     {

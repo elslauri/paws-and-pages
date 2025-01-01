@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Project.Classes.Collision;
+using Project.Classes.Visuals;
 
-namespace Project.Classes.GameObjects.Items
+namespace Project.Classes.GameObjects.Background
 {
     internal class Bookshelve : ICollidable, IDraw
     {
@@ -23,7 +24,7 @@ namespace Project.Classes.GameObjects.Items
 
         public Bookshelve(Texture2D texture, Vector2 position)
         {
-            this.Texture = texture;
+            Texture = texture;
             Position = position + new Vector2(Texture.Width / 2, Texture.Height / 2);
             Color = Color.White;
             Scale = 3f;
@@ -31,18 +32,18 @@ namespace Project.Classes.GameObjects.Items
             Origin = new Vector2(0, 0);
 
             Size = new Vector2(0, 0); //TODO: FOR THIS SHELVE ONLY SO MAKE A FACTORY?!
-            SourceRectangle = new Rectangle(0,0, 128, 192); 
+            SourceRectangle = new Rectangle(0, 0, 128, 192);
 
 
-            ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y) , texture);
+            ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y), texture);
         }
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
-           spriteBatch.Draw(Texture, Position , SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
-           
-           ColBox.Draw(spriteBatch);
+            spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+
+            ColBox.Draw(spriteBatch);
         }
     }
 }

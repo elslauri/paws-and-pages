@@ -23,7 +23,7 @@ public class Game1 : Game
     private SpriteBatch spriteBatch;
     private DrawingManager drawingManager;
 
-    private List<Classes.GameObjects.IDraw> drawables;
+    private List<IDraw> drawables;
     private List<ICollidable> obstacles;
 
     // TODO: move loading textures
@@ -52,6 +52,7 @@ public class Game1 : Game
     private AnimationManager animationCatManager;
     private AnimationManager animationNPCManager;
 
+    private BookshelveFactory bookshelveFactory;
     private Texture2D bookTexture;
 
     private List<Book> books;
@@ -106,29 +107,16 @@ public class Game1 : Game
         map = new Map([tileTexture]);
 
 
-        bookshelves = new List<Bookshelve>();
-        //FACTORY
-        // makeBookshelves(amountX, amountY)
-        // public List<Bookshelve> makeBookShelves(int amountX, int amountY)
-        // List<Bookshelve> bookshelves = new List<Bookshelves>();
-        for (int j = 200; j <= 800; j+=200)
-        {
-            for (int i = 0; i < 5 * 192; i += 192)
-            {
-                bookshelves.Add(new LongFullBookShelve(bookshelveTexture, new Vector2(0 + i, j)));
-
-            }
-        }
-        // return bookshelves;
-
+        bookshelveFactory = new BookshelveFactory(bookshelveTexture);
+        bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50,300),5,6,192,200);
 
         obstacles = [.. bookshelves];
 
         booksToBeDeleted = new List<Book>();
         books = new List<Book>();
-        for (int j = 400; j <500; j+=100)
+        for (int j = 450; j <550; j+=100)
         {
-            for (int i = 100; i <= 1000; i+=200)
+            for (int i = 150; i <= 1050; i+=200)
             {
                 books.Add(new Book(bookTexture, new Vector2(0+i,j)));
             }
@@ -169,6 +157,8 @@ public class Game1 : Game
         bookTexture = Content.Load<Texture2D>("Items/bookClosed");
 
         font = Content.Load<SpriteFont>("MenuFont");
+
+
     }
 
     protected override void Update(GameTime gameTime)

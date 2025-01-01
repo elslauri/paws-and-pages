@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Collision;
+using Project.Classes.Visuals;
 using System;
 
 namespace Project.Classes.GameObjects.Items

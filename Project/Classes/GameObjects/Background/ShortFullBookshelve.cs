@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Collision;
 
-namespace Project.Classes.GameObjects.Items
+namespace Project.Classes.GameObjects.Background
 {
     internal class ShortFullBookshelve : Bookshelve
     {
         public ShortFullBookshelve(Texture2D texture, Vector2 position) : base(texture, position)
         {
-            Size = new Vector2(64, 48); 
+            Size = new Vector2(64, 48);
             SourceRectangle = new Rectangle(0, 48, 64, 48);
 
 

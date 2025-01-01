@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.GameObjects.Background;
+using Project.Classes.Visuals;
 using System.Collections.Generic;
 
 
@@ -14,7 +15,7 @@ namespace Project.Classes.Animations
             this.spriteBatch = spriteBatch;
         }
 
-        public void Draw(IEnumerable<GameObjects.IDraw> drawables)
+        public void Draw(IEnumerable<IDraw> drawables)
         {
             spriteBatch.Begin(transformMatrix: Camera.GetTheCamera().translation, samplerState: SamplerState.PointClamp);
 

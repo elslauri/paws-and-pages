@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Project.Classes.GameObjects;
 using Project.Classes.GameObjects.Background;
 using Project.Classes.GameObjects.Characters;
+using Project.Classes.Visuals;
 
 namespace Project.Classes.UI
 {

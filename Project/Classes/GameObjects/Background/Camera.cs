@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Project.Classes.GameObjects;
+using Project.Classes.Visuals;
 
 namespace Project.Classes.GameObjects.Background
 {
