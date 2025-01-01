@@ -56,6 +56,8 @@ public class Game1 : Game
     private AnimationManager animationCatManager;
     private AnimationManager animationNPCManager;
 
+    private CalmNPCFactory calmNPCFactory;
+
     private BookshelveFactory bookshelveFactory;
     private Texture2D bookTexture;
 
@@ -136,7 +138,8 @@ public class Game1 : Game
         }
 
         // Initialize characters
-        npcStill = new NPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(1, 1), obstacles, blockTexture);
+        calmNPCFactory = new CalmNPCFactory();
+        npcStill = calmNPCFactory.CreateNPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(1, 1), obstacles, blockTexture);
        
         player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles, blockTexture);
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
