@@ -137,7 +137,7 @@ public class Game1 : Game
         // Initialize characters
         testChar = new NPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(2f, 2f), obstacles, blockTexture);
         
-        player = new MainCharacter(animationMainCharManager, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstacles, blockTexture);
+        player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles, blockTexture);
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
         // UI

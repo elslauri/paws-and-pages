@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.GameObjects;
+using Project.Classes.GameObjects.Background;
 using Project.Classes.GameObjects.Characters;
 
 namespace Project.Classes.UI
@@ -28,7 +29,11 @@ namespace Project.Classes.UI
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, message, Position, pearl);
+            Camera camera = Camera.GetTheCamera();
+            Matrix translationMatrix = camera.translation;
+            Vector2 worldPosition = Vector2.Transform(Position, Matrix.Invert(translationMatrix));
+
+            spriteBatch.DrawString(font, message, worldPosition, pearl);
         }
         private string UpdateMessage()
         {
