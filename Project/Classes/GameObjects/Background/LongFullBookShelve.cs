@@ -4,11 +4,11 @@ using Project.Classes.Collision;
 
 namespace Project.Classes.GameObjects.Background
 {
-    internal class LongFullBookShelve : Bookshelve
+    internal class LongFullBookshelve : Bookshelve
     {
-        public LongFullBookShelve(Texture2D texture, Vector2 position) : base(texture, position)
+        public LongFullBookshelve(Texture2D texture, Vector2 position) : base(texture, position)
         {
-            Size = new Vector2(64, 48); //TODO: FOR THIS SHELVE ONLY SO MAKE A FACTORY?
+            Size = new Vector2(64, 48); // TODO: refactor? see factory? 
             SourceRectangle = new Rectangle(0, 0, 64, 48);
 
 

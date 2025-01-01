@@ -15,7 +15,14 @@ namespace Project.Classes.GameObjects.Background
             this.texture = texture;
         }
 
-
+        /// <summary>
+        /// Creates a list of bookshelves with positions
+        /// </summary>
+        /// <param name="startPosition"></param>
+        /// <param name="floorPlan">2D list of ints: 1 -> long bookshelve</param>
+        /// <param name="spacingX"></param>
+        /// <param name="spacingY"></param>
+        /// <returns>List of bookshelves</returns>
         public List<Bookshelve> CreateBookshelves(Vector2 startPosition, int[,] floorPlan, int spacingX, int spacingY)
         {
             List<Bookshelve> shelves = new List<Bookshelve>();
@@ -27,10 +34,16 @@ namespace Project.Classes.GameObjects.Background
             {
                 for (int i = 0; i < columns; i++)
                 {
+
                     if (floorPlan[j,i]==1)
                     {
                         Vector2 pos = new Vector2(startPosition.X + spacingX * i, startPosition.Y + spacingY * j);
-                        shelves.Add(new LongFullBookShelve(texture, pos));
+                        shelves.Add(new LongFullBookshelve(texture, pos));
+                    }
+                    if (floorPlan[j, i] == 2)
+                    {
+                        Vector2 pos = new Vector2(startPosition.X + spacingX * i, startPosition.Y + spacingY * j);
+                        shelves.Add(new ShortFullBookshelve(texture, pos));
                     }
                 }
             }

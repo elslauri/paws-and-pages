@@ -74,3 +74,5 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\DotGothic16.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\DotGothic.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\MenuFont.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Background\longFilledBookshelve.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Background\shortFilledBookshelve.xnb

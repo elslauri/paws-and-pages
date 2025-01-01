@@ -29,7 +29,9 @@ public class Game1 : Game
     // TODO: move loading textures
     // characters
     private Texture2D npc_basicMan_Texture;
-    private NPC testChar;
+    private NPC npcStill;
+    private NPC npcWalk;
+    private NPC npcRun;
     private Texture2D mcTextureIdleD;
     private Texture2D mcTextureWalkF;
     private MainCharacter player;
@@ -41,7 +43,9 @@ public class Game1 : Game
     private Map map;
     private Texture2D tileTexture;
     private List<Bookshelve> bookshelves;
-    private Texture2D bookshelveTexture;
+    private Texture2D longBookshelveTexture;
+    private Texture2D shortBookshelveTexture; // TODO: do something with this
+
 
 
     //texture for box collision
@@ -116,24 +120,24 @@ public class Game1 : Game
                { 1,1,1,1,0,1,0,1,1,1,1 },
                { 1,1,1,1,0,1,1,1,0,1,1 }
             };  // 7,11
-        bookshelveFactory = new BookshelveFactory(bookshelveTexture);
-        bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50, 300), floorPlan, 192, 200);
+        bookshelveFactory = new BookshelveFactory(longBookshelveTexture);
+        bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50, 250), floorPlan, 192, 200);
 
         obstacles = [.. bookshelves];
 
         booksToBeDeleted = new List<Book>();
         books = new List<Book>();
-        for (int j = 450; j < 550; j += 100)
+        for (int j = 530; j < 630; j += 100)
         {
-            for (int i = 150; i <= 1050; i += 200)
+            for (int i = 130; i <= 1300; i += 192)
             {
                 books.Add(new Book(bookTexture, new Vector2(0 + i, j)));
             }
         }
 
         // Initialize characters
-        testChar = new NPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(2f, 2f), obstacles, blockTexture);
-
+        npcStill = new NPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(1, 1), obstacles, blockTexture);
+       
         player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles, blockTexture);
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
@@ -141,7 +145,7 @@ public class Game1 : Game
         ui = new UI(font, new Vector2(10, 10), player);
 
 
-        drawables = [map, .. bookshelves, .. books, testChar, cat, player, ui];
+        drawables = [map, .. bookshelves, .. books, npcStill, cat, player, ui];
 
         // camera 
         Camera.GetTheCamera().Initialize(map, player);
@@ -162,7 +166,8 @@ public class Game1 : Game
 
         mcTextureIdleD = Content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
         mcTextureWalkF = Content.Load<Texture2D>("Characters/MC/MC_walk_Down");
-        bookshelveTexture = Content.Load<Texture2D>("Background/filledbookshelves");
+        longBookshelveTexture = Content.Load<Texture2D>("Background/longFilledBookshelve");
+        shortBookshelveTexture = Content.Load<Texture2D>("Background/shortFilledBookshelve");
         bookTexture = Content.Load<Texture2D>("Items/bookClosed");
 
         font = Content.Load<SpriteFont>("MenuFont");
@@ -176,7 +181,7 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        testChar.Update(gameTime);
+        npcStill.Update(gameTime);
         cat.Update(gameTime);
         player.Update(gameTime);
 
@@ -185,13 +190,13 @@ public class Game1 : Game
         base.Update(gameTime);
 
         // test collision TODO: move to other file
-        if (player.ColBox.IsCollidingWith(testChar.ColBox))
+        if (player.ColBox.IsCollidingWith(npcStill.ColBox))
         {
             Debug.WriteLine("PARDON ME");
         }
 
         CheckBookPickUp();
-        drawables = [map, .. bookshelves, .. books, testChar, cat, player, ui];
+        drawables = [map, .. bookshelves, .. books, npcStill, cat, player, ui];
 
     }
 

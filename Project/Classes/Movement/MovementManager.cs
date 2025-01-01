@@ -14,7 +14,7 @@ namespace Project.Classes.Movement
         {
             float acceleration = 0.3f;
             character.Speed += character.Speed * acceleration;
-            float maxSpeed = 5;
+            float maxSpeed = 3;
             character.Speed = Limit(character.Speed, maxSpeed);
 
             Vector2 nextPos = character.Position + character.Speed;
@@ -55,11 +55,18 @@ namespace Project.Classes.Movement
         {
             var direction = character.InputReader.ReadInput();
 
-            float acceleration = 0.2f;
+            float acceleration = 0.3f;
+            float friction = 0.7f;
 
-            character.Speed += direction * acceleration;
+            if (direction != Vector2.Zero)
+            {
+                character.Speed += direction * acceleration;
+            } else
+            {
+                character.Speed *= friction;
+            }
 
-            float maxSpeed = 5;
+            float maxSpeed = 3;
             character.Speed = Limit(character.Speed, maxSpeed);
 
             Vector2 nextPos = character.Position + character.Speed;
@@ -69,6 +76,10 @@ namespace Project.Classes.Movement
                 if (TryMove(nextPos, character))
                 {
                     character.Position = nextPos;
+                }
+                else
+                {
+                    character.Speed *= friction;
                 }
             }
             else
@@ -148,13 +159,13 @@ namespace Project.Classes.Movement
 
         private bool IsCharWithinX(Character character)
         {
-            return character.Position.X + character.Speed.X >= 0 && character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X;
+            return character.Position.X + character.Speed.X >= 0 - character.ColBox.Size.X / 2 && character.Position.X + character.Speed.X <= Globals.mapSizeX - 1.5 * character.ColBox.Size.X  ;
 
             // return character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X || character.Position.X + character.Speed.X >= 0;
         }
         private bool IsCharWithinY(Character character)
         {
-            return character.Position.Y + character.Speed.Y >= 0 && character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y;
+            return character.Position.Y + character.Speed.Y >= 0 - character.ColBox.Size.Y / 2 && character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y;
 
             //  return character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y || character.Position.Y + character.Speed.Y >= 0;
         }
