@@ -46,7 +46,7 @@ public class Game1 : Game
 
     //texture for box collision
     private Texture2D blockTexture;
-    
+
     private AnimationFactory animationFactory;
     private AnimationManager animationMainCharManager;
     private AnimationManager animationCatManager;
@@ -98,38 +98,47 @@ public class Game1 : Game
         animationCatManager.AddAnimation("Run_left", runCat_left);
         animationCatManager.AddAnimation("Run_right", runCat_right);
         animationNPCManager = new AnimationManager();
-        var idleNpc = animationFactory.CreateAnimationFromSpriteSheet(npc_basicMan_Texture, 7,1);
+        var idleNpc = animationFactory.CreateAnimationFromSpriteSheet(npc_basicMan_Texture, 7, 1);
         animationNPCManager.AddAnimation("Idle", idleNpc);
 
-        
+
 
         // add background and blocks
         map = new Map([tileTexture]);
 
-
+        int[,] floorPlan = new int[,]
+            {
+               { 1,1,0,1,1,1,1,0,1,1,1 },
+               { 1,0,1,1,0,1,1,1,1,1,1 },
+               { 1,1,0,0,1,1,1,1,0,1,1 },
+               { 0,1,1,1,1,1,1,0,1,1,1 },
+               { 1,0,0,1,1,0,1,1,0,0,1 },
+               { 1,1,1,1,0,1,0,1,1,1,1 },
+               { 1,1,1,1,0,1,1,1,0,1,1 }
+            };  // 7,11
         bookshelveFactory = new BookshelveFactory(bookshelveTexture);
-        bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50,300),7,11,192,200);
+        bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50, 300), floorPlan, 192, 200);
 
         obstacles = [.. bookshelves];
 
         booksToBeDeleted = new List<Book>();
         books = new List<Book>();
-        for (int j = 450; j <550; j+=100)
+        for (int j = 450; j < 550; j += 100)
         {
-            for (int i = 150; i <= 1050; i+=200)
+            for (int i = 150; i <= 1050; i += 200)
             {
-                books.Add(new Book(bookTexture, new Vector2(0+i,j)));
+                books.Add(new Book(bookTexture, new Vector2(0 + i, j)));
             }
         }
 
         // Initialize characters
         testChar = new NPC(animationNPCManager, 3f, new Vector2(150, 100), new Vector2(2f, 2f), obstacles, blockTexture);
-        
+
         player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles, blockTexture);
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
 
         // UI
-        ui = new UI(font, new Vector2(10,10), player);
+        ui = new UI(font, new Vector2(10, 10), player);
 
 
         drawables = [map, .. bookshelves, .. books, testChar, cat, player, ui];
@@ -188,7 +197,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(new Color(52, 52, 79)); 
+        GraphicsDevice.Clear(new Color(52, 52, 79));
 
         // TODO: Add your drawing code here
 
@@ -211,7 +220,7 @@ public class Game1 : Game
 
     private void CheckBookPickUp()
     {
-        foreach(Book book in books)
+        foreach (Book book in books)
         {
             if (player.ColBox.IsCollidingWith(book.ColBox))
             {
@@ -219,7 +228,7 @@ public class Game1 : Game
                 player.PickUpBook();
             }
         }
-        foreach(Book book in booksToBeDeleted)
+        foreach (Book book in booksToBeDeleted)
         {
             books.Remove(book);
         }
