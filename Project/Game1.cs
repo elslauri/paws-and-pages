@@ -10,6 +10,7 @@ using Project.Classes;
 using Project.Classes.Animations;
 using Project.Classes.GameObjects.Background;
 using Project.Classes.Visuals;
+using Project.Classes.UI;
 
 
 namespace Project;
@@ -56,6 +57,8 @@ public class Game1 : Game
     private List<Book> books;
     private List<Book> booksToBeDeleted;
 
+    //UI
+    private UI ui;
 
     public Game1()
     {
@@ -135,6 +138,9 @@ public class Game1 : Game
         
         player = new MainCharacter(animationMainCharManager, 4f, new Vector2(0, 0), new Vector2(4f, 4f), obstacles, blockTexture);
         cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles, blockTexture);
+
+        // UI
+        ui = new UI(null, new Vector2(50,50), player);
 
 
         drawables = [map, .. bookshelves, .. books, testChar, cat, player];

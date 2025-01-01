@@ -5,6 +5,7 @@ using Project.Classes.Input;
 using Project.Classes.Movement;
 using Project.Classes.Collision;
 using Project.Classes.Animations;
+using System.Diagnostics;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -12,7 +13,17 @@ namespace Project.Classes.GameObjects.Characters
     {
         private MovementManager movementManager;
 
-        public int Books { get; set; }
+        private int books;
+
+        public int Books
+        {
+            get { return books; }
+            set { 
+                books = value;
+                OnPickUp?.Invoke(books);
+            }
+        }
+
 
         public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) :
             base(animationManager, scale, startPos, speed, obstacles, blockTexture)
@@ -32,10 +43,13 @@ namespace Project.Classes.GameObjects.Characters
         {
             movementManager.MoveWithKeys(this);
         }
+        public delegate void ObserveBooks(int bookCount);
+        public event ObserveBooks OnPickUp;
 
         public void PickUpBook()
         {
             Books++;
+            Debug.WriteLine("PICKUP");
         }
         public void GiveAwayBook()
         {

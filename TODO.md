@@ -17,19 +17,18 @@
 - [ ] factory om npcs aan te maken 
 - [ ] observer voor posities? 
 - [ ] score 
-- [ ] use sprite class in char and items
-- [ ] make character class abstract
+- [ ] make character class abstract? and/or an interface
 
 ## Requirements
 
 - [x] Github
 - [ ] Startscherm waar je ten minste op start kan drukken
-- [ ] Geanimeerde held en/of enemies
+- [x] Geanimeerde held en/of enemies
 - [ ] Minstens twee levels waar je vanuit startscherm naartoe en/of opeenvolgend naartoe kan
 - [ ] Minstens drie verschillende vijanden
 - [x] Minstens keyboard (up, down, left, right)
 - [ ] Game over scherm wanneer verslagen/gewonnen
-- [ ] Basic physics: collisions met vast objecten en enemies, acceleratie en momentum van held
+- [x] Basic physics: collisions met vast objecten en enemies, acceleratie en momentum van held
 - [ ] Basic AI: elk type enemy heeft een andere AI
 - [ ] Sprites en tileset/background
 - [ ] Minstens 2 design patters
@@ -38,7 +37,7 @@
 
 ### Extra's
 - [ ] fog of war (volledig scherm is niet direct zichtbaar)
-- [ ] Vriendelijke helper die je volgt en meehelpt
+- [x] Vriendelijke helper die je volgt en meehelpt
 - vijand kan schieten, held moet ontwijken
 - Held kan geld verzamelen als score: bepaalde score: victory
 - held kan monsters enkel doden door er langs boven op te springen

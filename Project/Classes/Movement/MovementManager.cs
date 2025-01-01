@@ -44,16 +44,11 @@ namespace Project.Classes.Movement
             else if(!IsCharWithinX(character))
             {
                 character.Speed = new Vector2(-character.Speed.X * 0.5f, character.Speed.Y);
-
-                Debug.WriteLine("Boundary x");
             }
             else if(!IsCharWithinY(character))
             {
                 character.Speed = new Vector2(character.Speed.X, -character.Speed.Y * 0.5f);
-
-                Debug.WriteLine("Boundary y");
             }
-            Debug.WriteLine($"Position: {character.Position}, Speed: {character.Speed}");
         }
 
         public void MoveWithKeys(Character character)
