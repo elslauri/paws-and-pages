@@ -24,8 +24,8 @@ namespace Project.Classes.GameObjects.Characters
         }
 
 
-        public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) :
-            base(animationManager, scale, startPos, speed, obstacles, blockTexture)
+        public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles) :
+            base(animationManager, scale, startPos, speed, obstacles)
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();

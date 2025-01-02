@@ -12,7 +12,7 @@ namespace Project.Classes.GameObjects.Background
             SourceRectangle = new Rectangle(0, 0, 64, 48);
 
 
-            ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y / 4f), texture);
+            ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y / 4f));
 
         }
     }

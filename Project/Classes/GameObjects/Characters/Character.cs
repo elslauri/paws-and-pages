@@ -44,7 +44,7 @@ namespace Project.Classes.GameObjects.Characters
         #endregion
 
 
-        public Character(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture, IAnimationStrategy animationStrategy = null)
+        public Character(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, IAnimationStrategy animationStrategy = null)
         {
             Scale = scale;
 
@@ -60,7 +60,7 @@ namespace Project.Classes.GameObjects.Characters
 
             var size = this.animationManager.GetCurrentFrameSize();
 
-            ColBox = new CollisionBox(Position, Scale * size, blockTexture);
+            ColBox = new CollisionBox(Position, Scale * size);
             this.obstacles = obstacles;
 
         }
@@ -74,8 +74,6 @@ namespace Project.Classes.GameObjects.Characters
             ColBox.Update(gameTime, Position );
 
         }
-
-
 
         public void UpdateState()
         {

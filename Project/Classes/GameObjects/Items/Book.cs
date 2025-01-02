@@ -38,7 +38,7 @@ namespace Project.Classes.GameObjects.Items
             SourceRectangle = new Rectangle(0, 0, 128, 192);
 
 
-            ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y), texture);
+            ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y));
         }
 
 

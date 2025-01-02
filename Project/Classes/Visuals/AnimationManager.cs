@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Visuals;
@@ -9,6 +10,7 @@ namespace Project.Classes.Animations
     {
         private Dictionary<string, Animation> animations;
         private Animation currentAnimation;
+
 
         public AnimationManager()
         {
@@ -40,7 +42,7 @@ namespace Project.Classes.Animations
             var frame = currentAnimation.GetCurrentFrameSourceRectangle();
             //var origin = new Vector2(frame.Width / 2f, frame.Height / 2f);
             var origin = Vector2.Zero;
-           // Debug.WriteLine("MANAGER -- frame: "+ frame + " origin: " + origin); 
+            // Debug.WriteLine("MANAGER -- frame: "+ frame + " origin: " + origin); 
             spriteBatch.Draw(currentAnimation.Texture, position, frame, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
         }
 
@@ -62,5 +64,6 @@ namespace Project.Classes.Animations
             Rectangle frame = currentAnimation.Frames[0].SourceRectangle;
             return new Vector2(frame.Width, frame.Height);
         }
+
     }
 }

@@ -17,8 +17,8 @@ namespace Project.Classes.GameObjects.Characters
     {
         private MovementManager movementManager;
 
-        public NPC(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture) : 
-            base(animationManager, scale, position, speed, obstacles, blockTexture)
+        public NPC(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles) : 
+            base(animationManager, scale, position, speed, obstacles)
         {
             movementManager = new MovementManager();
         }

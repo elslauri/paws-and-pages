@@ -142,7 +142,7 @@ namespace Project.Classes.Movement
         /// <returns>True if possible, return false if collision</returns>
         private bool TryMove(Vector2 targetPos, Character character)
         {
-            var tempCollisionBox = new CollisionBox(targetPos, character.ColBox.Size, character.ColBox.texture);
+            var tempCollisionBox = new CollisionBox(targetPos, character.ColBox.Size);
             foreach (var obstacle in character.obstacles)
             {
                 if (tempCollisionBox.IsCollidingWith(obstacle.ColBox))

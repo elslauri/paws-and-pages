@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project.Classes.Collision
 {
@@ -16,14 +11,13 @@ namespace Project.Classes.Collision
 
         // scale
 
-        public Texture2D texture; // Placeholder texture for drawing
+        //public Texture2D texture; // Placeholder texture for drawing
 
-        public CollisionBox(Vector2 position, Vector2 size, Texture2D blockTexture)
+        public CollisionBox(Vector2 position, Vector2 size )
         {
             Position = position;
             Size = size;
 
-            this.texture = blockTexture;
 
             UpdateRectangle();
         }

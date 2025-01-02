@@ -9,12 +9,6 @@ using Project.Classes.Movement;
 using Project.Classes.Visuals;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -23,8 +17,8 @@ namespace Project.Classes.GameObjects.Characters
         private MovementManager movementManager;
         private Character player;
 
-        public Friend(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, Character player, List<ICollidable> obstacles,Texture2D blockTexture) : 
-            base(animationManager, scale, position, speed, obstacles, blockTexture, new TwoDirectionalAnimationStrategy())
+        public Friend(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, Character player, List<ICollidable> obstacles) : 
+            base(animationManager, scale, position, speed, obstacles, new TwoDirectionalAnimationStrategy())
         {
             this.player = player;
 

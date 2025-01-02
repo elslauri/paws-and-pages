@@ -11,19 +11,18 @@ namespace Project.Classes.GameObjects.Characters
         private readonly float scale;
         private readonly Vector2 speed;
         private readonly List<ICollidable> obstacles;
-        private readonly Texture2D blockTexture;
+     
 
-        public NPCFactory(float scale, Vector2 speed, List<ICollidable> obstacles, Texture2D blockTexture)
+        public NPCFactory(float scale, Vector2 speed, List<ICollidable> obstacles)
         {
             this.scale = scale;
             this.speed = speed;
             this.obstacles = obstacles;
-            this.blockTexture = blockTexture;
         }
 
         public NPC CreateNPC(AnimationManager animationManager, Vector2 position)
         {
-            return new NPC(animationManager, scale, position, speed, obstacles, blockTexture);
+            return new NPC(animationManager, scale, position, speed, obstacles);
         }
     }
 }
