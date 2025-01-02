@@ -32,7 +32,7 @@ namespace Project.Classes.GameObjects.Background
             Origin = new Vector2(0, 0);
 
             Size = new Vector2(0, 0); //TODO: FOR THIS SHELVE ONLY SO MAKE A FACTORY?!
-            SourceRectangle = new Rectangle(0, 0, 128, 192);
+            SourceRectangle = new Rectangle(0, 0, 228, 192);
 
 
             ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y), texture);
@@ -43,7 +43,7 @@ namespace Project.Classes.GameObjects.Background
         {
             spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
 
-            // ColBox.Draw(spriteBatch); // TODO: remove after debug
+            ColBox.Draw(spriteBatch); // TODO: remove after debug
         }
     }
 }

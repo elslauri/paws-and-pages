@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace Project.Classes.Scenes
 {
-    internal class GameManager
+    internal class GameManager : IGameManager
     {
         private List<IDraw> drawables;
         private List<ICollidable> obstacles;

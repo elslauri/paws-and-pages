@@ -36,10 +36,7 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        // Rescale window -> TODO: move to a globals class?
-        graphics.PreferredBackBufferWidth = Globals.windowSizeX;
-        graphics.PreferredBackBufferHeight = Globals.windowSizeY;
-        graphics.ApplyChanges();
+        ConfigureGraphics();
 
         base.Initialize();
 
@@ -64,7 +61,6 @@ public class Game1 : Game
         base.Update(gameTime);
 
     }
-
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(new Color(52, 52, 79));
@@ -72,5 +68,11 @@ public class Game1 : Game
         gameManager.Draw(gameTime);
 
         base.Draw(gameTime);
+    }
+    private void ConfigureGraphics()
+    {
+        graphics.PreferredBackBufferWidth = Globals.windowSizeX;
+        graphics.PreferredBackBufferHeight = Globals.windowSizeY;
+        graphics.ApplyChanges();
     }
 }
