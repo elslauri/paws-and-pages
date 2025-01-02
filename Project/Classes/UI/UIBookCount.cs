@@ -6,7 +6,7 @@ using Project.Classes.Visuals;
 
 namespace Project.Classes.UI
 {
-    internal class UI : IDraw
+    internal class UIBookCount : IDraw
     {
         private SpriteFont font;
         private int books;
@@ -14,7 +14,7 @@ namespace Project.Classes.UI
         private Color pearl;
         public Vector2 Position { get; set; }
 
-        public UI(SpriteFont font, Vector2 position, MainCharacter player)
+        public UIBookCount(SpriteFont font, Vector2 position, MainCharacter player)
         {
             this.font = font;
             Position = position;
