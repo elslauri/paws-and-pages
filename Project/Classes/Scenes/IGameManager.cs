@@ -7,7 +7,8 @@ namespace Project.Classes.Scenes
     internal interface IGameManager
     {
         public void Initialize(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content);
+        public void LoadContent();
         public void Update(GameTime gameTime);
-        public void Draw(GameTime gameTime);
+        public void Draw();
     }
 }

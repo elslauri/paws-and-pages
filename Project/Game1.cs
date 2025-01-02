@@ -1,16 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Project.Classes.GameObjects.Characters;
-using System.Diagnostics;
-using Project.Classes.GameObjects.Items;
-using Project.Classes.Collision;
-using System.Collections.Generic;
 using Project.Classes;
-using Project.Classes.Animations;
-using Project.Classes.GameObjects.Background;
-using Project.Classes.Visuals;
-using Project.Classes.UI;
 using Project.Classes.Scenes;
 
 
@@ -38,16 +29,18 @@ public class Game1 : Game
     {
         ConfigureGraphics();
 
-        base.Initialize();
+        spriteBatch = new SpriteBatch(GraphicsDevice);
 
         gameManager.Initialize(graphics, spriteBatch, Content);
-        
+
+        base.Initialize();
+
     }
 
     protected override void LoadContent()
     {
-        spriteBatch = new SpriteBatch(GraphicsDevice);
-
+        
+        gameManager.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
@@ -65,7 +58,7 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(new Color(52, 52, 79));
 
-        gameManager.Draw(gameTime);
+        gameManager.Draw();
 
         base.Draw(gameTime);
     }
