@@ -3,7 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Animations;
+using Project.Classes.Collision;
 using Project.Classes.GameObjects.Characters;
+using Project.Classes.UI;
 using Project.Classes.Visuals;
 using System.Collections.Generic;
 
@@ -12,6 +14,8 @@ namespace Project.Classes.Scenes
     internal class MainScreen : Level
     {
         private List<IDraw> drawables;
+        private List<ICollidable> obstacels;
+
         private DrawingManager drawingManager;
 
 
@@ -22,6 +26,7 @@ namespace Project.Classes.Scenes
         private AnimationManager animationManagerMain;
 
         private SpriteFont font;
+        private Title title; 
 
         public MainScreen(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content) : base(graphics, spriteBatch, content)
         {
@@ -42,25 +47,24 @@ namespace Project.Classes.Scenes
             animationManagerMain = new AnimationManager();
             var idleCat = animationFactoryMain.CreateAnimationFromSpriteSheet(catTextureIdle, 8, 1);
             animationManagerMain.AddAnimation("Idle", idleCat);
-            animationManagerMain.SetAnimation("Idle"); // to be sure
 
 
-            friend = new MainCharacter(animationManagerMain, 2f, new Microsoft.Xna.Framework.Vector2(50, 50), new Vector2(2,2), null);
-            drawables = [ friend ];
+            friend = new MainCharacter(animationManagerMain, 2f, new Vector2(Globals.windowSizeX/2, Globals.windowSizeY/2), new Vector2(2,2), obstacels);
+            
+            title = new Title(font, "The Library", new Vector2(Globals.windowSizeX/2-100, Globals.windowSizeY/3));
 
-            //Camera.GetTheCamera().Initialize(map, friend);
+            drawables = [title, friend];
 
         }
 
         public override void Update(GameTime gameTime)
         {
             friend.Update(gameTime);
-            //Camera.GetTheCamera().Update(gameTime);
 
         }
         public override void Draw()
         {
-            drawingManager.Draw(drawables);
+            drawingManager.Draw(drawables, false);
         }
 
     }

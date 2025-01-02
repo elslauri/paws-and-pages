@@ -15,10 +15,12 @@ namespace Project.Classes.Animations
             this.spriteBatch = spriteBatch;
         }
 
-        public void Draw(IEnumerable<IDraw> drawables)
+        public void Draw(IEnumerable<IDraw> drawables, bool camera)
         {
-            // spriteBatch.Begin(transformMatrix: Camera.GetTheCamera().translation, samplerState: SamplerState.PointClamp);
-            spriteBatch.Begin();
+            if (camera)
+                spriteBatch.Begin(transformMatrix: Camera.GetTheCamera().translation, samplerState: SamplerState.PointClamp);
+            else
+                spriteBatch.Begin();
 
             foreach (var d in drawables)
             {

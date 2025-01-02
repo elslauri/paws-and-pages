@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Project.Classes.Collision;
 using Project.Classes.GameObjects.Characters;
+using System.Collections.ObjectModel;
 
 
 namespace Project.Classes.Movement
@@ -143,11 +144,14 @@ namespace Project.Classes.Movement
         private bool TryMove(Vector2 targetPos, Character character)
         {
             var tempCollisionBox = new CollisionBox(targetPos, character.ColBox.Size);
-            foreach (var obstacle in character.obstacles)
+            if (character.obstacles != null)
             {
-                if (tempCollisionBox.IsCollidingWith(obstacle.ColBox))
+                foreach (var obstacle in character.obstacles)
                 {
-                    return false;
+                    if (tempCollisionBox.IsCollidingWith(obstacle.ColBox))
+                    {
+                        return false;
+                    }
                 }
             }
             return true;

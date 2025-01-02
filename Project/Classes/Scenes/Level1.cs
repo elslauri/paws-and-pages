@@ -123,7 +123,7 @@ namespace Project.Classes.Scenes
         }
         public override void Draw()
         {
-            drawingManager.Draw(drawables);
+            drawingManager.Draw(drawables, true);
         }
 
         private void GetAnimations()
