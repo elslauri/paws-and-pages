@@ -37,11 +37,6 @@ public class Game1 : Game
 
     }
 
-    protected override void LoadContent()
-    {
-        
-        gameManager.LoadContent();
-    }
 
     protected override void Update(GameTime gameTime)
     {

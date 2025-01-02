@@ -8,39 +8,33 @@ namespace Project.Classes.Scenes
 {
     internal class GameManager : IGameManager
     {
-        private Scene currentScene;
-
+        private SceneManager sceneManager;
+        
+        public GameManager()
+        {
+            sceneManager = new SceneManager(); // TODO: maybe move to parameter in constructor
+        }
 
         public void Initialize(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
         {
-            currentScene = new Level1(graphics, spriteBatch, content);
-            currentScene.Initialize();
-        }
-
-        public void LoadContent()
-        {
-            if (currentScene != null)
-            {
-                currentScene.LoadContent();
-            }
-            else
-            {
-                throw new InvalidOperationException("currentScene is not initialized.");
-            }
+            Scene level1 = new Level1(graphics, spriteBatch, content);
+            sceneManager.ChangeScene(level1);
+            
         }
 
         public void Update(GameTime gameTime)
         {
-            currentScene.Update(gameTime);
+            sceneManager.Update(gameTime);
         }
 
         public void Draw()
         {
-            currentScene.Draw();
+            sceneManager.Draw();
         }
 
-        // TODO: method to change scene here I guess
-
-
+        public void ChangeScene(Scene newScene)
+        {
+            sceneManager.ChangeScene(newScene);
+        }
     }
 }
