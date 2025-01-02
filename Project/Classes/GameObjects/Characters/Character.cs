@@ -13,15 +13,14 @@ namespace Project.Classes.GameObjects.Characters
     {
         #region members
 
-         
+
         // TODO: remove Texture. Origin, Color, Rotation from IDraw
         public Texture2D Texture { get; }
         public Color Color { get; }
         public float Rotation { get; }
         public Vector2 Origin { get; }
 
-
-
+       
 
 
         public Vector2 Position { get; set; }

@@ -13,6 +13,7 @@ namespace Project.Classes.GameObjects.Characters
         private MovementManager movementManager;
 
         private int books;
+        
 
         public int Books
         {

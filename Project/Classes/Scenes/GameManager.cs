@@ -17,7 +17,7 @@ namespace Project.Classes.Scenes
 
         public void Initialize(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
         {
-            Scene level1 = new Level1(graphics, spriteBatch, content);
+            Scene level1 = new MainScreen(graphics, spriteBatch, content);
             sceneManager.ChangeScene(level1);
             
         }

@@ -12,6 +12,7 @@ namespace Project.Classes.Animations
         private Animation currentAnimation;
 
 
+
         public AnimationManager()
         {
             animations = new Dictionary<string, Animation>();

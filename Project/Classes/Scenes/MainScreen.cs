@@ -6,7 +6,6 @@ using Project.Classes.Animations;
 using Project.Classes.GameObjects.Characters;
 using Project.Classes.Visuals;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Project.Classes.Scenes
 {
@@ -46,23 +45,22 @@ namespace Project.Classes.Scenes
             animationManagerMain.SetAnimation("Idle"); // to be sure
 
 
-            friend = new MainCharacter(animationManagerMain, 2f, new Vector2(Globals.windowSizeX / 2, Globals.windowSizeY / 2), new Vector2(2,2), null);
+            friend = new MainCharacter(animationManagerMain, 2f, new Microsoft.Xna.Framework.Vector2(50, 50), new Vector2(2,2), null);
             drawables = [ friend ];
+
+            //Camera.GetTheCamera().Initialize(map, friend);
+
         }
 
         public override void Update(GameTime gameTime)
         {
             friend.Update(gameTime);
+            //Camera.GetTheCamera().Update(gameTime);
 
         }
         public override void Draw()
         {
             drawingManager.Draw(drawables);
-            if (friend.Texture == null)
-            {
-                Debug.WriteLine("texture is null at: " + friend.Position);
-
-            }
         }
 
     }

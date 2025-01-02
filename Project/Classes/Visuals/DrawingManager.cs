@@ -17,7 +17,8 @@ namespace Project.Classes.Animations
 
         public void Draw(IEnumerable<IDraw> drawables)
         {
-            spriteBatch.Begin(transformMatrix: Camera.GetTheCamera().translation, samplerState: SamplerState.PointClamp);
+            // spriteBatch.Begin(transformMatrix: Camera.GetTheCamera().translation, samplerState: SamplerState.PointClamp);
+            spriteBatch.Begin();
 
             foreach (var d in drawables)
             {
