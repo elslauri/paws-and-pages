@@ -26,7 +26,14 @@ namespace Project.Classes.Scenes
 
         // npc
         private Texture2D joggingIdleTexture;
+        private Texture2D joggingUpTexture;
+        private Texture2D joggingLeftTexture;
+        private Texture2D joggingDownTexture;
+        private Texture2D joggingRightTexture;
+
         private Texture2D dressIdleTexture;
+
+
         private NPC npcStill;
         private NPC npcWalk;
         private NPC npcRun;
@@ -89,7 +96,15 @@ namespace Project.Classes.Scenes
         {
             tileTexture = content.Load<Texture2D>("Background/planks_H_3");
             joggingIdleTexture = content.Load<Texture2D>("Characters/npc/jogging_idle");
+            joggingUpTexture = content.Load<Texture2D>("Characters/npc/jogging_up");
+            joggingLeftTexture = content.Load<Texture2D>("Characters/npc/jogging_left");
+            joggingDownTexture = content.Load<Texture2D>("Characters/npc/jogging_down");
+            joggingRightTexture = content.Load<Texture2D>("Characters/npc/jogging_right");
+
             dressIdleTexture = content.Load<Texture2D>("Characters/npc/dress_idle");
+            
+            
+            
             catTextureIdle = content.Load<Texture2D>("Characters/friend/friend_idle");
             catTextureRunLeft = content.Load<Texture2D>("Characters/friend/friend_run_left");
             catTextureRunRight = content.Load<Texture2D>("Characters/friend/friend_run_right");
@@ -203,8 +218,8 @@ namespace Project.Classes.Scenes
             // initialize NPC styles
             npcStyles = new List<INPCStyle>()
             { //TODO: add all them styles here after loading their textures AND write new animation strategy
-                new NPCStyle(joggingIdleTexture,joggingIdleTexture,joggingIdleTexture,joggingIdleTexture,joggingIdleTexture),
-                new NPCStyle(dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture)
+                new NPCStyle(joggingIdleTexture,joggingUpTexture,joggingLeftTexture,joggingRightTexture,joggingDownTexture),
+              //  new NPCStyle(dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture)
             };
 
             // Initialize npc factories

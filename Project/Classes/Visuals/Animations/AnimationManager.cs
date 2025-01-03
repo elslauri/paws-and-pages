@@ -41,9 +41,7 @@ namespace Project.Classes.Visuals.Animations
         public void Draw(SpriteBatch spriteBatch, Vector2 position, float scale)
         {
             var frame = currentAnimation.GetCurrentFrameSourceRectangle();
-            //var origin = new Vector2(frame.Width / 2f, frame.Height / 2f);
-            var origin = Vector2.Zero;
-            // Debug.WriteLine("MANAGER -- frame: "+ frame + " origin: " + origin); 
+            var origin = Vector2.Zero; 
             spriteBatch.Draw(currentAnimation.Texture, position, frame, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
         }
 

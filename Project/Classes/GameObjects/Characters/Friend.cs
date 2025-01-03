@@ -1,13 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using NVorbis.Contracts;
 using Project.Classes.Collision;
-using Project.Classes.Input;
 using Project.Classes.Movement;
-using Project.Classes.Visuals;
 using Project.Classes.Visuals.Animations;
-using System;
 using System.Collections.Generic;
 
 namespace Project.Classes.GameObjects.Characters

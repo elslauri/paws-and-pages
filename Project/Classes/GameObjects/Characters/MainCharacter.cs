@@ -43,7 +43,6 @@ namespace Project.Classes.GameObjects.Characters
         private void Move()
         {
             movementManager.MoveWithKeys(this);
-            Debug.WriteLine("speed of mc: "+Speed);
         }
         public delegate void ObserveBooks(int bookCount);
         public event ObserveBooks OnPickUp;
