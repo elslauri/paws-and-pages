@@ -111,3 +111,5 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\Characters\npc\skirt_up.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\LevelFont.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\TitleFont.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\UI\rectangleBox.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\OrderFont.xnb

@@ -33,7 +33,7 @@
 - [ ] Minstens twee uitgewerkte extra's
 
 ### Extra's
-- [ ] fog of war (volledig scherm is niet direct zichtbaar)
+- [x] fog of war (volledig scherm is niet direct zichtbaar)
 - [x] Vriendelijke helper die je volgt en meehelpt
 - vijand kan schieten, held moet ontwijken
 - [ ] Held kan geld verzamelen als score: bepaalde score: victory

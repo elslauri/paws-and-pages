@@ -10,6 +10,7 @@ using Project.Classes.GameObjects.Items;
 using Project.Classes.UI;
 using Project.Classes.Visuals;
 using Project.Classes.Visuals.Animations;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -106,8 +107,11 @@ namespace Project.Classes.Scenes
         private List<Book> booksToBeDeleted;
 
         //UI
-        private UIBookCount ui;
+        private UIBookCount bookCount;
         private SpriteFont font;
+        private SpriteFont orderFont;
+        private Texture2D bubbleTexture;
+        private Bubble bubble;
 
         #endregion
         public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
@@ -177,14 +181,19 @@ namespace Project.Classes.Scenes
             mcWalkUpTexture = content.Load<Texture2D>("Characters/MC/walk_up");
             #endregion
 
-            #region itemsAndBackground
+            #region background
             tileTexture = content.Load<Texture2D>("Background/planks_H_3");
 
             longBookshelveTexture = content.Load<Texture2D>("Background/longFilledBookshelve");
             shortBookshelveTexture = content.Load<Texture2D>("Background/shortFilledBookshelve");
             bookTexture = content.Load<Texture2D>("Items/bookClosed");
 
+            #endregion
+
+            #region UI
             font = content.Load<SpriteFont>("LevelFont");
+            bubbleTexture = content.Load<Texture2D>("UI/rectangleBox");
+            orderFont = content.Load<SpriteFont>("OrderFont");
             #endregion
 
             SetAnimations();
@@ -213,7 +222,7 @@ namespace Project.Classes.Scenes
             }
 
             CheckBookPickUp();
-            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, cat, player, ui];
+            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, cat, player, bookCount, bubble];
 
         }
         public override void Draw()
@@ -302,10 +311,12 @@ namespace Project.Classes.Scenes
             cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles);
 
             // UI
-            ui = new UIBookCount(font, new Vector2(10, 10), player);
+            bookCount = new UIBookCount(font, new Vector2(10, 10), player);
+            bubble = new Bubble(bubbleTexture, 10, orderFont);
+            bubble.SetPosition(new Vector2(400, 400));
+            bubble.SetMessage("This is a test test test"+Environment.NewLine +"  akjajaa;kadga;kfg;angjakg;agjn;");
 
-
-            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, cat, player, ui];
+            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, cat, player, bookCount, bubble];
         }
 
         /// <summary>
