@@ -4,18 +4,18 @@ namespace Project.Classes.Visuals.Animations
 {
     internal class TwoDirectionalAnimationStrategy : IAnimationStrategy
     {
-        public void SetAnimation(AnimationManager animationManager, string state, Vector2 speed)
+        public void SetAnimation(AnimationManager animationManager, AnimationState state, Vector2 speed)
         {
-            string animation = state;
             if (speed.X < 0)
             {
-                animation += "_left";
+                animationManager.SetAnimation(AnimationState.Walk_Left);
+
             }
             else if (speed.X > 0)
             {
-                animation += "_right";
+                animationManager.SetAnimation(AnimationState.Walk_Right);
+
             }
-            animationManager.SetAnimation(animation);
         }
     }
 }

@@ -31,8 +31,8 @@ namespace Project.Classes.GameObjects.Characters
 
 
         protected AnimationManager animationManager;
-        // TODO: make enum STATE
-        private string currentState;
+        
+        private AnimationState currentState;
         protected IAnimationStrategy animationStrategy; 
 
         public IInputReader InputReader { get; set; }
@@ -53,7 +53,7 @@ namespace Project.Classes.GameObjects.Characters
            
             this.animationManager = animationManager; 
             this.animationStrategy = animationStrategy ?? new DefaultAnimationStrategy();
-            currentState = "Idle";
+            currentState = AnimationState.Idle;
             this.animationManager.SetAnimation(currentState);
 
 
@@ -76,7 +76,7 @@ namespace Project.Classes.GameObjects.Characters
 
         public void UpdateState()
         {
-            currentState = IsMoving() ? "Run" : "Idle";
+            currentState = IsMoving() ? AnimationState.Walk_Down : AnimationState.Idle;
         }
          private bool IsMoving()
         {

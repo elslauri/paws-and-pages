@@ -25,9 +25,9 @@ namespace Project.Classes.Visuals.Animations
                 currentAnimation = animation;
         }
 
-        public void SetAnimation(string animationKey)
+        public void SetAnimation(AnimationState animationKey)
         {
-            if (animations.TryGetValue(animationKey, out var animation))
+            if (animations.TryGetValue(animationKey.ToString(), out var animation))
             {
                 currentAnimation = animation;
             }
