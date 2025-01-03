@@ -24,20 +24,48 @@ namespace Project.Classes.Scenes
 
         private DrawingManager drawingManager;
 
-        // npc
+        #region npcTextures
         private Texture2D joggingIdleTexture;
         private Texture2D joggingUpTexture;
         private Texture2D joggingLeftTexture;
         private Texture2D joggingDownTexture;
         private Texture2D joggingRightTexture;
 
+        private Texture2D jeansIdleTexture;
+        private Texture2D jeansUpTexture;
+        private Texture2D jeansLeftTexture;
+        private Texture2D jeansDownTexture;
+        private Texture2D jeansRightTexture;
+
+        private Texture2D skirtIdleTexture;
+        private Texture2D skirtUpTexture;
+        private Texture2D skirtLeftTexture;
+        private Texture2D skirtDownTexture;
+        private Texture2D skirtRightTexture;
+
+        private Texture2D hatIdleTexture;
+        private Texture2D hatUpTexture;
+        private Texture2D hatLeftTexture;
+        private Texture2D hatDownTexture;
+        private Texture2D hatRightTexture;
+
         private Texture2D dressIdleTexture;
+        private Texture2D dressUpTexture;
+        private Texture2D dressLeftTexture;
+        private Texture2D dressDownTexture;
+        private Texture2D dressRightTexture;
 
-
+        private Texture2D beardIdleTexture;
+        private Texture2D beardUpTexture;
+        private Texture2D beardLeftTexture;
+        private Texture2D beardDownTexture;
+        private Texture2D beardRightTexture;
+        #endregion
         private NPC npcStill;
         private NPC npcWalk;
         private NPC npcRun;
-        //mc
+
+        #region mcTextures
         private Texture2D mcIdleTexture;
         private Texture2D mcWalkDownTexture;
         private Texture2D mcWalkLeftDownTexture;
@@ -45,12 +73,15 @@ namespace Project.Classes.Scenes
         private Texture2D mcWalkRightDownTexture;
         private Texture2D mcWalkRightUpTexture;
         private Texture2D mcWalkUpTexture;
+        #endregion
         private MainCharacter player;
-        //cat
+        #region catTextures
         private Texture2D catTextureIdle;
         private Texture2D catTextureRunLeft;
         private Texture2D catTextureRunRight;
+        #endregion
         private Friend cat;
+
         // background
         private Map map;
         private Texture2D tileTexture;
@@ -58,11 +89,9 @@ namespace Project.Classes.Scenes
         private Texture2D longBookshelveTexture;
         private Texture2D shortBookshelveTexture; // TODO: do something with this
 
-
         private AnimationFactory animationFactory;
         private AnimationManager animationMainCharManager;
         private AnimationManager animationCatManager;
-//        private AnimationManager animationNPCManager;
 
         private NPCFactory calmNPCFactory;
         private NPCFactory walkingNPCFactory;
@@ -81,10 +110,10 @@ namespace Project.Classes.Scenes
         private SpriteFont font;
 
         #endregion
-        public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content) 
+        public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
             : base(graphics, spriteBatch, content)
         {
-            
+
         }
 
         public override void Initialize()
@@ -94,21 +123,51 @@ namespace Project.Classes.Scenes
         }
         public override void LoadContent()
         {
-            tileTexture = content.Load<Texture2D>("Background/planks_H_3");
+            #region npc
             joggingIdleTexture = content.Load<Texture2D>("Characters/npc/jogging_idle");
             joggingUpTexture = content.Load<Texture2D>("Characters/npc/jogging_up");
             joggingLeftTexture = content.Load<Texture2D>("Characters/npc/jogging_left");
             joggingDownTexture = content.Load<Texture2D>("Characters/npc/jogging_down");
             joggingRightTexture = content.Load<Texture2D>("Characters/npc/jogging_right");
 
+            jeansIdleTexture = content.Load<Texture2D>("Characters/npc/jeans_idle");
+            jeansUpTexture = content.Load<Texture2D>("Characters/npc/jeans_up");
+            jeansLeftTexture = content.Load<Texture2D>("Characters/npc/jeans_left");
+            jeansDownTexture = content.Load<Texture2D>("Characters/npc/jeans_down");
+            jeansRightTexture = content.Load<Texture2D>("Characters/npc/jeans_right");
+
+            skirtIdleTexture = content.Load<Texture2D>("Characters/npc/skirt_idle");
+            skirtUpTexture = content.Load<Texture2D>("Characters/npc/skirt_up");
+            skirtLeftTexture = content.Load<Texture2D>("Characters/npc/skirt_left");
+            skirtDownTexture = content.Load<Texture2D>("Characters/npc/skirt_down");
+            skirtRightTexture = content.Load<Texture2D>("Characters/npc/skirt_right");
+
+            hatIdleTexture = content.Load<Texture2D>("Characters/npc/hat_idle");
+            hatUpTexture = content.Load<Texture2D>("Characters/npc/hat_up");
+            hatLeftTexture = content.Load<Texture2D>("Characters/npc/hat_left");
+            hatDownTexture = content.Load<Texture2D>("Characters/npc/hat_down");
+            hatRightTexture = content.Load<Texture2D>("Characters/npc/hat_right");
+
             dressIdleTexture = content.Load<Texture2D>("Characters/npc/dress_idle");
-            
-            
-            
+            dressUpTexture = content.Load<Texture2D>("Characters/npc/dress_up");
+            dressLeftTexture = content.Load<Texture2D>("Characters/npc/dress_left");
+            dressDownTexture = content.Load<Texture2D>("Characters/npc/dress_down");
+            dressRightTexture = content.Load<Texture2D>("Characters/npc/dress_right");
+
+            beardIdleTexture = content.Load<Texture2D>("Characters/npc/beard_idle");
+            beardUpTexture = content.Load<Texture2D>("Characters/npc/beard_up");
+            beardLeftTexture = content.Load<Texture2D>("Characters/npc/beard_left");
+            beardDownTexture = content.Load<Texture2D>("Characters/npc/beard_down");
+            beardRightTexture = content.Load<Texture2D>("Characters/npc/beard_right");
+            #endregion
+
+            #region cat
             catTextureIdle = content.Load<Texture2D>("Characters/friend/friend_idle");
             catTextureRunLeft = content.Load<Texture2D>("Characters/friend/friend_run_left");
             catTextureRunRight = content.Load<Texture2D>("Characters/friend/friend_run_right");
+            #endregion
 
+            #region player
             mcIdleTexture = content.Load<Texture2D>("Characters/MC/idle_down");
             mcWalkDownTexture = content.Load<Texture2D>("Characters/MC/walk_down");
             mcWalkLeftDownTexture = content.Load<Texture2D>("Characters/MC/walk_left_down");
@@ -116,18 +175,21 @@ namespace Project.Classes.Scenes
             mcWalkRightDownTexture = content.Load<Texture2D>("Characters/MC/walk_right_down");
             mcWalkRightUpTexture = content.Load<Texture2D>("Characters/MC/walk_right_up");
             mcWalkUpTexture = content.Load<Texture2D>("Characters/MC/walk_up");
+            #endregion
+
+            #region itemsAndBackground
+            tileTexture = content.Load<Texture2D>("Background/planks_H_3");
 
             longBookshelveTexture = content.Load<Texture2D>("Background/longFilledBookshelve");
             shortBookshelveTexture = content.Load<Texture2D>("Background/shortFilledBookshelve");
             bookTexture = content.Load<Texture2D>("Items/bookClosed");
 
             font = content.Load<SpriteFont>("LevelFont");
-            
-            
+            #endregion
+
             SetAnimations();
 
             InitializeGameObjects();
-
 
             Camera.GetTheCamera().Initialize(map, player);
 
@@ -213,13 +275,17 @@ namespace Project.Classes.Scenes
 
             booksToBeDeleted = new List<Book>();
             bookSpawnManager = new BookSpawnManager();
-            books = bookSpawnManager.SpawnBooks(bookTexture,bookshelves);
+            books = bookSpawnManager.SpawnBooks(bookTexture, bookshelves);
 
             // initialize NPC styles
             npcStyles = new List<INPCStyle>()
-            { //TODO: add all them styles here after loading their textures AND write new animation strategy
+            { 
                 new NPCStyle(joggingIdleTexture,joggingUpTexture,joggingLeftTexture,joggingRightTexture,joggingDownTexture),
-              //  new NPCStyle(dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture)
+                new NPCStyle(jeansIdleTexture, jeansUpTexture, jeansLeftTexture, jeansRightTexture, jeansDownTexture),
+                new NPCStyle(skirtIdleTexture, skirtUpTexture, skirtLeftTexture, skirtRightTexture, skirtDownTexture),
+                new NPCStyle(hatIdleTexture, hatUpTexture, hatLeftTexture, hatRightTexture, hatDownTexture),
+                new NPCStyle(dressIdleTexture, dressUpTexture, dressLeftTexture, dressRightTexture, dressDownTexture),
+                new NPCStyle(beardIdleTexture, beardUpTexture, beardLeftTexture, beardRightTexture, beardDownTexture),
             };
 
             // Initialize npc factories
