@@ -15,6 +15,9 @@ namespace Project.Classes.Visuals.Animations
             {
                 animationManager.SetAnimation(AnimationState.Walk_Right);
 
+            } else
+            {
+                animationManager.SetAnimation(AnimationState.Idle);
             }
         }
     }

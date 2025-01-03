@@ -52,7 +52,7 @@ namespace Project.Classes.Scenes
 
             friend = new MainCharacter(animationManagerMain, 2f, new Vector2(Globals.windowSizeX/2, Globals.windowSizeY/2), new Vector2(2,2), obstacels);
             
-            title = new Title(font, "Paws and pages", new Vector2(Globals.windowSizeX/2-200, Globals.windowSizeY/3));
+            title = new Title(font, "Paws and Pages", new Vector2(Globals.windowSizeX/2-220, Globals.windowSizeY/3));
 
             drawables = [title, friend];
 

@@ -27,7 +27,7 @@
 - [ ] Game over scherm wanneer verslagen/gewonnen
 - [x] Basic physics: collisions met vast objecten en enemies, acceleratie en momentum van held
 - [ ] Basic AI: elk type enemy heeft een andere AI
-- [ ] Sprites en tileset/background
+- [x] Sprites en tileset/background
 - [ ] Minstens 2 design patters
 - [ ] Toepassen van SOLID: extra folders + drie bewijzen
 - [ ] Minstens twee uitgewerkte extra's
