@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace Project.Classes.Animations
+namespace Project.Classes.Visuals.Animations
 {
     internal class FrameExtractor
     {

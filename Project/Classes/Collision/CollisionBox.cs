@@ -13,7 +13,7 @@ namespace Project.Classes.Collision
 
         //public Texture2D texture; // Placeholder texture for drawing
 
-        public CollisionBox(Vector2 position, Vector2 size )
+        public CollisionBox(Vector2 position, Vector2 size)
         {
             Position = position;
             Size = size;
@@ -40,10 +40,10 @@ namespace Project.Classes.Collision
         public void Draw(SpriteBatch spriteBatch)
         {
             // spriteBatch.Draw(texture, Rectangle, Color.Red); // sprite with red overlay
-            Texture2D border = makeBordersCollisionBox(spriteBatch, (int)Rectangle.Width, (int)Rectangle.Height);
+            Texture2D border = makeBordersCollisionBox(spriteBatch, Rectangle.Width, Rectangle.Height);
             spriteBatch.Draw(border, Rectangle, Color.White);
- 
-      
+
+
         }
 
         /// <summary>
@@ -75,11 +75,11 @@ namespace Project.Classes.Collision
             {
                 data[i] = Color.Violet;
             }
-            for (int i = data.Length - width -1; i < data.Length; i++)
+            for (int i = data.Length - width - 1; i < data.Length; i++)
             {
                 data[i] = Color.Violet;
             }
-            for (int i = width; i < data.Length; i+= width)
+            for (int i = width; i < data.Length; i += width)
             {
                 data[i - 1] = Color.Violet;
                 data[i] = Color.Violet;

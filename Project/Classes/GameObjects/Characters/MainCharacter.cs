@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Project.Classes.Input;
 using Project.Classes.Movement;
+using Project.Classes.Visuals.Animations;
 using Project.Classes.Collision;
-using Project.Classes.Animations;
 
 namespace Project.Classes.GameObjects.Characters
 {

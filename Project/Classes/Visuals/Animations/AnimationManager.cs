@@ -2,37 +2,37 @@
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Project.Classes.Visuals;
 
-namespace Project.Classes.Animations
+namespace Project.Classes.Visuals.Animations
 {
+    public enum AnimationState { Idle, Walk_Up, Walk_Left, Walk_Right, Walk_Down } // TODO: where oh where should I put this
+
+
     internal class AnimationManager
     {
         private Dictionary<string, Animation> animations;
         private Animation currentAnimation;
-
-
 
         public AnimationManager()
         {
             animations = new Dictionary<string, Animation>();
         }
 
-        public void AddAnimation(string key, Animation animation)
+        public void AddAnimation(AnimationState key, Animation animation)
         {
-            animations[key] = animation;
+            animations[key.ToString()] = animation;
             if (currentAnimation == null)
                 currentAnimation = animation;
         }
-        
+
         public void SetAnimation(string animationKey)
         {
-            if(animations.TryGetValue(animationKey, out var animation))
+            if (animations.TryGetValue(animationKey, out var animation))
             {
                 currentAnimation = animation;
             }
         }
-      
+
         public void Update(GameTime gameTime)
         {
             currentAnimation.Update(gameTime);

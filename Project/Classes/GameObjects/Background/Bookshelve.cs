@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Project.Classes.Collision;
 using Project.Classes.Visuals;
+using Project.Classes.Collision;
 
 namespace Project.Classes.GameObjects.Background
 {

@@ -7,6 +7,7 @@ using Project.Classes.Collision;
 using Project.Classes.GameObjects.Characters;
 using Project.Classes.UI;
 using Project.Classes.Visuals;
+using Project.Classes.Visuals.Animations;
 using System.Collections.Generic;
 
 namespace Project.Classes.Scenes
@@ -41,17 +42,17 @@ namespace Project.Classes.Scenes
         {
             catTextureIdle = content.Load<Texture2D>("Characters/friend/friend_idle");
 
-            font = content.Load<SpriteFont>("MenuFont");
+            font = content.Load<SpriteFont>("TitleFont");
 
             animationFactoryMain = new AnimationFactory();
             animationManagerMain = new AnimationManager();
             var idleCat = animationFactoryMain.CreateAnimationFromSpriteSheet(catTextureIdle, 8, 1);
-            animationManagerMain.AddAnimation("Idle", idleCat);
+            animationManagerMain.AddAnimation(AnimationState.Idle, idleCat);
 
 
             friend = new MainCharacter(animationManagerMain, 2f, new Vector2(Globals.windowSizeX/2, Globals.windowSizeY/2), new Vector2(2,2), obstacels);
             
-            title = new Title(font, "The Library", new Vector2(Globals.windowSizeX/2-100, Globals.windowSizeY/3));
+            title = new Title(font, "Paws and pages", new Vector2(Globals.windowSizeX/2-200, Globals.windowSizeY/3));
 
             drawables = [title, friend];
 

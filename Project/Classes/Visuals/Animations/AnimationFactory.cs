@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Project.Classes.Animations;
 
-namespace Project.Classes.Visuals
+namespace Project.Classes.Visuals.Animations
 {
     internal class AnimationFactory
     {

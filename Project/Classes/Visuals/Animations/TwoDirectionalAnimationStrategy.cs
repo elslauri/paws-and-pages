@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Project.Classes.Animations;
 
-namespace Project.Classes.Visuals
+namespace Project.Classes.Visuals.Animations
 {
     internal class TwoDirectionalAnimationStrategy : IAnimationStrategy
     {

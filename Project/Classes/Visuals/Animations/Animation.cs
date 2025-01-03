@@ -1,13 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Project.Classes.Animations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Project.Classes.Visuals
+namespace Project.Classes.Visuals.Animations
 {
     internal class Animation
     {
@@ -33,7 +28,7 @@ namespace Project.Classes.Visuals
 
             secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
 
-           // CurrentFrame = frames[counter];
+            // CurrentFrame = frames[counter];
 
             if (secondCounter >= 1d / Fps)
             {
@@ -42,7 +37,7 @@ namespace Project.Classes.Visuals
                 {
                     counter = 0;
                 }
-              //  CurrentFrame = frames[counter];
+                //  CurrentFrame = frames[counter];
                 secondCounter = 0;
 
             }

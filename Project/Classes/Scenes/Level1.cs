@@ -5,9 +5,11 @@ using Project.Classes.Animations;
 using Project.Classes.Collision;
 using Project.Classes.GameObjects.Background;
 using Project.Classes.GameObjects.Characters;
+using Project.Classes.GameObjects.Characters.NPC;
 using Project.Classes.GameObjects.Items;
 using Project.Classes.UI;
 using Project.Classes.Visuals;
+using Project.Classes.Visuals.Animations;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -24,7 +26,8 @@ namespace Project.Classes.Scenes
 
         // TODO: move loading textures
         // characters
-        private Texture2D npc_basicMan_Texture;
+        private Texture2D joggingIdleTexture;
+        private Texture2D dressIdleTexture;
         private NPC npcStill;
         private NPC npcWalk;
         private NPC npcRun;
@@ -51,6 +54,7 @@ namespace Project.Classes.Scenes
         private NPCFactory calmNPCFactory;
         private NPCFactory walkingNPCFactory;
         private NPCFactory panicNPCFactory;
+        private List<INPCStyle> npcStyles;
 
         private BookshelveFactory bookshelveFactory;
         private Texture2D bookTexture;
@@ -77,18 +81,19 @@ namespace Project.Classes.Scenes
         public override void LoadContent()
         {
             tileTexture = content.Load<Texture2D>("Background/planks_H_3");
-            npc_basicMan_Texture = content.Load<Texture2D>("npc_basicMan_walkF_fluid");
+            joggingIdleTexture = content.Load<Texture2D>("Characters/npc/jogging_idle");
+            dressIdleTexture = content.Load<Texture2D>("Characters/npc/dress_idle");
             catTextureIdle = content.Load<Texture2D>("Characters/friend/friend_idle");
             catTextureRunLeft = content.Load<Texture2D>("Characters/friend/friend_run_left");
             catTextureRunRight = content.Load<Texture2D>("Characters/friend/friend_run_right");
 
-            mcTextureIdleD = content.Load<Texture2D>("Characters/MC/MC_Idle_Down");
-            mcTextureWalkF = content.Load<Texture2D>("Characters/MC/MC_walk_Down");
+            mcTextureIdleD = content.Load<Texture2D>("Characters/MC/idle_down");
+            mcTextureWalkF = content.Load<Texture2D>("Characters/MC/walk_down");
             longBookshelveTexture = content.Load<Texture2D>("Background/longFilledBookshelve");
             shortBookshelveTexture = content.Load<Texture2D>("Background/shortFilledBookshelve");
             bookTexture = content.Load<Texture2D>("Items/bookClosed");
 
-            font = content.Load<SpriteFont>("MenuFont");
+            font = content.Load<SpriteFont>("LevelFont");
             
             
             GetAnimations();
@@ -132,18 +137,18 @@ namespace Project.Classes.Scenes
             animationMainCharManager = new AnimationManager();
             var idleMC = animationFactory.CreateAnimationFromSpriteSheet(mcTextureIdleD, 8, 1);
             var runMC = animationFactory.CreateAnimationFromSpriteSheet(mcTextureWalkF, 8, 1);
-            animationMainCharManager.AddAnimation("Idle", idleMC);
-            animationMainCharManager.AddAnimation("Run", runMC);
+            animationMainCharManager.AddAnimation(AnimationState.Idle, idleMC);
+            animationMainCharManager.AddAnimation(AnimationState.Walk_Down, runMC);
             animationCatManager = new AnimationManager();
             var idleCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureIdle, 8, 1);
             var runCat_left = animationFactory.CreateAnimationFromSpriteSheet(catTextureRunLeft, 6, 1);
             var runCat_right = animationFactory.CreateAnimationFromSpriteSheet(catTextureRunRight, 6, 1);
-            animationCatManager.AddAnimation("Idle", idleCat);
-            animationCatManager.AddAnimation("Run_left", runCat_left);
-            animationCatManager.AddAnimation("Run_right", runCat_right);
+            animationCatManager.AddAnimation(AnimationState.Idle, idleCat);
+            animationCatManager.AddAnimation(AnimationState.Walk_Left, runCat_left);
+            animationCatManager.AddAnimation(AnimationState.Walk_Right, runCat_right);
             animationNPCManager = new AnimationManager();
-            var idleNpc = animationFactory.CreateAnimationFromSpriteSheet(npc_basicMan_Texture, 7, 1);
-            animationNPCManager.AddAnimation("Idle", idleNpc);
+            var idleNpc = animationFactory.CreateAnimationFromSpriteSheet(joggingIdleTexture, 8, 1);
+            animationNPCManager.AddAnimation(AnimationState.Idle, idleNpc);
 
         }
         private void InitializeGameObjects()
@@ -175,15 +180,22 @@ namespace Project.Classes.Scenes
                     books.Add(new Book(bookTexture, new Vector2(0 + i, j)));
                 }
             }
+            // initialize NPC styles
+            npcStyles = new List<INPCStyle>()
+            { //TODO: add all them styles here after loading their textures
+                new NPCStyle(joggingIdleTexture,joggingIdleTexture,joggingIdleTexture,joggingIdleTexture,joggingIdleTexture),
+                new NPCStyle(dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture)
+            };
 
-            // Initialize characters
-            calmNPCFactory = new NPCFactory(3f, new Vector2(0, 0), obstacles);
+            // Initialize npc factories
+            calmNPCFactory = new NPCFactory(3f, new Vector2(0, 0), obstacles, animationFactory, npcStyles);
+            walkingNPCFactory = new NPCFactory(3f, new Vector2(1, 1), obstacles, animationFactory, npcStyles);
+            panicNPCFactory = new NPCFactory(3f, new Vector2(3, 3), obstacles, animationFactory, npcStyles);
+
+            // initialize characters
             npcStill = calmNPCFactory.CreateNPC(animationNPCManager, new Vector2(150, 100));
-            walkingNPCFactory = new NPCFactory(3f, new Vector2(1, 1), obstacles);
-            npcWalk = walkingNPCFactory.CreateNPC(animationNPCManager, new Vector2(200, 100));
-            panicNPCFactory = new NPCFactory(3f, new Vector2(3, 3), obstacles);
-            npcRun = panicNPCFactory.CreateNPC(animationNPCManager, new Vector2(250, 100));
-
+            npcWalk = walkingNPCFactory.CreateRandomNPC(new Vector2(200, 100));
+            npcRun = panicNPCFactory.CreateRandomNPC(new Vector2(250, 100));
 
             player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles);
             cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles);
