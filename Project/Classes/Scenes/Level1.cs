@@ -49,7 +49,7 @@ namespace Project.Classes.Scenes
         private AnimationFactory animationFactory;
         private AnimationManager animationMainCharManager;
         private AnimationManager animationCatManager;
-        private AnimationManager animationNPCManager;
+//        private AnimationManager animationNPCManager;
 
         private NPCFactory calmNPCFactory;
         private NPCFactory walkingNPCFactory;
@@ -58,6 +58,7 @@ namespace Project.Classes.Scenes
 
         private BookshelveFactory bookshelveFactory;
         private Texture2D bookTexture;
+        private BookSpawnManager bookSpawnManager;
 
         private List<Book> books;
         private List<Book> booksToBeDeleted;
@@ -96,7 +97,7 @@ namespace Project.Classes.Scenes
             font = content.Load<SpriteFont>("LevelFont");
             
             
-            GetAnimations();
+            SetAnimations();
 
             InitializeGameObjects();
 
@@ -131,7 +132,7 @@ namespace Project.Classes.Scenes
             drawingManager.Draw(drawables, true);
         }
 
-        private void GetAnimations()
+        private void SetAnimations()
         {
             animationFactory = new AnimationFactory();
             animationMainCharManager = new AnimationManager();
@@ -146,9 +147,6 @@ namespace Project.Classes.Scenes
             animationCatManager.AddAnimation(AnimationState.Idle, idleCat);
             animationCatManager.AddAnimation(AnimationState.Walk_Left, runCat_left);
             animationCatManager.AddAnimation(AnimationState.Walk_Right, runCat_right);
-            animationNPCManager = new AnimationManager();
-            var idleNpc = animationFactory.CreateAnimationFromSpriteSheet(joggingIdleTexture, 8, 1);
-            animationNPCManager.AddAnimation(AnimationState.Idle, idleNpc);
 
         }
         private void InitializeGameObjects()
@@ -165,24 +163,19 @@ namespace Project.Classes.Scenes
                { 1,0,0,1,1,0,1,1,0,0,1 },
                { 1,1,1,1,0,1,0,1,1,1,1 },
                { 1,1,1,1,0,1,1,1,0,1,1 }
-                };  // 7,11 // TODO: move
+                };  // 7,11 // TODO: move to members
             bookshelveFactory = new BookshelveFactory(longBookshelveTexture);
             bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50, 250), floorPlan, 192, 200);
 
             obstacles = [.. bookshelves];
 
             booksToBeDeleted = new List<Book>();
-            books = new List<Book>();
-            for (int j = 530; j < 630; j += 100)
-            {
-                for (int i = 130; i <= 1300; i += 192)
-                {
-                    books.Add(new Book(bookTexture, new Vector2(0 + i, j)));
-                }
-            }
+            bookSpawnManager = new BookSpawnManager();
+            books = bookSpawnManager.SpawnBooks(bookTexture,bookshelves);
+
             // initialize NPC styles
             npcStyles = new List<INPCStyle>()
-            { //TODO: add all them styles here after loading their textures
+            { //TODO: add all them styles here after loading their textures AND write new animation strategy
                 new NPCStyle(joggingIdleTexture,joggingIdleTexture,joggingIdleTexture,joggingIdleTexture,joggingIdleTexture),
                 new NPCStyle(dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture, dressIdleTexture)
             };
@@ -193,7 +186,7 @@ namespace Project.Classes.Scenes
             panicNPCFactory = new NPCFactory(3f, new Vector2(3, 3), obstacles, animationFactory, npcStyles);
 
             // initialize characters
-            npcStill = calmNPCFactory.CreateNPC(animationNPCManager, new Vector2(150, 100));
+            npcStill = calmNPCFactory.CreateRandomNPC(new Vector2(150, 100));
             npcWalk = walkingNPCFactory.CreateRandomNPC(new Vector2(200, 100));
             npcRun = panicNPCFactory.CreateRandomNPC(new Vector2(250, 100));
 
