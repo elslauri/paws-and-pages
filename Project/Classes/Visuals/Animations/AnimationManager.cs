@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Project.Classes.Visuals.Animations
 {
-    public enum AnimationState { Idle, Walk_Up, Walk_Left, Walk_Right, Walk_Down } // TODO: where oh where should I put this
+    public enum AnimationState { Idle, Walk_Up, Walk_Left, Walk_Right, Walk_Down, Walk_LeftUp, Walk_LeftDown, Walk_RightUp, Walk_RightDown } 
 
 
     internal class AnimationManager

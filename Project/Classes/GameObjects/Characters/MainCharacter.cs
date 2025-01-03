@@ -5,6 +5,7 @@ using Project.Classes.Input;
 using Project.Classes.Movement;
 using Project.Classes.Visuals.Animations;
 using Project.Classes.Collision;
+using System.Diagnostics;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -26,7 +27,7 @@ namespace Project.Classes.GameObjects.Characters
 
 
         public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles) :
-            base(animationManager, scale, startPos, speed, obstacles)
+            base(animationManager, scale, startPos, speed, obstacles, new SixDirectionalAnimationStrategy())
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();
@@ -42,6 +43,7 @@ namespace Project.Classes.GameObjects.Characters
         private void Move()
         {
             movementManager.MoveWithKeys(this);
+            Debug.WriteLine("speed of mc: "+Speed);
         }
         public delegate void ObserveBooks(int bookCount);
         public event ObserveBooks OnPickUp;

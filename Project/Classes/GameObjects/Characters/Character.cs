@@ -66,21 +66,11 @@ namespace Project.Classes.GameObjects.Characters
 
         public void Update(GameTime gameTime)
         {
-            UpdateState();
             animationStrategy.SetAnimation(animationManager, currentState, Speed);
 
             animationManager.Update(gameTime);
             ColBox.Update(gameTime, Position );
 
-        }
-
-        public void UpdateState()
-        {
-            currentState = IsMoving() ? AnimationState.Walk_Down : AnimationState.Idle;
-        }
-         private bool IsMoving()
-        {
-            return Speed.X != 0 || Speed.Y != 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)

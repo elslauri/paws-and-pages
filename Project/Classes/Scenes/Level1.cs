@@ -24,16 +24,22 @@ namespace Project.Classes.Scenes
 
         private DrawingManager drawingManager;
 
-        // TODO: move loading textures
-        // characters
+        // npc
         private Texture2D joggingIdleTexture;
         private Texture2D dressIdleTexture;
         private NPC npcStill;
         private NPC npcWalk;
         private NPC npcRun;
-        private Texture2D mcTextureIdleD;
-        private Texture2D mcTextureWalkF;
+        //mc
+        private Texture2D mcIdleTexture;
+        private Texture2D mcWalkDownTexture;
+        private Texture2D mcWalkLeftDownTexture;
+        private Texture2D mcWalkLeftUpTexture;
+        private Texture2D mcWalkRightDownTexture;
+        private Texture2D mcWalkRightUpTexture;
+        private Texture2D mcWalkUpTexture;
         private MainCharacter player;
+        //cat
         private Texture2D catTextureIdle;
         private Texture2D catTextureRunLeft;
         private Texture2D catTextureRunRight;
@@ -88,8 +94,14 @@ namespace Project.Classes.Scenes
             catTextureRunLeft = content.Load<Texture2D>("Characters/friend/friend_run_left");
             catTextureRunRight = content.Load<Texture2D>("Characters/friend/friend_run_right");
 
-            mcTextureIdleD = content.Load<Texture2D>("Characters/MC/idle_down");
-            mcTextureWalkF = content.Load<Texture2D>("Characters/MC/walk_down");
+            mcIdleTexture = content.Load<Texture2D>("Characters/MC/idle_down");
+            mcWalkDownTexture = content.Load<Texture2D>("Characters/MC/walk_down");
+            mcWalkLeftDownTexture = content.Load<Texture2D>("Characters/MC/walk_left_down");
+            mcWalkLeftUpTexture = content.Load<Texture2D>("Characters/MC/walk_left_up");
+            mcWalkRightDownTexture = content.Load<Texture2D>("Characters/MC/walk_right_down");
+            mcWalkRightUpTexture = content.Load<Texture2D>("Characters/MC/walk_right_up");
+            mcWalkUpTexture = content.Load<Texture2D>("Characters/MC/walk_up");
+
             longBookshelveTexture = content.Load<Texture2D>("Background/longFilledBookshelve");
             shortBookshelveTexture = content.Load<Texture2D>("Background/shortFilledBookshelve");
             bookTexture = content.Load<Texture2D>("Items/bookClosed");
@@ -135,11 +147,26 @@ namespace Project.Classes.Scenes
         private void SetAnimations()
         {
             animationFactory = new AnimationFactory();
+
             animationMainCharManager = new AnimationManager();
-            var idleMC = animationFactory.CreateAnimationFromSpriteSheet(mcTextureIdleD, 8, 1);
-            var runMC = animationFactory.CreateAnimationFromSpriteSheet(mcTextureWalkF, 8, 1);
-            animationMainCharManager.AddAnimation(AnimationState.Idle, idleMC);
-            animationMainCharManager.AddAnimation(AnimationState.Walk_Down, runMC);
+            // create animations from spritesheet
+            var mcIdle = animationFactory.CreateAnimationFromSpriteSheet(mcIdleTexture, 8, 1);
+            var mcWalkDown = animationFactory.CreateAnimationFromSpriteSheet(mcWalkDownTexture, 8, 1);
+            var mcWalkLeftDown = animationFactory.CreateAnimationFromSpriteSheet(mcWalkLeftDownTexture, 8, 1);
+            var mcWalkLeftUp = animationFactory.CreateAnimationFromSpriteSheet(mcWalkLeftUpTexture, 8, 1);
+            var mcWalkRightDown = animationFactory.CreateAnimationFromSpriteSheet(mcWalkRightDownTexture, 8, 1);
+            var mcWalkRightUp = animationFactory.CreateAnimationFromSpriteSheet(mcWalkRightUpTexture, 8, 1);
+            var mcWalkUp = animationFactory.CreateAnimationFromSpriteSheet(mcWalkDownTexture, 8, 1);
+            // add animations to their corresponding animationState
+            animationMainCharManager.AddAnimation(AnimationState.Idle, mcIdle);
+            animationMainCharManager.AddAnimation(AnimationState.Walk_Down, mcWalkDown);
+            animationMainCharManager.AddAnimation(AnimationState.Walk_LeftDown, mcWalkLeftDown);
+            animationMainCharManager.AddAnimation(AnimationState.Walk_LeftUp, mcWalkLeftUp);
+            animationMainCharManager.AddAnimation(AnimationState.Walk_RightDown, mcWalkRightDown);
+            animationMainCharManager.AddAnimation(AnimationState.Walk_RightUp, mcWalkRightUp);
+            animationMainCharManager.AddAnimation(AnimationState.Walk_Up, mcWalkUp);
+
+
             animationCatManager = new AnimationManager();
             var idleCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureIdle, 8, 1);
             var runCat_left = animationFactory.CreateAnimationFromSpriteSheet(catTextureRunLeft, 6, 1);
