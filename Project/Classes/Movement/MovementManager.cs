@@ -50,7 +50,6 @@ namespace Project.Classes.Movement
         public void MoveWithKeys(Character character)
         {
             var direction = character.InputReader.ReadInput();
-            Debug.WriteLine(character.Position);
             float acceleration = 0.3f;
             float friction = 0.7f;
 
@@ -96,7 +95,7 @@ namespace Project.Classes.Movement
             Vector2 direction = (target.Position - offset) - character.Position;
             float distance = direction.Length();
 
-            if (distance < 30)
+            if (distance < 20)
             {
                 character.Speed *= 0.9f;
                 if (character.Speed.Length() < 0.1f)

@@ -58,7 +58,7 @@ namespace Project.Classes.GameObjects.Characters
                 Books -= order.BooksOrdered;
                 order.DeliverBooks(order.BooksOrdered);
             }
-            else
+            else if(Books > 0)
             {
                 order.DeliverBooks(Books);
                 Books = 0;

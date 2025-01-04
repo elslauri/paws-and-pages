@@ -52,7 +52,7 @@ namespace Project.Classes.Scenes
                  };
         private List<(Vector2 position, NpcMoveType moveType)> npcDataEasy = new List<(Vector2 position, NpcMoveType moveType)>
         {
-            (new Vector2(150, 100), NpcMoveType.Calm),
+            (new Vector2(900, 100), NpcMoveType.Calm),
             (new Vector2(550, 700), NpcMoveType.Calm),
             (new Vector2(850, 350), NpcMoveType.Walk),
             (new Vector2(1450, 850), NpcMoveType.Walk),

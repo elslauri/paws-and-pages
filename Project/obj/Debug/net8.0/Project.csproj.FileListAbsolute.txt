@@ -119,5 +119,4 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\levelMusic
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\levelMusic.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\menuMusic.ogg
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\menuMusic.xnb
-C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\orderComplete.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\pickUpBook.xnb

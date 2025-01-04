@@ -66,7 +66,7 @@ namespace Project.Classes.Scenes.Screens
 
             string message = "Paws and Pages";
             title = new Title(font, message, new Vector2(Globals.WindowSizeX / 2 - font.MeasureString(message).X / 2, Globals.WindowSizeY / 3));
-            message = "Press 1 for level 1"+Environment.NewLine+"Press 2 for level 2";
+            message = "Press 1 for level 1" + Environment.NewLine + "Press 2 for level 2" + Environment.NewLine + "Press P for menu";
             routes = new Title(smallFont, message, new Vector2(Globals.WindowSizeX / 2 - smallFont.MeasureString(message).X / 2, Globals.WindowSizeY * 2 / 3));
 
             drawables = [title,routes , friend];
