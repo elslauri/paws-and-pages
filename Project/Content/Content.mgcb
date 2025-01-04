@@ -646,6 +646,12 @@
 /processorParam:TextureFormat=Compressed
 /build:OrderFont.spritefont
 
+#begin pickUpBook.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pickUpBook.wav
+
 #begin TitleFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

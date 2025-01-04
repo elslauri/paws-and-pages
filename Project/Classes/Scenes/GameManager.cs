@@ -76,7 +76,7 @@ namespace Project.Classes.Scenes
         {
             sceneManager = scene;
             musicManager = sound;
-
+            
         }
 
         public void Initialize(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)

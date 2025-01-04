@@ -13,9 +13,10 @@ using Project.Classes.Visuals;
 using System.Collections.Generic;
 using Project.Classes.Visualize.Animations.AnimationStrategies;
 using Project.Classes.Scenes.Checkers;
-using Project.Classes.Scenes.Levels;
+using Project.Classes.Sound;
+using Microsoft.Xna.Framework.Audio;
 
-namespace Project.Classes.Scenes
+namespace Project.Classes.Scenes.Levels
 {
     internal class Level : Scene
     {
@@ -114,11 +115,15 @@ namespace Project.Classes.Scenes
         protected int maxBooksPerOrder;
         #endregion
 
-        #region ui
+        #region soundAndUI
         protected UIBookCount bookCount;
         protected SpriteFont font;
         protected SpriteFont orderFont;
         protected Texture2D bubbleTexture;
+
+        protected SoundEffectManager soundEffectManager;
+        protected SoundEffect pickUpBook;
+        
         #endregion
 
         #endregion
@@ -126,10 +131,10 @@ namespace Project.Classes.Scenes
         public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, LevelConfiguration config)
             : base(graphics, spriteBatch, content, gameManager)
         {
-            this.floorPlan = config.FloorPlan;
-            this.minBooksPerOrder = config.MinBooksPerOrder;
-            this.maxBooksPerOrder = config.MaxBooksPerOrder;
-            this.npcData = config.NpcData;
+            floorPlan = config.FloorPlan;
+            minBooksPerOrder = config.MinBooksPerOrder;
+            maxBooksPerOrder = config.MaxBooksPerOrder;
+            npcData = config.NpcData;
         }
 
 
@@ -229,10 +234,12 @@ namespace Project.Classes.Scenes
 
             #endregion
 
-            #region UI
+            #region soundAndUI
             font = content.Load<SpriteFont>("LevelFont");
             bubbleTexture = content.Load<Texture2D>("UI/roundedBox");
             orderFont = content.Load<SpriteFont>("OrderFont");
+
+            pickUpBook = content.Load<SoundEffect>("pickUpBook");
             #endregion
         }
         protected virtual void SetAnimations()
@@ -298,6 +305,7 @@ namespace Project.Classes.Scenes
 
             drawables = [map, .. bookshelves, cat, player, bookCount];
 
+            soundEffectManager = new SoundEffectManager(player, pickUpBook);
         }
         private void InitializeNpcStyles()
         {
