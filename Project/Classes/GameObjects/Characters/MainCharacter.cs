@@ -5,6 +5,7 @@ using Project.Classes.Movement;
 using Project.Classes.Visuals.Animations;
 using Project.Classes.Collision;
 using Project.Classes.GameObjects.Items;
+using Project.Classes.Visualize.Animations.AnimationStrategies;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -23,8 +24,8 @@ namespace Project.Classes.GameObjects.Characters
         }
 
 
-        public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, List<ICollidable> obstacles) :
-            base(animationManager, scale, startPos, speed, obstacles, new SixDirectionalAnimationStrategy())
+        public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, IAnimationStrategy animationStrategy, List<ICollidable> obstacles = null) :
+            base(animationManager, scale, startPos, speed, obstacles, animationStrategy)
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();

@@ -9,12 +9,14 @@ namespace Project.Classes.Scenes
         protected GraphicsDeviceManager graphics;
         protected SpriteBatch spriteBatch;
         protected ContentManager content;
+        protected GameManager gameManager;
 
-        public Scene(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
+        public Scene(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager)
         {
             this.graphics = graphics;
             this.spriteBatch = spriteBatch;
             this.content = content;
+            this.gameManager = gameManager;
         }
 
         public abstract void Initialize();

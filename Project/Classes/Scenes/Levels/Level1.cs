@@ -8,6 +8,7 @@ using Project.Classes.GameObjects.Characters;
 using Project.Classes.GameObjects.Characters.NPC;
 using Project.Classes.GameObjects.Items;
 using Project.Classes.UI;
+using Project.Classes.Visualize.Animations.AnimationStrategies;
 using Project.Classes.Visuals;
 using Project.Classes.Visuals.Animations;
 using System;
@@ -226,9 +227,9 @@ namespace Project.Classes.Scenes.Levels
             CheckBookPickUp();
             CheckBookDelivery();
             drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, .. orders, cat, player, bookCount];
-            
-            
-            
+
+
+
             if (levelCompletionChecker.IsLevelComplete(orders))
             {
                 gameManager.OnLevelComplete();
@@ -324,7 +325,7 @@ namespace Project.Classes.Scenes.Levels
             orders = orderManager.GenerateOrders(1, 1); // TODO: this is levelspecific
             levelCompletionChecker = new LevelCompletionChecker();
 
-            player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles);
+            player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), new SixDirectionalAnimationStrategy(), obstacles);
             cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles);
 
             // UI
@@ -369,8 +370,8 @@ namespace Project.Classes.Scenes.Levels
         {
             Bubble congrats = new Bubble(bubbleTexture, congratsFont);
             congrats.SetPosition(player.Position);
-            congrats.SetMessage("Level complete"+Environment.NewLine+"Press p to continue...");
-            drawables.Add(congrats); 
+            congrats.SetMessage("Level complete" + Environment.NewLine + "Press p to continue...");
+            drawables.Add(congrats);
         }
     }
 }

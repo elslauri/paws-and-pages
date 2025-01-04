@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project.Classes.Scenes.Levels;
+using Project.Classes.Scenes.Screens;
 using System.Diagnostics;
 
 
@@ -13,6 +14,7 @@ namespace Project.Classes.Scenes
     {
         private SceneManager sceneManager;
         private Scene mainScene;
+        private Scene levelCompleteScene;
         private Scene level1;
 
 
@@ -24,6 +26,7 @@ namespace Project.Classes.Scenes
         public void Initialize(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
         {
             mainScene = new MainScreen(graphics, spriteBatch, content, this);
+            levelCompleteScene = new LevelCompleteScreen(graphics, spriteBatch, content, this);
             level1 = new Level1(graphics, spriteBatch, content, this);
             
 
@@ -33,9 +36,7 @@ namespace Project.Classes.Scenes
         public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.P))
-                ChangeScene(mainScene);
-            Debug.WriteLine($"mainScene is null: {mainScene == null}");
-            Debug.WriteLine($"level1 is null: {level1 == null}");
+                ChangeScene(levelCompleteScene);
             sceneManager.Update(gameTime);
         }
 
@@ -51,7 +52,7 @@ namespace Project.Classes.Scenes
 
         public void OnLevelComplete()
         {
-            ChangeScene(mainScene);
+            ChangeScene(levelCompleteScene);
         }
     }
 }

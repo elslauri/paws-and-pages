@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Collision;
 using Project.Classes.Input;
 using Project.Classes.Movement;
+using Project.Classes.Visualize.Animations.AnimationStrategies;
 using Project.Classes.Visuals;
 using Project.Classes.Visuals.Animations;
 using System.Collections.Generic;

@@ -1,18 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Project.Classes.Scenes
 {
     internal class Level : Scene
     {
-        protected GameManager gameManager;
 
         public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager) 
-            : base(graphics, spriteBatch, content)
+            : base(graphics, spriteBatch, content, gameManager)
         {
-            this.gameManager = gameManager;
         }
 
 
