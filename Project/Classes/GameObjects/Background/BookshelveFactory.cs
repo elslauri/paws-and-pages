@@ -39,7 +39,7 @@ namespace Project.Classes.GameObjects.Background
                         Vector2 pos = new Vector2(startPosition.X + spacingX * i, startPosition.Y + spacingY * j);
                         shelves.Add(new LongFullBookshelve(texture, pos));
                     }
-                    // TODO: add more shelve here 
+                    // TODO: add more kinds of shelves here 
                 }
             }
             return shelves;

@@ -12,6 +12,7 @@ using Project.Classes.Visuals.Animations;
 using Project.Classes.Visuals;
 using System.Collections.Generic;
 using Project.Classes.Visualize.Animations.AnimationStrategies;
+using System.Diagnostics;
 
 namespace Project.Classes.Scenes
 {
@@ -122,7 +123,7 @@ namespace Project.Classes.Scenes
 
         #endregion
 
-        public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int [,] floorPlan) 
+        public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int[,] floorPlan)
             : base(graphics, spriteBatch, content, gameManager)
         {
             this.floorPlan = floorPlan;
@@ -276,14 +277,14 @@ namespace Project.Classes.Scenes
 
             books = new List<Book>();
             booksToBeDeleted = new List<Book>();
-            
-            player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), new SixDirectionalAnimationStrategy(), obstacles);
-            cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles);
+
+            player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(2, 2), 4f, new SixDirectionalAnimationStrategy(), obstacles);
+            cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), 2f, player, new TwoDirectionalAnimationStrategy() ,obstacles);
 
             InitializeNpcStyles();
-            calmNPCFactory = new NPCFactory(3f, new Vector2(0, 0), obstacles, animationFactory, npcStyles);
-            walkingNPCFactory = new NPCFactory(3f, new Vector2(1, 1), obstacles, animationFactory, npcStyles);
-            panicNPCFactory = new NPCFactory(3f, new Vector2(3, 3), obstacles, animationFactory, npcStyles);
+            calmNPCFactory = new NPCFactory(3f, new Vector2(0, 0), 0f, obstacles, animationFactory, npcStyles);
+            walkingNPCFactory = new NPCFactory(3f, new Vector2(-0.5f, 0.5f), 1f, obstacles, animationFactory, npcStyles);
+            panicNPCFactory = new NPCFactory(3f, new Vector2(0.5f, 0.5f), 3f, obstacles, animationFactory, npcStyles);
             npcs = new List<NPC>();
 
             bookCount = new UIBookCount(font, new Vector2(10, 10), player);
@@ -308,7 +309,7 @@ namespace Project.Classes.Scenes
         {
             cat.Update(gameTime);
             player.Update(gameTime);
-            if (orders.Count > 0 ) // TODO: check if ok
+            if (orders.Count > 0) // TODO: check if ok
             {
                 foreach (Order order in orders)
                 {

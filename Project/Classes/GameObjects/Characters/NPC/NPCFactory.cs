@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Collision;
+using Project.Classes.Visualize.Animations.AnimationStrategies;
 using Project.Classes.Visuals.Animations;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Project.Classes.GameObjects.Characters.NPC
 {
@@ -11,14 +13,16 @@ namespace Project.Classes.GameObjects.Characters.NPC
     {
         private readonly float scale;
         private readonly Vector2 speed;
+        private readonly float maxSpeed;
         private readonly List<ICollidable> obstacles;
         private readonly AnimationFactory animationFactory;
         private readonly List<INPCStyle> npcStyles;
 
-        public NPCFactory(float scale, Vector2 speed, List<ICollidable> obstacles, AnimationFactory animationFactory, List<INPCStyle> npcStyles)
+        public NPCFactory(float scale, Vector2 speed, float maxSpeed, List<ICollidable> obstacles, AnimationFactory animationFactory, List<INPCStyle> npcStyles)
         {
             this.scale = scale;
             this.speed = speed;
+            this.maxSpeed = maxSpeed;
             this.obstacles = obstacles;
             this.animationFactory = animationFactory;
             this.npcStyles = npcStyles;
@@ -26,7 +30,7 @@ namespace Project.Classes.GameObjects.Characters.NPC
 
         public NPC CreateNPC(AnimationManager animationManager, Vector2 position)
         {
-            return new NPC(animationManager, scale, position, speed, obstacles);
+             return new NPC(animationManager, scale, position, speed, maxSpeed, new FourDirectionalAnimationStrategy(), obstacles);
         }
         public NPC CreateRandomNPC(Vector2 position)
         {

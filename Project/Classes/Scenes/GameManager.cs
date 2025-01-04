@@ -18,8 +18,8 @@ namespace Project.Classes.Scenes
         private Scene level1;
         private Scene level2;
 
-       private int [,] floorPlan = new int[,] 
-            {
+        private int[,] floorPlan = new int[,]
+             {
                { 1,1,0,1,1,1,1,0,1,1,1 },
                { 1,0,1,1,0,1,1,1,1,1,1 },
                { 1,1,0,0,1,1,1,1,0,1,1 },
@@ -27,10 +27,10 @@ namespace Project.Classes.Scenes
                { 1,0,0,1,1,0,1,1,0,0,1 },
                { 1,1,1,1,0,1,0,1,1,1,1 },
                { 1,1,1,1,0,1,1,1,0,1,1 }
-                };
+                 };
 
 
-    public GameManager()
+        public GameManager()
         {
             sceneManager = new SceneManager(); // TODO: maybe move to parameter in constructor
         }

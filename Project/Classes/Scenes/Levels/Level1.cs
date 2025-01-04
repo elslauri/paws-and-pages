@@ -58,7 +58,7 @@ namespace Project.Classes.Scenes.Levels
             // TODO: initialize npcs list / loop
             npcStill = calmNPCFactory.CreateRandomNPC(new Vector2(150, 100));
             npcWalk = walkingNPCFactory.CreateRandomNPC(new Vector2(200, 100));
-            npcRun = panicNPCFactory.CreateRandomNPC(new Vector2(250, 100));
+            npcRun = panicNPCFactory.CreateRandomNPC(new Vector2(500, 700));
 
             npcs.AddRange([npcStill, npcWalk, npcRun]);
 

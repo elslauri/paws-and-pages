@@ -13,8 +13,8 @@ namespace Project.Classes.GameObjects.Characters
         private MovementManager movementManager;
         private Character player;
 
-        public Friend(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, Character player, List<ICollidable> obstacles) : 
-            base(animationManager, scale, position, speed, obstacles, new TwoDirectionalAnimationStrategy())
+        public Friend(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, float maxSpeed, Character player, IAnimationStrategy animationStrategy, List<ICollidable> obstacles = null) :
+            base(animationManager, scale, position, speed, maxSpeed, obstacles, animationStrategy)
         {
             this.player = player;
 
@@ -22,15 +22,12 @@ namespace Project.Classes.GameObjects.Characters
 
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             Move();
         }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
+
 
         private void Move()
         {

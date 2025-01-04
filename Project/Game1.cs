@@ -15,7 +15,7 @@ public class Game1 : Game
     private SpriteBatch spriteBatch;
 
     private GameManager gameManager;
-    
+
 
     public Game1()
     {

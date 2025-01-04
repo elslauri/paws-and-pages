@@ -14,22 +14,12 @@ namespace Project.Classes.GameObjects.Characters
     {
         #region members
 
-
-        // TODO: remove Texture. Origin, Color, Rotation from IDraw
-        public Texture2D Texture { get; }
-        public Color Color { get; }
-        public float Rotation { get; }
-        public Vector2 Origin { get; }
-
-
-
-
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
 
         public float Scale { get; }
 
-
+        public float MaxSpeed { get; }
 
         protected AnimationManager animationManager;
 
@@ -44,13 +34,13 @@ namespace Project.Classes.GameObjects.Characters
         #endregion
 
 
-        public Character(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, List<ICollidable> obstacles, IAnimationStrategy animationStrategy = null)
+        public Character(AnimationManager animationManager, float scale, Vector2 position, Vector2 speed, float maxSpeed, List<ICollidable> obstacles, IAnimationStrategy animationStrategy = null)
         {
             Scale = scale;
 
             Position = position;
             Speed = speed;
-
+            MaxSpeed = maxSpeed;
 
             this.animationManager = animationManager;
             this.animationStrategy = animationStrategy ?? new DefaultAnimationStrategy();
@@ -65,7 +55,7 @@ namespace Project.Classes.GameObjects.Characters
 
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             animationStrategy.SetAnimation(animationManager, currentState, Speed);
 
@@ -74,7 +64,7 @@ namespace Project.Classes.GameObjects.Characters
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             animationManager.Draw(spriteBatch, Position, Scale);
             if (Globals.showCollision)

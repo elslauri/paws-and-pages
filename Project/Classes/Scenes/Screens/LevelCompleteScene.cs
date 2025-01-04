@@ -58,7 +58,7 @@ namespace Project.Classes.Scenes.Screens
             animationManager.AddAnimation(AnimationState.Walk_Right, runCat_right);
 
 
-            friend = new MainCharacter(animationManager, 2f, new Vector2(Globals.windowSizeX / 2, Globals.windowSizeY / 2), new Vector2(2, 2), new TwoDirectionalAnimationStrategy());
+            friend = new MainCharacter(animationManager, 3f, new Vector2(Globals.windowSizeX / 2, Globals.windowSizeY / 2), new Vector2(1, 1), 2f, new TwoDirectionalAnimationStrategy());
 
             var message = "Level complete";
             congratsText = new Title(titleFont, message, new Vector2(Globals.windowSizeX / 2 - titleFont.MeasureString(message).X/2, Globals.windowSizeY / 3));

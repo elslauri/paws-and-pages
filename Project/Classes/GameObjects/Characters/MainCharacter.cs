@@ -17,22 +17,23 @@ namespace Project.Classes.GameObjects.Characters
         public int Books
         {
             get { return books; }
-            set { 
+            set
+            {
                 books = value;
                 OnPickUp?.Invoke(books);
             }
         }
 
 
-        public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, IAnimationStrategy animationStrategy, List<ICollidable> obstacles = null) :
-            base(animationManager, scale, startPos, speed, obstacles, animationStrategy)
+        public MainCharacter(AnimationManager animationManager, float scale, Vector2 startPos, Vector2 speed, float maxSpeed, IAnimationStrategy animationStrategy, List<ICollidable> obstacles = null) :
+            base(animationManager, scale, startPos, speed, maxSpeed, obstacles, animationStrategy)
         {
             movementManager = new MovementManager();
             InputReader = new KeyboardReader();
-            
+
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             Move();
@@ -42,6 +43,7 @@ namespace Project.Classes.GameObjects.Characters
         {
             movementManager.MoveWithKeys(this);
         }
+
         public delegate void ObserveBooks(int bookCount);
         public event ObserveBooks OnPickUp;
 

@@ -1,22 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using Project.Classes.Collision;
 using Project.Classes.GameObjects.Characters;
-using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 
 namespace Project.Classes.Movement
 {
     internal class MovementManager
     {
-        public void Move(Character character) // todo: add MaxSpeed here
+        public void Move(Character character)
         {
             float acceleration = 0.3f;
             character.Speed += character.Speed * acceleration;
-            float maxSpeed = 3;
-            character.Speed = Limit(character.Speed, maxSpeed);
+            character.Speed = Limit(character.Speed, character.MaxSpeed);
 
             Vector2 nextPos = character.Position + character.Speed;
-
 
             if (IsCharWithinX(character) && IsCharWithinY(character))
             {
@@ -26,7 +24,7 @@ namespace Project.Classes.Movement
                     if (!TryMove(nextPosX, character))
                     {
                         character.Speed = new Vector2(-character.Speed.X * 0.5f, character.Speed.Y);
-                     }
+                    }
                     Vector2 nextPosY = new Vector2(character.Position.X, character.Position.Y + character.Speed.Y);
                     if (!TryMove(nextPosY, character))
                     {
@@ -39,11 +37,11 @@ namespace Project.Classes.Movement
                     character.Position = nextPos;
                 }
             }
-            else if(!IsCharWithinX(character))
+            else if (!IsCharWithinX(character))
             {
                 character.Speed = new Vector2(-character.Speed.X * 0.5f, character.Speed.Y);
             }
-            else if(!IsCharWithinY(character))
+            else if (!IsCharWithinY(character))
             {
                 character.Speed = new Vector2(character.Speed.X, -character.Speed.Y * 0.5f);
             }
@@ -59,12 +57,13 @@ namespace Project.Classes.Movement
             if (direction != Vector2.Zero)
             {
                 character.Speed += direction * acceleration;
-            } else
+            }
+            else
             {
                 character.Speed *= friction;
             }
 
-            float maxSpeed = 3;
+            float maxSpeed = character.MaxSpeed;
             character.Speed = Limit(character.Speed, maxSpeed);
 
             Vector2 nextPos = character.Position + character.Speed;
@@ -112,8 +111,7 @@ namespace Project.Classes.Movement
 
             character.Speed += direction * acceleration;
 
-            float maxSpeed = 2f;
-            character.Speed = Limit(character.Speed, maxSpeed);
+            character.Speed = Limit(character.Speed, character.MaxSpeed);
 
             character.Position += character.Speed;
         }
@@ -160,7 +158,7 @@ namespace Project.Classes.Movement
 
         private bool IsCharWithinX(Character character)
         {
-            return character.Position.X + character.Speed.X >= 0 - character.ColBox.Size.X / 2 && character.Position.X + character.Speed.X <= Globals.mapSizeX - 1.5 * character.ColBox.Size.X  ;
+            return character.Position.X + character.Speed.X >= 0 - character.ColBox.Size.X / 2 && character.Position.X + character.Speed.X <= Globals.mapSizeX - 1.5 * character.ColBox.Size.X;
 
             // return character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X || character.Position.X + character.Speed.X >= 0;
         }
