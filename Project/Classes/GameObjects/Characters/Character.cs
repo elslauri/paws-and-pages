@@ -21,7 +21,7 @@ namespace Project.Classes.GameObjects.Characters
         public float Rotation { get; }
         public Vector2 Origin { get; }
 
-       
+
 
 
         public Vector2 Position { get; set; }
@@ -32,9 +32,9 @@ namespace Project.Classes.GameObjects.Characters
 
 
         protected AnimationManager animationManager;
-        
+
         private AnimationState currentState;
-        protected IAnimationStrategy animationStrategy; 
+        protected IAnimationStrategy animationStrategy;
 
         public IInputReader InputReader { get; set; }
 
@@ -51,8 +51,8 @@ namespace Project.Classes.GameObjects.Characters
             Position = position;
             Speed = speed;
 
-           
-            this.animationManager = animationManager; 
+
+            this.animationManager = animationManager;
             this.animationStrategy = animationStrategy ?? new DefaultAnimationStrategy();
             currentState = AnimationState.Idle;
             this.animationManager.SetAnimation(currentState);
@@ -70,15 +70,15 @@ namespace Project.Classes.GameObjects.Characters
             animationStrategy.SetAnimation(animationManager, currentState, Speed);
 
             animationManager.Update(gameTime);
-            ColBox.Update(gameTime, Position );
+            ColBox.Update(gameTime, Position);
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             animationManager.Draw(spriteBatch, Position, Scale);
-            
-            ColBox.Draw(spriteBatch); // TODO: remove after testing
+            if (Globals.showCollision)
+                ColBox.Draw(spriteBatch);
         }
     }
 }

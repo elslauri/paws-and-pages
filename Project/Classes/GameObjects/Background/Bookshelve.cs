@@ -43,7 +43,10 @@ namespace Project.Classes.GameObjects.Background
         {
             spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
 
-            ColBox.Draw(spriteBatch); // TODO: remove after debug
+            if (Globals.showCollision)
+            {
+                ColBox.Draw(spriteBatch);
+            }
         }
     }
 }

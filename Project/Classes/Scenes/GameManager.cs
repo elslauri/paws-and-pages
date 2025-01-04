@@ -36,7 +36,7 @@ namespace Project.Classes.Scenes
         public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.P))
-                ChangeScene(levelCompleteScene);
+                ChangeScene(mainScene);
             sceneManager.Update(gameTime);
         }
 
