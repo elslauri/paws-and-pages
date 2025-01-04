@@ -65,6 +65,7 @@ namespace Project.Classes.Scenes
         private NPC npcStill;
         private NPC npcWalk;
         private NPC npcRun;
+        private List<NPC> npcs;
 
         #region mcTextures
         private Texture2D mcIdleTexture;
@@ -112,6 +113,9 @@ namespace Project.Classes.Scenes
         private SpriteFont orderFont;
         private Texture2D bubbleTexture;
         private Bubble bubble;
+
+        private OrderManager orderManager;
+        private List<Order> orders;
 
         #endregion
         public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
@@ -211,6 +215,10 @@ namespace Project.Classes.Scenes
             npcRun.Update(gameTime);
             cat.Update(gameTime);
             player.Update(gameTime);
+            foreach (Order order in orders)
+            {
+                order.Update(gameTime);
+            }
 
             Camera.GetTheCamera().Update(gameTime);
 
@@ -222,7 +230,7 @@ namespace Project.Classes.Scenes
             }
 
             CheckBookPickUp();
-            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, cat, player, bookCount, bubble];
+            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, .. orders, cat, player, bookCount, bubble];
 
         }
         public override void Draw()
@@ -234,6 +242,7 @@ namespace Project.Classes.Scenes
         {
             animationFactory = new AnimationFactory();
 
+            #region player
             animationMainCharManager = new AnimationManager();
             // create animations from spritesheet
             var mcIdle = animationFactory.CreateAnimationFromSpriteSheet(mcIdleTexture, 8, 1);
@@ -251,8 +260,9 @@ namespace Project.Classes.Scenes
             animationMainCharManager.AddAnimation(AnimationState.Walk_RightDown, mcWalkRightDown);
             animationMainCharManager.AddAnimation(AnimationState.Walk_RightUp, mcWalkRightUp);
             animationMainCharManager.AddAnimation(AnimationState.Walk_Up, mcWalkUp);
+            #endregion
 
-
+            #region cat
             animationCatManager = new AnimationManager();
             var idleCat = animationFactory.CreateAnimationFromSpriteSheet(catTextureIdle, 8, 1);
             var runCat_left = animationFactory.CreateAnimationFromSpriteSheet(catTextureRunLeft, 6, 1);
@@ -260,7 +270,7 @@ namespace Project.Classes.Scenes
             animationCatManager.AddAnimation(AnimationState.Idle, idleCat);
             animationCatManager.AddAnimation(AnimationState.Walk_Left, runCat_left);
             animationCatManager.AddAnimation(AnimationState.Walk_Right, runCat_right);
-
+            #endregion
         }
         private void InitializeGameObjects()
         {
@@ -307,16 +317,20 @@ namespace Project.Classes.Scenes
             npcWalk = walkingNPCFactory.CreateRandomNPC(new Vector2(200, 100));
             npcRun = panicNPCFactory.CreateRandomNPC(new Vector2(250, 100));
 
+            npcs = new List<NPC> { npcStill, npcWalk, npcRun };
+            orderManager = new OrderManager(npcs, bubbleTexture, orderFont);
+            orders = orderManager.GenerateOrders(1, 5);
+
             player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles);
             cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles);
 
             // UI
             bookCount = new UIBookCount(font, new Vector2(10, 10), player);
-            bubble = new Bubble(bubbleTexture, 10, orderFont);
+            bubble = new Bubble(bubbleTexture, orderFont);
             bubble.SetPosition(new Vector2(400, 400));
             bubble.SetMessage("This is a test test test"+Environment.NewLine +"  akjajaa;kadga;kfg;angjakg;agjn;");
 
-            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, cat, player, bookCount, bubble];
+            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, ..orders, cat, player, bookCount, bubble];
         }
 
         /// <summary>

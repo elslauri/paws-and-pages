@@ -29,11 +29,11 @@ namespace Project.Classes.UI
 
         
 
-        public Bubble(Texture2D texture, int cornerSize, SpriteFont font)
+        public Bubble(Texture2D texture, SpriteFont font)
         {
             this.texture = texture;
-            this.cornerSize = cornerSize;
-
+            
+            cornerSize = 10; 
 
             this.font = font;
             textColor = new Color(201, 173, 161);
