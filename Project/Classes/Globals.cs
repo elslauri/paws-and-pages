@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Project.Classes.GameObjects.Characters.NPC;
+using System.Collections.Generic;
 
 namespace Project.Classes
 {
@@ -12,7 +14,7 @@ namespace Project.Classes
 
         public static bool ShowCollision { get; } = false;
 
-        public static Color BackGroundColor { get; } = new Color(52, 52, 79); 
+        public static Color BackGroundColor { get; } = new Color(52, 52, 79);
 
     }
 }

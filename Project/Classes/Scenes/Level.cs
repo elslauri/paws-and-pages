@@ -13,6 +13,7 @@ using Project.Classes.Visuals;
 using System.Collections.Generic;
 using Project.Classes.Visualize.Animations.AnimationStrategies;
 using Project.Classes.Scenes.Checkers;
+using Project.Classes.Scenes.Levels;
 
 namespace Project.Classes.Scenes
 {
@@ -30,11 +31,6 @@ namespace Project.Classes.Scenes
         protected DeliveryChecker deliveryChecker;
 
         #region characters
-        protected NPCFactory calmNPCFactory;
-        protected NPCFactory walkingNPCFactory;
-        protected NPCFactory panicNPCFactory;
-        protected List<INPCStyle> npcStyles;
-
         protected MainCharacter player;
         protected AnimationManager animationMainCharManager;
         #region mcTextures
@@ -53,8 +49,12 @@ namespace Project.Classes.Scenes
         protected Texture2D catTextureIdle;
         protected Texture2D catTextureRunLeft;
         protected Texture2D catTextureRunRight;
+        #endregion
 
         protected List<NPC> npcs;
+        protected List<(Vector2 position, NpcMoveType npcMoveType)> npcData;
+        protected NPCFactory npcFactory;
+        protected List<INPCStyle> npcStyles;
         #region npcTextures
         protected Texture2D joggingIdleTexture;
         protected Texture2D joggingUpTexture;
@@ -92,9 +92,6 @@ namespace Project.Classes.Scenes
         protected Texture2D beardDownTexture;
         protected Texture2D beardRightTexture;
         #endregion
-
-        #endregion
-
         #endregion
 
         #region backgroundAndItems
@@ -126,12 +123,13 @@ namespace Project.Classes.Scenes
 
         #endregion
 
-        public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int[,] floorPlan, int minBooksPerOrder, int maxBooksPerOrder)
+        public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, LevelConfiguration config)
             : base(graphics, spriteBatch, content, gameManager)
         {
-            this.floorPlan = floorPlan;
-            this.minBooksPerOrder = minBooksPerOrder;
-            this.maxBooksPerOrder = maxBooksPerOrder;
+            this.floorPlan = config.FloorPlan;
+            this.minBooksPerOrder = config.MinBooksPerOrder;
+            this.maxBooksPerOrder = config.MaxBooksPerOrder;
+            this.npcData = config.NpcData;
         }
 
 
@@ -293,10 +291,8 @@ namespace Project.Classes.Scenes
             cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), 2f, player, new TwoDirectionalAnimationStrategy(), obstacles);
 
             InitializeNpcStyles();
-            calmNPCFactory = new NPCFactory(3f, new Vector2(0, 0), 0f, obstacles, animationFactory, npcStyles);
-            walkingNPCFactory = new NPCFactory(3f, new Vector2(-0.5f, 0.5f), 1f, obstacles, animationFactory, npcStyles);
-            panicNPCFactory = new NPCFactory(3f, new Vector2(0.5f, 0.5f), 3f, obstacles, animationFactory, npcStyles);
             npcs = new List<NPC>();
+            npcFactory = new NPCFactory(3f, obstacles, animationFactory, npcStyles);
 
             bookCount = new UIBookCount(font, new Vector2(10, 10), player);
 

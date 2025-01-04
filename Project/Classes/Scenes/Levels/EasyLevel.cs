@@ -9,15 +9,10 @@ namespace Project.Classes.Scenes.Levels
 {
     internal class EasyLevel : Level
     {
-        
-        private NPC npcStill;
-        private NPC npcWalk;
-        private NPC npcRun;
-
-
-        public EasyLevel(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int[,] floorPlan, int minBooksPerOrder, int maxBooksPerOrder)
-            : base(graphics, spriteBatch, content, gameManager, floorPlan, minBooksPerOrder, maxBooksPerOrder)
+        public EasyLevel(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, LevelConfiguration config)
+            : base(graphics, spriteBatch, content, gameManager, config)
         {
+
         }
 
         public override void Initialize()
@@ -33,14 +28,12 @@ namespace Project.Classes.Scenes.Levels
         {
             base.Update(gameTime);
 
-            npcStill.Update(gameTime);
-            npcWalk.Update(gameTime);
-            npcRun.Update(gameTime);
+            foreach (NPC npc in npcs)
+            {
+                npc.Update(gameTime);
+            }
 
-
-
-            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, .. orders, cat, player, bookCount];
-
+            drawables = [map, .. bookshelves, .. books, .. npcs, .. orders, cat, player, bookCount];
 
         }
         public override void Draw()
@@ -54,17 +47,19 @@ namespace Project.Classes.Scenes.Levels
             base.InitializeGameObjects();
 
 
-            books.AddRange(bookSpawnManager.SpawnBooks(bookTexture, bookshelves, 0.7f)); // TODO: make less for levl2
+            books.AddRange(bookSpawnManager.SpawnBooks(bookTexture, bookshelves, 0.6f));
 
-            // TODO: initialize npcs list / loop
-            npcStill = calmNPCFactory.CreateRandomNPC(new Vector2(150, 100));
-            npcWalk = walkingNPCFactory.CreateRandomNPC(new Vector2(200, 100));
-            npcRun = panicNPCFactory.CreateRandomNPC(new Vector2(500, 700));
 
-            npcs.AddRange([npcStill, npcWalk, npcRun]);
+
+            foreach (var (position, moveType) in npcData)
+            {
+                var npc = npcFactory.CreateRandomNPC(position, moveType);
+                npcs.Add(npc);
+            }
+
 
             orderManager = new OrderManager(npcs, bubbleTexture, orderFont);
-            orders = orderManager.GenerateOrders(minBooksPerOrder, maxBooksPerOrder); 
+            orders = orderManager.GenerateOrders(minBooksPerOrder, maxBooksPerOrder);
 
             drawables.AddRange([.. books, .. orders, .. npcs]);
 
