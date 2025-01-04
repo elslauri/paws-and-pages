@@ -31,8 +31,8 @@ namespace Project.Classes.UI
         public Bubble(Texture2D texture, SpriteFont font)
         {
             this.texture = texture;
-            
-            cornerSize = 10; 
+           
+            cornerSize = 8; 
 
             this.font = font;
             textColor = new Color(201, 173, 161);

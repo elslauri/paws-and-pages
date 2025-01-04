@@ -589,6 +589,13 @@
 /processorParam:TextureFormat=Color
 /build:Characters/npc/skirt_up.png
 
+#begin congratsFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:congratsFont.spritefont
+
 #begin Items/bookClosed.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -645,4 +652,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/rectangleBox.png
+
+#begin UI/roundedBox.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/roundedBox.png
 

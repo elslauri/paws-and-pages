@@ -111,6 +111,7 @@ namespace Project.Classes.Scenes.Levels
         private UIBookCount bookCount;
         private SpriteFont font;
         private SpriteFont orderFont;
+        private SpriteFont congratsFont;
         private Texture2D bubbleTexture;
 
         private OrderManager orderManager;
@@ -118,11 +119,9 @@ namespace Project.Classes.Scenes.Levels
 
         private LevelCompletionChecker levelCompletionChecker;
         #endregion
-        public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
-            : base(graphics, spriteBatch, content)
-        {
-
-        }
+        public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager)
+            : base(graphics, spriteBatch, content, gameManager)
+        { }
 
         public override void Initialize()
         {
@@ -196,8 +195,9 @@ namespace Project.Classes.Scenes.Levels
 
             #region UI
             font = content.Load<SpriteFont>("LevelFont");
-            bubbleTexture = content.Load<Texture2D>("UI/rectangleBox");
+            bubbleTexture = content.Load<Texture2D>("UI/roundedBox");
             orderFont = content.Load<SpriteFont>("OrderFont");
+            congratsFont = content.Load<SpriteFont>("congratsFont");
             #endregion
 
             SetAnimations();
@@ -231,11 +231,8 @@ namespace Project.Classes.Scenes.Levels
             
             if (levelCompletionChecker.IsLevelComplete(orders))
             {
-                // TODO: maybe another screen? 
-                Debug.WriteLine("LEVEL COMPLETE");
-                ShowLevelCompleteBubble();
+                gameManager.OnLevelComplete();
             }
-
         }
         public override void Draw()
         {
@@ -370,8 +367,8 @@ namespace Project.Classes.Scenes.Levels
 
         private void ShowLevelCompleteBubble()
         {
-            Bubble congrats = new Bubble(bubbleTexture, orderFont);
-            congrats.SetPosition(new Vector2((Globals.windowSizeX-congrats.Width)/2, (Globals.windowSizeY-congrats.Height)/2));
+            Bubble congrats = new Bubble(bubbleTexture, congratsFont);
+            congrats.SetPosition(player.Position);
             congrats.SetMessage("Level complete"+Environment.NewLine+"Press p to continue...");
             drawables.Add(congrats); 
         }

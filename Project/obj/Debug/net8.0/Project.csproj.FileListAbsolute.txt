@@ -113,3 +113,5 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\LevelFont.
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\TitleFont.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\UI\rectangleBox.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\OrderFont.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\congratsFont.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\UI\roundedBox.xnb

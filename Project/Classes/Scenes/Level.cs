@@ -7,12 +7,12 @@ namespace Project.Classes.Scenes
 {
     internal class Level : Scene
     {
-        private GameManager gameManager;
+        protected GameManager gameManager;
 
-        public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content) 
+        public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager) 
             : base(graphics, spriteBatch, content)
         {
-            this.gameManager = new GameManager(); //TODO: check if here new or in constructor
+            this.gameManager = gameManager;
         }
 
 

@@ -29,7 +29,8 @@ namespace Project.Classes.Scenes
         private SpriteFont font;
         private Title title; 
 
-        public MainScreen(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content) : base(graphics, spriteBatch, content)
+        public MainScreen(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager) 
+            : base(graphics, spriteBatch, content, gameManager)
         {
         }
 

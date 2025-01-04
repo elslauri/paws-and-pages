@@ -24,7 +24,7 @@
 - [ ] Minstens twee levels waar je vanuit startscherm naartoe en/of opeenvolgend naartoe kan
 - [ ] Minstens drie verschillende vijanden
 - [x] Minstens keyboard (up, down, left, right)
-- [ ] Game over scherm wanneer verslagen/gewonnen
+- [x] Game over scherm wanneer verslagen/gewonnen
 - [x] Basic physics: collisions met vast objecten en enemies, acceleratie en momentum van held
 - [ ] Basic AI: elk type enemy heeft een andere AI
 - [x] Sprites en tileset/background
