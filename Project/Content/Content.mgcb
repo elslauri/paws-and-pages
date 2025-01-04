@@ -627,6 +627,18 @@
 /processorParam:TextureFormat=Compressed
 /build:LevelFont.spritefont
 
+#begin levelMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:levelMusic.mp3
+
+#begin menuMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:menuMusic.mp3
+
 #begin OrderFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project.Classes;
 using Project.Classes.Scenes;
+using Project.Classes.Sound;
 
 
 namespace Project;
@@ -13,14 +14,19 @@ public class Game1 : Game
     private SpriteBatch spriteBatch;
 
     private GameManager gameManager;
-
+    private MusicManager soundManager;
+    private SceneManager scenemanager;
 
     public Game1()
     {
         graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = false;
-        gameManager = new GameManager();
+
+        scenemanager = new SceneManager();
+        soundManager = new MusicManager();
+        gameManager = new GameManager(scenemanager, soundManager);
+
     }
 
     protected override void Initialize()
@@ -30,7 +36,7 @@ public class Game1 : Game
         spriteBatch = new SpriteBatch(GraphicsDevice);
 
         gameManager.Initialize(graphics, spriteBatch, Content);
-
+        
         base.Initialize();
 
     }

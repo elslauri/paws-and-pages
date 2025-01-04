@@ -96,7 +96,7 @@ namespace Project.Classes.Movement
             Vector2 direction = (target.Position - offset) - character.Position;
             float distance = direction.Length();
 
-            if (distance < 20)
+            if (distance < 30)
             {
                 character.Speed *= 0.9f;
                 if (character.Speed.Length() < 0.1f)

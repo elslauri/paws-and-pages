@@ -115,3 +115,7 @@ C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\UI\rectang
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\OrderFont.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\congratsFont.xnb
 C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\UI\roundedBox.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\levelMusic.ogg
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\levelMusic.xnb
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\menuMusic.ogg
+C:\Repos\gamedev\ba2-gamedev-project\Project\bin\Debug\net8.0\Content\menuMusic.xnb

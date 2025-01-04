@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Project.Classes.GameObjects.Characters.NPC;
 using Project.Classes.Scenes.Levels;
 using Project.Classes.Scenes.Screens;
+using Project.Classes.Sound;
 using System.Collections.Generic;
 
 
@@ -13,6 +14,8 @@ namespace Project.Classes.Scenes
 {
     internal class GameManager : IGameManager
     {
+        private MusicManager musicManager;
+
         private SceneManager sceneManager;
         private Scene mainScene;
         private Scene levelCompleteScene;
@@ -69,9 +72,11 @@ namespace Project.Classes.Scenes
             (new Vector2(1900, 1200), NpcMoveType.Panic),
         };
 
-        public GameManager()
+        public GameManager(SceneManager scene, MusicManager sound)
         {
-            sceneManager = new SceneManager(); // TODO: maybe move to parameter in constructor
+            sceneManager = scene;
+            musicManager = sound;
+
         }
 
         public void Initialize(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
@@ -89,6 +94,9 @@ namespace Project.Classes.Scenes
 
             level1 = new EasyLevel(graphics, spriteBatch, content, this, configEasy);
             level2 = new AdvancedLevel(graphics, spriteBatch, content, this, configAdvanced);
+
+            musicManager.Initialize(content);
+            musicManager.PlayMenuMusic();
 
             sceneManager.ChangeScene(mainScene);
         }
@@ -112,6 +120,14 @@ namespace Project.Classes.Scenes
         public void ChangeScene(Scene newScene)
         {
             sceneManager.ChangeScene(newScene);
+            if (newScene is Level)
+            {
+                musicManager.PlayLevelMusic();
+            }
+            else if (newScene is Scene)
+            {
+                musicManager.PlayMenuMusic();
+            }
         }
 
         public void OnLevelComplete()
