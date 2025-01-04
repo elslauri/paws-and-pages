@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Animations;
-using Project.Classes.Collision;
 using Project.Classes.GameObjects.Characters;
 using Project.Classes.UI;
 using Project.Classes.Visualize.Animations.AnimationStrategies;
@@ -13,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Project.Classes.Scenes.Screens
 {
-    internal class MainScreen : Level
+    internal class MainScene : Scene
     {
         private List<IDraw> drawables;
 
@@ -31,7 +30,7 @@ namespace Project.Classes.Scenes.Screens
         private SpriteFont font;
         private Title title;
 
-        public MainScreen(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager)
+        public MainScene(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager)
             : base(graphics, spriteBatch, content, gameManager)
         {
         }

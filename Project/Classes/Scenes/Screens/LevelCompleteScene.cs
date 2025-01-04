@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Project.Classes.Scenes.Screens
 {
-    internal class LevelCompleteScreen : Scene
+    internal class LevelCompleteScene : Scene
     {
         private List<IDraw> drawables;
         private DrawingManager drawingManager;
@@ -30,7 +30,7 @@ namespace Project.Classes.Scenes.Screens
         private SpriteFont congratsFont;
         private Title continueText;
 
-        public LevelCompleteScreen(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager)
+        public LevelCompleteScene(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager)
            : base(graphics, spriteBatch, content, gameManager) { }
 
 

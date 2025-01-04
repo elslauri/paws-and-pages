@@ -8,7 +8,6 @@ namespace Project.Classes.GameObjects.Background
     internal class Bookshelve : ICollidable, IDraw
     {
         public Texture2D Texture { get; set; }
-
         public Rectangle SourceRectangle { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }

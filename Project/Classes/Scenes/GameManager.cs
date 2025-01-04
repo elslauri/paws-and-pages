@@ -16,19 +16,31 @@ namespace Project.Classes.Scenes
         private Scene mainScene;
         private Scene levelCompleteScene;
         private Scene level1;
+        private Scene level2;
+
+       private int [,] floorPlan = new int[,] 
+            {
+               { 1,1,0,1,1,1,1,0,1,1,1 },
+               { 1,0,1,1,0,1,1,1,1,1,1 },
+               { 1,1,0,0,1,1,1,1,0,1,1 },
+               { 0,1,1,1,1,1,1,0,1,1,1 },
+               { 1,0,0,1,1,0,1,1,0,0,1 },
+               { 1,1,1,1,0,1,0,1,1,1,1 },
+               { 1,1,1,1,0,1,1,1,0,1,1 }
+                };
 
 
-        public GameManager()
+    public GameManager()
         {
             sceneManager = new SceneManager(); // TODO: maybe move to parameter in constructor
         }
 
         public void Initialize(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
         {
-            mainScene = new MainScreen(graphics, spriteBatch, content, this);
-            levelCompleteScene = new LevelCompleteScreen(graphics, spriteBatch, content, this);
-            level1 = new Level1(graphics, spriteBatch, content, this);
-            
+            mainScene = new MainScene(graphics, spriteBatch, content, this);
+            levelCompleteScene = new LevelCompleteScene(graphics, spriteBatch, content, this);
+            level1 = new Level1(graphics, spriteBatch, content, this, floorPlan);
+            level2 = new Level2(graphics, spriteBatch, content, this, floorPlan);
 
             sceneManager.ChangeScene(level1);
         }
@@ -37,6 +49,10 @@ namespace Project.Classes.Scenes
         {
             if (Keyboard.GetState().IsKeyDown(Keys.P))
                 ChangeScene(mainScene);
+            if (Keyboard.GetState().IsKeyDown(Keys.D1))
+                ChangeScene(level1);
+            if (Keyboard.GetState().IsKeyDown(Keys.D2))
+                ChangeScene(level2);
             sceneManager.Update(gameTime);
         }
 
