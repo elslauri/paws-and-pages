@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Visuals;
+using System.Diagnostics;
 
 namespace Project.Classes.UI
 {
@@ -93,7 +94,6 @@ namespace Project.Classes.UI
             {
                 spriteBatch.Draw(texture, destinationRectangles[i], sourceRectangles[i], Color.White);
             }
-
             spriteBatch.DrawString(font, message, textPos, textColor);
         }
     }

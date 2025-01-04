@@ -13,13 +13,15 @@ namespace Project.Classes.GameObjects.Items
         public Vector2 Position { get; set; }
 
         public int BooksOrdered { get; set; }
+        public bool IsComplete { get; set; }
 
         public Order(Character orderer, Texture2D texture, SpriteFont font, int amountOfBooks)
         {
             Orderer = orderer;
             SpeechBubble = new Bubble(texture, font);
             BooksOrdered = amountOfBooks;
-            SpeechBubble.SetMessage(BooksOrdered.ToString());
+            SetOrderMessage(BooksOrdered);
+            IsComplete = false;
         }
 
         public void DeliverBooks(int booksTobeDelivered)
@@ -28,6 +30,7 @@ namespace Project.Classes.GameObjects.Items
             {
                 BooksOrdered = 0;
                 SetThankYouMessage();
+                MarkAsComplete();
             }
             else
             {
@@ -51,7 +54,7 @@ namespace Project.Classes.GameObjects.Items
         /// </summary>
         private void UpdateBubblePosition()
         {
-            Position = new Vector2(Orderer.Position.X - SpeechBubble.Width / 2 + 8, Orderer.Position.Y - 70);
+            Position = new Vector2(Orderer.Position.X - SpeechBubble.Width / 2 + 16, Orderer.Position.Y - 70);
             SpeechBubble.SetPosition(Position);
         }
         /// <summary>
@@ -62,17 +65,21 @@ namespace Project.Classes.GameObjects.Items
         {
             if (amount == 1)
             {
-                SpeechBubble.SetMessage($"{amount} book please");
+                SpeechBubble.SetMessage($"{amount} book");
             }
             else
             {
-                SpeechBubble.SetMessage($"{amount} books please");
+                SpeechBubble.SetMessage($"{amount} books");
             }
 
         }
         private void SetThankYouMessage()
         {
             SpeechBubble.SetMessage("Thank you");
+        }
+        private void MarkAsComplete()
+        {
+            IsComplete = true;
         }
     }
 }

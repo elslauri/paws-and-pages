@@ -14,7 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Project.Classes.Scenes
+namespace Project.Classes.Scenes.Levels
 {
     internal class Level1 : Level
     {
@@ -112,11 +112,11 @@ namespace Project.Classes.Scenes
         private SpriteFont font;
         private SpriteFont orderFont;
         private Texture2D bubbleTexture;
-        private Bubble bubble;
 
         private OrderManager orderManager;
         private List<Order> orders;
 
+        private LevelCompletionChecker levelCompletionChecker;
         #endregion
         public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
             : base(graphics, spriteBatch, content)
@@ -223,19 +223,23 @@ namespace Project.Classes.Scenes
             Camera.GetTheCamera().Update(gameTime);
 
 
-            // test collision TODO: move to other file
-            if (player.ColBox.IsCollidingWith(npcStill.ColBox))
-            {
-                Debug.WriteLine("PARDON ME");
-            }
-
             CheckBookPickUp();
             CheckBookDelivery();
-            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, .. orders, cat, player, bookCount, bubble];
+            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, .. orders, cat, player, bookCount];
+            
+            
+            
+            if (levelCompletionChecker.IsLevelComplete(orders))
+            {
+                // TODO: maybe another screen? 
+                Debug.WriteLine("LEVEL COMPLETE");
+                ShowLevelCompleteBubble();
+            }
 
         }
         public override void Draw()
         {
+
             drawingManager.Draw(drawables, true);
         }
 
@@ -275,7 +279,7 @@ namespace Project.Classes.Scenes
         }
         private void InitializeGameObjects()
         {
-            // add background and blocks
+            // background 
             map = new Map([tileTexture]);
 
             int[,] floorPlan = new int[,]
@@ -294,12 +298,12 @@ namespace Project.Classes.Scenes
             obstacles = [.. bookshelves];
 
             booksToBeDeleted = new List<Book>();
-            bookSpawnManager = new BookSpawnManager();
+            bookSpawnManager = new BookSpawnManager(); // TODO: add chance back to contructor? levelspecific
             books = bookSpawnManager.SpawnBooks(bookTexture, bookshelves);
 
             // initialize NPC styles
             npcStyles = new List<INPCStyle>()
-            { 
+            {
                 new NPCStyle(joggingIdleTexture,joggingUpTexture,joggingLeftTexture,joggingRightTexture,joggingDownTexture),
                 new NPCStyle(jeansIdleTexture, jeansUpTexture, jeansLeftTexture, jeansRightTexture, jeansDownTexture),
                 new NPCStyle(skirtIdleTexture, skirtUpTexture, skirtLeftTexture, skirtRightTexture, skirtDownTexture),
@@ -318,20 +322,19 @@ namespace Project.Classes.Scenes
             npcWalk = walkingNPCFactory.CreateRandomNPC(new Vector2(200, 100));
             npcRun = panicNPCFactory.CreateRandomNPC(new Vector2(250, 100));
 
-            npcs = new List<NPC> { npcStill, npcWalk, npcRun };
+            npcs = new List<NPC> { npcStill, npcWalk, npcRun }; // TODO: this is levelspecific
             orderManager = new OrderManager(npcs, bubbleTexture, orderFont);
-            orders = orderManager.GenerateOrders(1, 5);
+            orders = orderManager.GenerateOrders(1, 1); // TODO: this is levelspecific
+            levelCompletionChecker = new LevelCompletionChecker();
 
             player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(4f, 4f), obstacles);
             cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), player, obstacles);
 
             // UI
             bookCount = new UIBookCount(font, new Vector2(10, 10), player);
-            bubble = new Bubble(bubbleTexture, orderFont);
-            bubble.SetPosition(new Vector2(400, 400));
-            bubble.SetMessage("This is a test test test"+Environment.NewLine +"  akjajaa;kadga;kfg;angjakg;agjn;");
 
-            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, ..orders, cat, player, bookCount, bubble];
+
+            drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, .. orders, cat, player, bookCount];
         }
 
         /// <summary>
@@ -356,13 +359,21 @@ namespace Project.Classes.Scenes
 
         private void CheckBookDelivery()
         {
-            foreach(Order order in orders)
+            foreach (Order order in orders)
             {
-                if (player.ColBox.IsCollidingWith(order.Orderer.ColBox) && order.BooksOrdered >0)
+                if (player.ColBox.IsCollidingWith(order.Orderer.ColBox) && !order.IsComplete)
                 {
                     player.DeliverBooksTo(order);
                 }
             }
+        }
+
+        private void ShowLevelCompleteBubble()
+        {
+            Bubble congrats = new Bubble(bubbleTexture, orderFont);
+            congrats.SetPosition(new Vector2((Globals.windowSizeX-congrats.Width)/2, (Globals.windowSizeY-congrats.Height)/2));
+            congrats.SetMessage("Level complete"+Environment.NewLine+"Press p to continue...");
+            drawables.Add(congrats); 
         }
     }
 }
