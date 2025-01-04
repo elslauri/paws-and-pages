@@ -1,7 +1,7 @@
 ﻿using Project.Classes.GameObjects.Items;
 using System.Collections.Generic;
 
-namespace Project.Classes.Scenes
+namespace Project.Classes.Scenes.Checkers
 {
     internal class LevelCompletionChecker
     {

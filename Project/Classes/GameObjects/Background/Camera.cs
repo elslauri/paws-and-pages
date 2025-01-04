@@ -38,10 +38,10 @@ namespace Project.Classes.GameObjects.Background
         /// </summary>
         private void CalculateTranslation()
         {
-            var dx = Globals.windowSizeX / 2 - anchor.Position.X;
-            dx = MathHelper.Clamp(dx, -map.MapSize.X + Globals.windowSizeX + map.TileSize.X / 2, map.TileSize.X / 2);
-            var dy = Globals.windowSizeY / 2 - anchor.Position.Y;
-            dy = MathHelper.Clamp(dy, -map.MapSize.Y + Globals.windowSizeY + map.TileSize.Y / 2, map.TileSize.Y / 2);
+            var dx = Globals.WindowSizeX / 2 - anchor.Position.X;
+            dx = MathHelper.Clamp(dx, -map.MapSize.X + Globals.WindowSizeX + map.TileSize.X / 2, map.TileSize.X / 2);
+            var dy = Globals.WindowSizeY / 2 - anchor.Position.Y;
+            dy = MathHelper.Clamp(dy, -map.MapSize.Y + Globals.WindowSizeY + map.TileSize.Y / 2, map.TileSize.Y / 2);
             translation = Matrix.CreateTranslation(dx, dy, 0);
         }
     }

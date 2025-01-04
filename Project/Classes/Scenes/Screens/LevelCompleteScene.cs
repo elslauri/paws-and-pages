@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Animations;
+using Project.Classes.GameObjects.Background;
 using Project.Classes.GameObjects.Characters;
 using Project.Classes.UI;
 using Project.Classes.Visualize.Animations.AnimationStrategies;
@@ -15,6 +16,9 @@ namespace Project.Classes.Scenes.Screens
     {
         private List<IDraw> drawables;
         private DrawingManager drawingManager;
+
+        //private Map background;
+        //private Texture2D tileTexture;
 
         private Texture2D catTextureIdle;
         private Texture2D catTextureLeft;
@@ -45,6 +49,8 @@ namespace Project.Classes.Scenes.Screens
             catTextureLeft = content.Load<Texture2D>("Characters/friend/friend_run_left");
             catTextureRight = content.Load<Texture2D>("Characters/friend/friend_run_right");
 
+           // tileTexture = content.Load<Texture2D>("Background/planks_H_3");
+
             titleFont = content.Load<SpriteFont>("titleFont");
             congratsFont = content.Load<SpriteFont>("congratsFont");
 
@@ -58,13 +64,16 @@ namespace Project.Classes.Scenes.Screens
             animationManager.AddAnimation(AnimationState.Walk_Right, runCat_right);
 
 
-            friend = new MainCharacter(animationManager, 3f, new Vector2(Globals.windowSizeX / 2, Globals.windowSizeY / 2), new Vector2(1, 1), 2f, new TwoDirectionalAnimationStrategy());
+            friend = new MainCharacter(animationManager, 3f, new Vector2(Globals.WindowSizeX / 2, Globals.WindowSizeY / 2), new Vector2(1, 1), 2f, new TwoDirectionalAnimationStrategy());
 
             var message = "Level complete";
-            congratsText = new Title(titleFont, message, new Vector2(Globals.windowSizeX / 2 - titleFont.MeasureString(message).X/2, Globals.windowSizeY / 3));
+            congratsText = new Title(titleFont, message, new Vector2(Globals.WindowSizeX / 2 - titleFont.MeasureString(message).X/2, Globals.WindowSizeY / 3));
             message = "Press P to continue";
-            continueText = new Title(congratsFont, message, new Vector2(Globals.windowSizeX/2 - congratsFont.MeasureString(message).X / 2, Globals.windowSizeY/3 + 400));
+            continueText = new Title(congratsFont, message, new Vector2(Globals.WindowSizeX/2 - congratsFont.MeasureString(message).X / 2, Globals.WindowSizeY/3 + 400));
 
+           // background = new Map(new List<Texture2D> {tileTexture });
+
+           // drawables = [background, congratsText, continueText, friend];
             drawables = [congratsText, continueText, friend];
         }
 

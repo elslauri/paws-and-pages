@@ -67,7 +67,7 @@ namespace Project.Classes.GameObjects.Characters
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             animationManager.Draw(spriteBatch, Position, Scale);
-            if (Globals.showCollision)
+            if (Globals.ShowCollision)
                 ColBox.Draw(spriteBatch);
         }
     }

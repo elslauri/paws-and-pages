@@ -9,8 +9,6 @@ namespace Project;
 
 public class Game1 : Game
 {
-    // TODO: make a game manager with draw and update instead of here ? levels 
-
     private GraphicsDeviceManager graphics;
     private SpriteBatch spriteBatch;
 
@@ -51,7 +49,7 @@ public class Game1 : Game
     }
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(new Color(52, 52, 79));
+        GraphicsDevice.Clear(Globals.BackGroundColor);
 
         gameManager.Draw();
 
@@ -59,8 +57,8 @@ public class Game1 : Game
     }
     private void ConfigureGraphics()
     {
-        graphics.PreferredBackBufferWidth = Globals.windowSizeX;
-        graphics.PreferredBackBufferHeight = Globals.windowSizeY;
+        graphics.PreferredBackBufferWidth = Globals.WindowSizeX;
+        graphics.PreferredBackBufferHeight = Globals.WindowSizeY;
         graphics.ApplyChanges();
     }
 }

@@ -158,13 +158,13 @@ namespace Project.Classes.Movement
 
         private bool IsCharWithinX(Character character)
         {
-            return character.Position.X + character.Speed.X >= 0 - character.ColBox.Size.X / 2 && character.Position.X + character.Speed.X <= Globals.mapSizeX - 1.5 * character.ColBox.Size.X;
+            return character.Position.X + character.Speed.X >= 0 - character.ColBox.Size.X / 2 && character.Position.X + character.Speed.X <= Globals.MapSizeX - 1.5 * character.ColBox.Size.X;
 
             // return character.Position.X + character.Speed.X <= Globals.mapSizeX - character.ColBox.Size.X || character.Position.X + character.Speed.X >= 0;
         }
         private bool IsCharWithinY(Character character)
         {
-            return character.Position.Y + character.Speed.Y >= 0 - character.ColBox.Size.Y / 2 && character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y;
+            return character.Position.Y + character.Speed.Y >= 0 - character.ColBox.Size.Y / 2 && character.Position.Y + character.Speed.Y <= Globals.MapSizeY - character.ColBox.Size.Y;
 
             //  return character.Position.Y + character.Speed.Y <= Globals.mapSizeY - character.ColBox.Size.Y || character.Position.Y + character.Speed.Y >= 0;
         }

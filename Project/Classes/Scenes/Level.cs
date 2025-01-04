@@ -13,6 +13,7 @@ using Project.Classes.Visuals;
 using System.Collections.Generic;
 using Project.Classes.Visualize.Animations.AnimationStrategies;
 using System.Diagnostics;
+using Project.Classes.Scenes.Checkers;
 
 namespace Project.Classes.Scenes
 {
@@ -27,6 +28,8 @@ namespace Project.Classes.Scenes
         protected AnimationFactory animationFactory;
 
         protected LevelCompletionChecker levelCompletionChecker;
+        protected PickUpChecker pickUpChecker;
+        protected DeliveryChecker deliveryChecker;
 
         #region characters
         protected NPCFactory calmNPCFactory;
@@ -140,6 +143,7 @@ namespace Project.Classes.Scenes
             LoadTextures();
             SetAnimations();
             InitializeGameObjects();
+            InitializeCheckers();
             Camera.GetTheCamera().Initialize(map, player);
         }
 
@@ -149,8 +153,8 @@ namespace Project.Classes.Scenes
 
             Camera.GetTheCamera().Update(gameTime);
 
-            CheckBookPickUp();
-            CheckBookDelivery();
+            pickUpChecker.CheckBookPickUp();
+            deliveryChecker.CheckBookDelivery();
             if (levelCompletionChecker.IsLevelComplete(orders))
             {
                 gameManager.OnLevelComplete();
@@ -265,10 +269,14 @@ namespace Project.Classes.Scenes
             animationCatManager.AddAnimation(AnimationState.Walk_Right, runCat_right);
             #endregion
         }
-        protected virtual void InitializeGameObjects()
+        protected virtual void InitializeCheckers()
         {
             levelCompletionChecker = new LevelCompletionChecker();
-
+            pickUpChecker = new PickUpChecker(player, books, booksToBeDeleted);
+            deliveryChecker = new DeliveryChecker(player, orders);
+        }
+        protected virtual void InitializeGameObjects()
+        {
             map = new Map([tileTexture]);
             bookshelveFactory = new BookshelveFactory(longBookshelveTexture);
             bookshelves = bookshelveFactory.CreateBookshelves(new Vector2(50, 250), floorPlan, 192, 200);
@@ -279,7 +287,7 @@ namespace Project.Classes.Scenes
             booksToBeDeleted = new List<Book>();
 
             player = new MainCharacter(animationMainCharManager, 4f, new Vector2(400, 100), new Vector2(2, 2), 4f, new SixDirectionalAnimationStrategy(), obstacles);
-            cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), 2f, player, new TwoDirectionalAnimationStrategy() ,obstacles);
+            cat = new Friend(animationCatManager, 2f, new Vector2(200, 200), new Vector2(0.5f, 0.5f), 2f, player, new TwoDirectionalAnimationStrategy(), obstacles);
 
             InitializeNpcStyles();
             calmNPCFactory = new NPCFactory(3f, new Vector2(0, 0), 0f, obstacles, animationFactory, npcStyles);
@@ -309,50 +317,11 @@ namespace Project.Classes.Scenes
         {
             cat.Update(gameTime);
             player.Update(gameTime);
-            if (orders.Count > 0) // TODO: check if ok
+            if (orders.Count > 0)
             {
                 foreach (Order order in orders)
                 {
                     order.Update(gameTime);
-                }
-            }
-        }
-
-        // TODO: move these to a pickupchecker and a deliverychecker
-
-        /// <summary>
-        /// Checks if the player has picked up a book and removes it from the drawn books
-        /// </summary>
-        private void CheckBookPickUp()
-        {
-            foreach (Book book in books)
-            {
-                if (player.ColBox.IsCollidingWith(book.ColBox))
-                {
-                    booksToBeDeleted.Add(book);
-                    player.PickUpBook();
-                }
-            }
-            RemoveToBeDeletedBooks();
-        }
-        private void RemoveToBeDeletedBooks()
-        {
-            foreach (Book book in booksToBeDeleted)
-            {
-                books.Remove(book);
-            }
-            booksToBeDeleted.Clear();
-        }
-        /// <summary>
-        /// Checks if the player has delivered a book
-        /// </summary>
-        private void CheckBookDelivery()
-        {
-            foreach (Order order in orders)
-            {
-                if (player.ColBox.IsCollidingWith(order.Orderer.ColBox) && !order.IsComplete)
-                {
-                    player.DeliverBooksTo(order);
                 }
             }
         }

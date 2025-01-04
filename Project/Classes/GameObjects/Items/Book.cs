@@ -46,7 +46,7 @@ namespace Project.Classes.GameObjects.Items
         {
             spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
 
-            if (Globals.showCollision)
+            if (Globals.ShowCollision)
             {
                 ColBox.Draw(spriteBatch);
 

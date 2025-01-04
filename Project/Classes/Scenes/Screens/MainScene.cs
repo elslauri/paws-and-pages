@@ -59,10 +59,10 @@ namespace Project.Classes.Scenes.Screens
 
 
 
-            friend = new MainCharacter(animationManager, 3f, new Vector2(Globals.windowSizeX / 2, Globals.windowSizeY / 2), new Vector2(2, 2), 3f, new TwoDirectionalAnimationStrategy());
+            friend = new MainCharacter(animationManager, 3f, new Vector2(Globals.WindowSizeX / 2, Globals.WindowSizeY / 2), new Vector2(2, 2), 3f, new TwoDirectionalAnimationStrategy());
 
             string message = "Paws and Pages";
-            title = new Title(font, message, new Vector2(Globals.windowSizeX / 2 - font.MeasureString(message).X /2, Globals.windowSizeY / 3));
+            title = new Title(font, message, new Vector2(Globals.WindowSizeX / 2 - font.MeasureString(message).X /2, Globals.WindowSizeY / 3));
 
             drawables = [title, friend];
 

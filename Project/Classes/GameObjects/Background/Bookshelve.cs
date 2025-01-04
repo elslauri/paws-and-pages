@@ -33,7 +33,7 @@ namespace Project.Classes.GameObjects.Background
         {
             spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, new Vector2(0,0), Scale, SpriteEffects.None, 0f);
 
-            if (Globals.showCollision)
+            if (Globals.ShowCollision)
             {
                 ColBox.Draw(spriteBatch);
             }
