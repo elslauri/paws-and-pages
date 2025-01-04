@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project.Classes.Visuals;
 
@@ -103,5 +101,5 @@ namespace Project.Classes.UI
 
 
 // For this code I copied almost letter by letter from a tutorial I found online.
-// Other tutorials I watched and did my own thing with what I learned, but this one is almost a perfect copy. 
+// For the other tutorials I watched, I did my own thing with what I learned, but this one is almost a perfect copy. 
 // This is the link: https://www.youtube.com/watch?v=vR9pozv9bjM

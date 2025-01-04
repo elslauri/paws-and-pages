@@ -1,11 +1,10 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Project.Classes.Input;
 using Project.Classes.Movement;
 using Project.Classes.Visuals.Animations;
 using Project.Classes.Collision;
-using System.Diagnostics;
+using Project.Classes.GameObjects.Items;
 
 namespace Project.Classes.GameObjects.Characters
 {
@@ -14,8 +13,6 @@ namespace Project.Classes.GameObjects.Characters
         private MovementManager movementManager;
 
         private int books;
-        
-
         public int Books
         {
             get { return books; }
@@ -51,9 +48,18 @@ namespace Project.Classes.GameObjects.Characters
         {
             Books++;
         }
-        public void GiveAwayBook()
+        public void DeliverBooksTo(Order order)
         {
-            Books--;
+            if (Books >= order.BooksOrdered)
+            {
+                Books -= order.BooksOrdered;
+                order.DeliverBooks(order.BooksOrdered);
+            }
+            else
+            {
+                order.DeliverBooks(Books);
+                Books = 0;
+            }
         }
 
     }

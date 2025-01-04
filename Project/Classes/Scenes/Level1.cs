@@ -230,6 +230,7 @@ namespace Project.Classes.Scenes
             }
 
             CheckBookPickUp();
+            CheckBookDelivery();
             drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, .. orders, cat, player, bookCount, bubble];
 
         }
@@ -251,7 +252,7 @@ namespace Project.Classes.Scenes
             var mcWalkLeftUp = animationFactory.CreateAnimationFromSpriteSheet(mcWalkLeftUpTexture, 8, 1);
             var mcWalkRightDown = animationFactory.CreateAnimationFromSpriteSheet(mcWalkRightDownTexture, 8, 1);
             var mcWalkRightUp = animationFactory.CreateAnimationFromSpriteSheet(mcWalkRightUpTexture, 8, 1);
-            var mcWalkUp = animationFactory.CreateAnimationFromSpriteSheet(mcWalkDownTexture, 8, 1);
+            var mcWalkUp = animationFactory.CreateAnimationFromSpriteSheet(mcWalkUpTexture, 8, 1);
             // add animations to their corresponding animationState
             animationMainCharManager.AddAnimation(AnimationState.Idle, mcIdle);
             animationMainCharManager.AddAnimation(AnimationState.Walk_Down, mcWalkDown);
@@ -351,6 +352,17 @@ namespace Project.Classes.Scenes
                 books.Remove(book);
             }
             booksToBeDeleted.Clear();
+        }
+
+        private void CheckBookDelivery()
+        {
+            foreach(Order order in orders)
+            {
+                if (player.ColBox.IsCollidingWith(order.Orderer.ColBox) && order.BooksOrdered >0)
+                {
+                    player.DeliverBooksTo(order);
+                }
+            }
         }
     }
 }
