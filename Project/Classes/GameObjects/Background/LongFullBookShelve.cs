@@ -8,10 +8,7 @@ namespace Project.Classes.GameObjects.Background
     {
         public LongFullBookshelve(Texture2D texture, Vector2 position) : base(texture, position)
         {
-            Size = new Vector2(64, 48); // TODO: refactor? see factory? 
-            SourceRectangle = new Rectangle(0, 0, 64, 48);
-
-
+            // adjusted collisionbox so collision box is only top of the bookshelve
             ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y / 4f));
 
         }

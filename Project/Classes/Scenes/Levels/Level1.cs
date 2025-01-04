@@ -1,36 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Project.Classes.Animations;
-using Project.Classes.Collision;
-using Project.Classes.GameObjects.Background;
-using Project.Classes.GameObjects.Characters;
 using Project.Classes.GameObjects.Characters.NPC;
 using Project.Classes.GameObjects.Items;
-using Project.Classes.UI;
-using Project.Classes.Visualize.Animations.AnimationStrategies;
-using Project.Classes.Visuals;
-using Project.Classes.Visuals.Animations;
-using System.Collections.Generic;
 
 
 namespace Project.Classes.Scenes.Levels
 {
     internal class Level1 : Level
     {
-       
-        // AAADFA
 
-
-        
         private NPC npcStill;
         private NPC npcWalk;
         private NPC npcRun;
 
-        // background
-       private Texture2D shortBookshelveTexture; // TODO: do something with this
-
-       
 
         public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int[,] floorPlan)
             : base(graphics, spriteBatch, content, gameManager, floorPlan)
@@ -52,19 +35,19 @@ namespace Project.Classes.Scenes.Levels
             npcStill.Update(gameTime);
             npcWalk.Update(gameTime);
             npcRun.Update(gameTime);
-            
+
 
 
             drawables = [map, .. bookshelves, .. books, npcStill, npcWalk, npcRun, .. orders, cat, player, bookCount];
 
-            
+
         }
         public override void Draw()
         {
             base.Draw();
         }
 
-        
+
         protected override void InitializeGameObjects()
         {
             base.InitializeGameObjects(); // TODO: check this works

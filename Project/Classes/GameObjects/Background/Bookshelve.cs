@@ -11,27 +11,18 @@ namespace Project.Classes.GameObjects.Background
         public Rectangle SourceRectangle { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }
-
-        public Color Color { get; set; }
-        public CollisionBox ColBox { get; set; }
-
-        public float Rotation { get; set; }
-
-        public Vector2 Origin { get; set; }
-
         public float Scale { get; set; }
+        public CollisionBox ColBox { get; set; }
 
         public Bookshelve(Texture2D texture, Vector2 position)
         {
             Texture = texture;
             Position = position + new Vector2(Texture.Width / 2, Texture.Height / 2);
-            Color = Color.White;
+
             Scale = 3f;
 
-            Origin = new Vector2(0, 0);
-
-            Size = new Vector2(0, 0); //TODO: FOR THIS SHELVE ONLY SO MAKE A FACTORY?!
-            SourceRectangle = new Rectangle(0, 0, 228, 192);
+            Size = new Vector2(texture.Width, texture.Height);
+            SourceRectangle = new Rectangle(0, 0, (int)Size.X, (int)Size.Y);
 
 
             ColBox = new CollisionBox(Position, new Vector2(Scale * Size.X, Scale * Size.Y));
@@ -40,7 +31,7 @@ namespace Project.Classes.GameObjects.Background
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Texture, Position, SourceRectangle, Color.White, 0f, new Vector2(0,0), Scale, SpriteEffects.None, 0f);
 
             if (Globals.showCollision)
             {

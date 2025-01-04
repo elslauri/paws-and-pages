@@ -34,17 +34,12 @@ namespace Project.Classes.GameObjects.Background
             {
                 for (int i = 0; i < columns; i++)
                 {
-
                     if (floorPlan[j,i]==1)
                     {
                         Vector2 pos = new Vector2(startPosition.X + spacingX * i, startPosition.Y + spacingY * j);
                         shelves.Add(new LongFullBookshelve(texture, pos));
                     }
-                    if (floorPlan[j, i] == 2)
-                    {
-                        Vector2 pos = new Vector2(startPosition.X + spacingX * i, startPosition.Y + spacingY * j);
-                        shelves.Add(new ShortFullBookshelve(texture, pos));
-                    }
+                    // TODO: add more shelve here 
                 }
             }
             return shelves;
