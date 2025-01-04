@@ -7,17 +7,18 @@ using Project.Classes.GameObjects.Items;
 
 namespace Project.Classes.Scenes.Levels
 {
-    internal class Level1 : Level
+    internal class EasyLevel : Level
     {
-
+        
         private NPC npcStill;
         private NPC npcWalk;
         private NPC npcRun;
 
 
-        public Level1(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int[,] floorPlan)
-            : base(graphics, spriteBatch, content, gameManager, floorPlan)
-        { }
+        public EasyLevel(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int[,] floorPlan, int minBooksPerOrder, int maxBooksPerOrder)
+            : base(graphics, spriteBatch, content, gameManager, floorPlan, minBooksPerOrder, maxBooksPerOrder)
+        {
+        }
 
         public override void Initialize()
         {
@@ -50,10 +51,10 @@ namespace Project.Classes.Scenes.Levels
 
         protected override void InitializeGameObjects()
         {
-            base.InitializeGameObjects(); // TODO: check this works
+            base.InitializeGameObjects();
 
-            bookSpawnManager = new BookSpawnManager(); // TODO: add chance back to contructor? levelspecific
-            books.AddRange(bookSpawnManager.SpawnBooks(bookTexture, bookshelves));
+
+            books.AddRange(bookSpawnManager.SpawnBooks(bookTexture, bookshelves, 0.7f)); // TODO: make less for levl2
 
             // TODO: initialize npcs list / loop
             npcStill = calmNPCFactory.CreateRandomNPC(new Vector2(150, 100));
@@ -63,7 +64,7 @@ namespace Project.Classes.Scenes.Levels
             npcs.AddRange([npcStill, npcWalk, npcRun]);
 
             orderManager = new OrderManager(npcs, bubbleTexture, orderFont);
-            orders = orderManager.GenerateOrders(1, 1); // TODO: this is levelspecific
+            orders = orderManager.GenerateOrders(minBooksPerOrder, maxBooksPerOrder); 
 
             drawables.AddRange([.. books, .. orders, .. npcs]);
 

@@ -37,10 +37,10 @@ namespace Project.Classes.Scenes
 
         public void Initialize(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content)
         {
-            mainScene = new MainScene(graphics, spriteBatch, content, this);
+            mainScene = new MenuScene(graphics, spriteBatch, content, this);
             levelCompleteScene = new LevelCompleteScene(graphics, spriteBatch, content, this);
-            level1 = new Level1(graphics, spriteBatch, content, this, floorPlan);
-            level2 = new Level2(graphics, spriteBatch, content, this, floorPlan);
+            level1 = new EasyLevel(graphics, spriteBatch, content, this, floorPlan, 1, 3);
+            level2 = new AdvancedLevel(graphics, spriteBatch, content, this, floorPlan, 1, 5);
 
             sceneManager.ChangeScene(level1);
         }

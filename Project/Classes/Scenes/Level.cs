@@ -12,7 +12,6 @@ using Project.Classes.Visuals.Animations;
 using Project.Classes.Visuals;
 using System.Collections.Generic;
 using Project.Classes.Visualize.Animations.AnimationStrategies;
-using System.Diagnostics;
 using Project.Classes.Scenes.Checkers;
 
 namespace Project.Classes.Scenes
@@ -20,7 +19,6 @@ namespace Project.Classes.Scenes
     internal class Level : Scene
     {
         #region members
-
         protected List<IDraw> drawables;
         protected List<ICollidable> obstacles;
 
@@ -115,6 +113,8 @@ namespace Project.Classes.Scenes
 
         protected OrderManager orderManager;
         protected List<Order> orders;
+        protected int minBooksPerOrder;
+        protected int maxBooksPerOrder;
         #endregion
 
         #region ui
@@ -126,10 +126,12 @@ namespace Project.Classes.Scenes
 
         #endregion
 
-        public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int[,] floorPlan)
+        public Level(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager, int[,] floorPlan, int minBooksPerOrder, int maxBooksPerOrder)
             : base(graphics, spriteBatch, content, gameManager)
         {
             this.floorPlan = floorPlan;
+            this.minBooksPerOrder = minBooksPerOrder;
+            this.maxBooksPerOrder = maxBooksPerOrder;
         }
 
 
@@ -283,6 +285,7 @@ namespace Project.Classes.Scenes
 
             obstacles = [.. bookshelves];
 
+            bookSpawnManager = new BookSpawnManager();
             books = new List<Book>();
             booksToBeDeleted = new List<Book>();
 
@@ -317,7 +320,7 @@ namespace Project.Classes.Scenes
         {
             cat.Update(gameTime);
             player.Update(gameTime);
-            if (orders.Count > 0)
+            if (orders != null)
             {
                 foreach (Order order in orders)
                 {

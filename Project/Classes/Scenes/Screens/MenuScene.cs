@@ -8,11 +8,12 @@ using Project.Classes.UI;
 using Project.Classes.Visualize.Animations.AnimationStrategies;
 using Project.Classes.Visuals;
 using Project.Classes.Visuals.Animations;
+using System;
 using System.Collections.Generic;
 
 namespace Project.Classes.Scenes.Screens
 {
-    internal class MainScene : Scene
+    internal class MenuScene : Scene
     {
         private List<IDraw> drawables;
 
@@ -29,8 +30,10 @@ namespace Project.Classes.Scenes.Screens
 
         private SpriteFont font;
         private Title title;
+        private SpriteFont smallFont;
+        private Title routes;
 
-        public MainScene(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager)
+        public MenuScene(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, GameManager gameManager)
             : base(graphics, spriteBatch, content, gameManager)
         {
         }
@@ -47,6 +50,7 @@ namespace Project.Classes.Scenes.Screens
             catTextureRight = content.Load<Texture2D>("Characters/friend/friend_run_right");
 
             font = content.Load<SpriteFont>("TitleFont");
+            smallFont = content.Load<SpriteFont>("OrderFont");
 
             animationFactory = new AnimationFactory();
             animationManager = new AnimationManager();
@@ -58,13 +62,14 @@ namespace Project.Classes.Scenes.Screens
             animationManager.AddAnimation(AnimationState.Walk_Right, runCat_right);
 
 
-
             friend = new MainCharacter(animationManager, 3f, new Vector2(Globals.WindowSizeX / 2, Globals.WindowSizeY / 2), new Vector2(2, 2), 3f, new TwoDirectionalAnimationStrategy());
 
             string message = "Paws and Pages";
-            title = new Title(font, message, new Vector2(Globals.WindowSizeX / 2 - font.MeasureString(message).X /2, Globals.WindowSizeY / 3));
+            title = new Title(font, message, new Vector2(Globals.WindowSizeX / 2 - font.MeasureString(message).X / 2, Globals.WindowSizeY / 3));
+            message = "Press 1 for level 1"+Environment.NewLine+"Press 2 for level 2";
+            routes = new Title(smallFont, message, new Vector2(Globals.WindowSizeX / 2 - smallFont.MeasureString(message).X / 2, Globals.WindowSizeY * 2 / 3));
 
-            drawables = [title, friend];
+            drawables = [title,routes , friend];
 
         }
 
